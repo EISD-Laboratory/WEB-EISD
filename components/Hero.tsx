@@ -58,7 +58,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.6 }}
           className="text-gray-700 text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          Welcome to the Lab EISD of STMIK Mardira Padang Academy of Technology. 
+          Welcome to the Lab EISD of Telkom University
           We focus on <span className="font-semibold text-primary">IoT</span>, <span className="font-semibold text-primary">Software Development</span>, <span className="font-semibold text-primary">UI/UX Design</span>, <span className="font-semibold text-primary">Artificial Intelligence</span>, 
           and <span className="font-semibold text-primary">Digital Innovation</span> to create real impact.
         </motion.p>

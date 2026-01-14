@@ -36,18 +36,24 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative py-16 px-4 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
-      {/* Decorative wave */}
+    <footer className="relative py-16 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 overflow-hidden">
+      {/* Decorative wave - Transition to dark */}
       <div className="absolute top-0 left-0 w-full h-24 -translate-y-full">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" fill="url(#wave-gradient)"/>
           <defs>
             <linearGradient id="wave-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgb(249 250 251)" />
-              <stop offset="100%" stopColor="rgb(255 255 255)" />
+              <stop offset="0%" stopColor="rgb(255 255 255)" />
+              <stop offset="100%" stopColor="rgb(15 23 42)" />
             </linearGradient>
           </defs>
         </svg>
+      </div>
+      
+      {/* Subtle decorative elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 right-10 w-64 h-64 bg-primary rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-64 h-64 bg-accent-green rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -61,7 +67,7 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 relative rounded-xl overflow-hidden bg-white p-1.5 border border-gray-100 shadow-soft">
+              <div className="w-12 h-12 relative rounded-xl overflow-hidden bg-white p-1.5 border border-gray-700 shadow-lg">
                 <Image 
                   src="/images/logo.png" 
                   alt="EISD Logo" 
@@ -69,9 +75,9 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="font-bold text-xl text-gray-900">Lab EISD</span>
+              <span className="font-bold text-xl text-white">Lab EISD</span>
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed mb-5">
+            <p className="text-gray-300 text-sm leading-relaxed mb-5">
               Empowering innovation through technology, collaboration, and real-world impact.
             </p>
             
@@ -81,7 +87,7 @@ export default function Footer() {
                 <motion.a
                   key={social.name}
                   href="#"
-                  className={`w-10 h-10 bg-white border border-gray-200 rounded-xl flex items-center justify-center transition-all duration-300 ${social.color} group`}
+                  className="w-10 h-10 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl flex items-center justify-center transition-all duration-300 group backdrop-blur-sm"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -89,7 +95,7 @@ export default function Footer() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: idx * 0.1 }}
                 >
-                  <svg className="w-4.5 h-4.5 text-gray-600 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4.5 h-4.5 text-gray-300 group-hover:text-white group-hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24">
                     <path d={social.icon}/>
                   </svg>
                 </motion.a>
@@ -104,12 +110,12 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h4 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+            <h4 className="font-bold text-white mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-gray-600 hover:text-primary text-sm transition-all hover:translate-x-1 inline-flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-300 group-hover:bg-primary transition-colors"></span>
+                  <a href={link.href} className="text-gray-300 hover:text-accent-green text-sm transition-all hover:translate-x-1 inline-flex items-center gap-2 group">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-500 group-hover:bg-accent-green transition-colors"></span>
                     {link.name}
                   </a>
                 </li>
@@ -124,26 +130,26 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h4 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Contact</h4>
-            <ul className="space-y-3 text-sm text-gray-600">
+            <h4 className="font-bold text-white mb-4 text-sm uppercase tracking-wider">Contact</h4>
+            <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:lab.eisd@telkomuniversity.ac.id" className="hover:text-primary transition-colors">
+                <a href="mailto:lab.eisd@telkomuniversity.ac.id" className="hover:text-accent-green transition-colors">
                 lab.eisd@telkomuniversity.ac.id
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <a href="tel:+6281234567890" className="hover:text-primary transition-colors">
+                <a href="tel:+6281234567890" className="hover:text-accent-green transition-colors">
                   +62 812 3456 7890
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -161,8 +167,8 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h4 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Newsletter</h4>
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+            <h4 className="font-bold text-white mb-4 text-sm uppercase tracking-wider">Newsletter</h4>
+            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
               Get the latest updates and events directly to your inbox.
             </p>
             <form onSubmit={handleSubscribe} className="relative">
@@ -171,12 +177,12 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition text-sm bg-white"
+                className="w-full px-4 py-3 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-accent-green/50 focus:border-accent-green transition text-sm bg-white/10 backdrop-blur-sm text-white placeholder:text-gray-400"
                 required
               />
               <motion.button
                 type="submit"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-accent-green hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-lg"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -199,11 +205,11 @@ export default function Footer() {
         </div>
 
         {/* Divider with gradient */}
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8" />
+        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
 
         {/* Bottom Bar */}
         <motion.div 
-          className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500"
+          className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -215,11 +221,11 @@ export default function Footer() {
             <span>All rights reserved.</span>
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-primary transition-colors">
+            <a href="#" className="hover:text-accent-green transition-colors">
               Privacy Policy
             </a>
             <span>•</span>
-            <a href="#" className="hover:text-primary transition-colors">
+            <a href="#" className="hover:text-accent-green transition-colors">
               Terms of Service
             </a>
           </div>
