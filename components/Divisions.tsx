@@ -138,26 +138,6 @@ export default function Divisions() {
                       
                       {/* Gradient Glow on Hover */}
                       <div className={`absolute -inset-0.5 bg-gradient-to-br ${gradients[card.displayIndex % gradients.length]} rounded-3xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 -z-10`} />
-                      
-                      {/* Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        {/* Number Badge - No Hover Animation */}
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradients[card.displayIndex % gradients.length]} flex items-center justify-center shadow-lg`}>
-                          <span className="text-2xl font-black text-white">
-                            {String(card.displayIndex + 1).padStart(2, '0')}
-                          </span>
-                        </div>
-                        
-                        {/* Member Badge - No Hover Animation */}
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full border border-gray-200">
-                          <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                          <span className="text-sm font-bold text-gray-900">
-                            <Counter to={card.members} />
-                          </span>
-                        </div>
-                      </div>
 
                       {/* Title */}
                       <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">

@@ -30,49 +30,42 @@ export const divisions = [
     id: 1,
     title: "Core Division",
     description: "Managing core operations and administrative functions of the laboratory.",
-    members: 3,
     image: "/images/logo.png",
   },
   {
     id: 2,
     title: "Enabler Division",
     description: "Managing human resources, internal development, and member coordination to support all laboratory divisions.",
-    members: 5,
     image: "/images/logo.png",
   },
   {
     id: 3,
     title: "Competition Division",
     description: "Preparing and competing in national and international tech competitions.",
-    members: 4,
     image: "/images/logo.png",
   },
   {
     id: 4,
     title: "Research & Community Division",
     description: "Conducting research projects and community outreach programs.",
-    members: 7,
     image: "/images/logo.png",
   },
   {
     id: 5,
     title: "Event Division",
     description: "Organizing tech events, workshops, and seminars for students.",
-    members: 5,
     image: "/images/logo.png",
   },
   {
     id: 6,
     title: "Study Group Division",
     description: "Facilitating peer learning and knowledge sharing sessions.",
-    members: 4,
     image: "/images/logo.png",
   },
   {
     id: 7,
     title: "Content Division",
     description: "Creating engaging content for social media and documentation.",
-    members: 6,
     image: "/images/logo.png",
   },
 ]
@@ -102,9 +95,9 @@ export const highlights = [
 ]
 
 export const navItems = [
-  { label: "Home", href: "#" },
-  { label: "Projects", href: "#" },
-  { label: "Events", href: "#" },
-  { label: "Gallery", href: "#" },
-  { label: "Articles", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Events", href: "/events" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Achievements", href: "/achievements" },
+  { label: "Articles", href: "/articles" },
 ]

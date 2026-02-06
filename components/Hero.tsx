@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import FloatingParticles from './FloatingParticles'
-import ScrollIndicator from './ScrollIndicator'
 import HeroBackground from './HeroBackground'
 
 export default function Hero() {
@@ -104,7 +103,6 @@ export default function Hero() {
         </motion.div>
       </div>
       
-      <ScrollIndicator />
     </section>
   )
 }
