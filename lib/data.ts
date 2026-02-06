@@ -96,8 +96,8 @@ export const highlights = [
 
 export const navItems = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Achievements", href: "/achievements" },
   { label: "Articles", href: "/articles" },
 ]

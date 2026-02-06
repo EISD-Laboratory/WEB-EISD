@@ -27,9 +27,9 @@ export default function Home() {
         <Divisions />
       </FadeIn>
       
-      <FadeIn direction="up" delay={0.5}>
+      {/* <FadeIn direction="up" delay={0.5}>
         <Highlights />
-      </FadeIn>
+      </FadeIn> */}
       
       {/* <FadeIn direction="up" delay={0.6}>
         <RecruitmentForm />

@@ -1,19 +1,14 @@
 'use client'
 
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { divisions } from '@/lib/data'
 import SectionHeading from './SectionHeading'
-import Counter from './Counter'
 import { useState } from 'react'
 
 export default function Divisions() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0) // -1 for left, 1 for right
-  const [isAnimating, setIsAnimating] = useState(false)
-
-  // Use divisions directly for infinite loop
-  const allCards = divisions
+  const [activeIndex, setActiveIndex] = useState(0)
+  const totalCards = divisions.length
 
   const gradients = [
     'from-purple-500 via-blue-500 to-cyan-500',
@@ -21,62 +16,37 @@ export default function Divisions() {
     'from-emerald-500 via-teal-500 to-cyan-500',
     'from-amber-500 via-orange-500 to-red-500',
     'from-indigo-500 via-purple-500 to-pink-500',
+    'from-cyan-500 via-blue-500 to-indigo-500',
+    'from-rose-500 via-pink-500 to-purple-500',
   ]
 
-  const cardsPerView = 3 // Show 3 cards at a time
-  const totalCards = allCards.length
+  // Calculate horizontal position for each card relative to active card
+  const getCardPosition = (index: number) => {
+    const diff = index - activeIndex
+    const half = Math.floor(totalCards / 2)
+
+    // Normalize diff for wrapping
+    let normalizedDiff = diff
+    if (diff > half) normalizedDiff = diff - totalCards
+    if (diff < -half) normalizedDiff = diff + totalCards
+
+    switch (normalizedDiff) {
+      case 0: // Active card (center)
+        return { x: 0, scale: 1, opacity: 1, zIndex: 3, visible: true }
+      case 1: // Card right (peek)
+        return { x: 340, scale: 0.88, opacity: 0.5, zIndex: 2, visible: true }
+      case -1: // Card left (peek)
+        return { x: -340, scale: 0.88, opacity: 0.5, zIndex: 2, visible: true }
+      default: // Hidden cards
+        return { x: normalizedDiff > 0 ? 500 : -500, scale: 0.8, opacity: 0, zIndex: 1, visible: false }
+    }
+  }
 
   const navigate = (dir: number) => {
-    if (isAnimating) return
-    
-    setDirection(dir)
-    setIsAnimating(true)
-    
-    setCurrentIndex((prev) => {
-      if (dir === 1) {
-        // Going right
-        return (prev + 1) % totalCards
-      } else {
-        // Going left
-        return prev === 0 ? totalCards - 1 : prev - 1
-      }
+    setActiveIndex((prev) => {
+      if (dir === 1) return (prev + 1) % totalCards
+      return prev === 0 ? totalCards - 1 : prev - 1
     })
-
-    setTimeout(() => setIsAnimating(false), 500)
-  }
-
-  // Get visible cards with wrapping
-  const getVisibleCards = () => {
-    const visible = []
-    for (let i = 0; i < cardsPerView; i++) {
-      const index = (currentIndex + i) % totalCards
-      visible.push({ ...allCards[index], displayIndex: index })
-    }
-    return visible
-  }
-
-  const visibleCards = getVisibleCards()
-
-  // Smooth fade + scale animation variants (less dizzying)
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.92,
-      rotateY: direction > 0 ? 15 : -15,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      rotateY: 0,
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -100 : 100,
-      opacity: 0,
-      scale: 0.92,
-      rotateY: direction > 0 ? -15 : 15,
-    }),
   }
 
   return (
@@ -89,96 +59,105 @@ export default function Divisions() {
         />
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative mt-12 px-4 md:px-8">
           {/* Navigation Buttons */}
           <button
             onClick={() => navigate(-1)}
-            disabled={isAnimating}
-            className="absolute left-0 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-2xl flex items-center justify-center text-white hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50"
+            className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
-            <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
             onClick={() => navigate(1)}
-            disabled={isAnimating}
-            className="absolute right-0 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-2xl flex items-center justify-center text-white hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50"
+            className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
-            <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[400px]">
-            <AnimatePresence initial={false} custom={direction} mode="popLayout">
-              {visibleCards.map((card, idx) => (
+          {/* Stacked Cards */}
+          <div className="relative flex items-center justify-center" style={{ height: '420px' }}>
+            {divisions.map((card, index) => {
+              const position = getCardPosition(index)
+              const isCenter = index === activeIndex
+              const gradientClass = gradients[index % gradients.length]
+
+              return (
                 <motion.div
-                  key={`${card.id}-${currentIndex}-${idx}`}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{
-                    x: { type: "spring", stiffness: 200, damping: 25 },
-                    opacity: { duration: 0.4 },
-                    scale: { duration: 0.4 },
-                    rotateY: { type: "spring", stiffness: 200, damping: 25 },
+                  key={card.id}
+                  className="absolute"
+                  style={{ width: '320px' }}
+                  initial={false}
+                  animate={{
+                    x: position.x,
+                    scale: position.scale,
+                    opacity: position.opacity,
+                    zIndex: position.zIndex,
                   }}
-                  style={{ perspective: 1000 }}
-                  className="w-full"
+                  transition={{
+                    type: "spring",
+                    stiffness: 120,
+                    damping: 25,
+                    mass: 0.8,
+                  }}
                 >
-                  {/* Division Card */}
-                  <div className="group relative h-full bg-white/70 backdrop-blur-sm rounded-3xl p-6 border border-white/80 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] min-h-[400px] flex flex-col">
-                      {/* Gradient Accent Top */}
-                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradients[card.displayIndex % gradients.length]} rounded-t-3xl`} />
-                      
-                      {/* Gradient Glow on Hover */}
-                      <div className={`absolute -inset-0.5 bg-gradient-to-br ${gradients[card.displayIndex % gradients.length]} rounded-3xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 -z-10`} />
+                  <div className={`relative rounded-3xl p-6 border transition-all duration-300 min-h-[380px] flex flex-col ${
+                    isCenter
+                      ? 'bg-white shadow-2xl border-primary/20 ring-1 ring-primary/10'
+                      : 'bg-white/60 shadow-md border-white/80'
+                  }`}>
+                    {/* Gradient Accent Top */}
+                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradientClass} rounded-t-3xl`} />
 
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                        {card.title}
-                      </h3>
+                    {/* Gradient Glow for center card */}
+                    {isCenter && (
+                      <div className={`absolute -inset-1 bg-gradient-to-br ${gradientClass} rounded-3xl opacity-15 blur-xl -z-10`} />
+                    )}
 
-                      {/* Description */}
-                      <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
-                        {card.description}
-                      </p>
+                    {/* Title */}
+                    <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                      isCenter ? 'text-primary' : 'text-gray-900'
+                    }`}>
+                      {card.title}
+                    </h3>
 
-                      {/* Image */}
-                      <div className="relative rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 h-36 group-hover:border-primary/30 transition-colors duration-300 mt-auto">
-                        <Image
-                          src={card.image}
-                          alt={card.title}
-                          width={1200}
-                          height={800}
-                          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
+                    {/* Description */}
+                    <p className={`text-sm leading-relaxed mb-4 flex-grow ${
+                      isCenter ? 'text-gray-700' : 'text-gray-500'
+                    }`}>
+                      {card.description}
+                    </p>
 
+                    {/* Image */}
+                    <div className={`relative rounded-2xl overflow-hidden border h-36 transition-colors duration-300 mt-auto ${
+                      isCenter ? 'bg-gray-50 border-primary/20' : 'bg-gray-50/50 border-gray-100'
+                    }`}>
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        width={1200}
+                        height={800}
+                        className="w-full h-full object-contain p-4"
+                      />
                     </div>
+                  </div>
                 </motion.div>
-              ))}
-            </AnimatePresence>
+              )
+            })}
           </div>
 
           {/* Progress Indicators */}
-          <div className="flex justify-center gap-2 mt-8">
-            {allCards.map((_, index) => (
+          <div className="flex justify-center gap-2 mt-6">
+            {divisions.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  if (!isAnimating) {
-                    setDirection(index > currentIndex ? 1 : -1)
-                    setCurrentIndex(index)
-                  }
-                }}
+                onClick={() => setActiveIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
+                  index === activeIndex
                     ? 'w-8 bg-gradient-to-r from-primary to-accent-green'
                     : 'w-2 bg-gray-300 hover:bg-gray-400'
                 }`}
@@ -186,29 +165,10 @@ export default function Divisions() {
             ))}
           </div>
 
-          {/* Scroll Hint */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="text-center mt-6 text-sm text-gray-500"
-          >
-            <span className="inline-flex items-center gap-2">
-              <motion.span
-                animate={{ x: [-3, 0, -3] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                ←
-              </motion.span>
-              Navigate through divisions
-              <motion.span
-                animate={{ x: [3, 0, 3] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </span>
-          </motion.div>
+          {/* Simple hint */}
+          <p className="text-center mt-4 text-sm text-gray-400">
+            Click arrows or dots to navigate
+          </p>
         </div>
       </div>
     </section>
