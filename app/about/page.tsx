@@ -9,18 +9,6 @@ import BackToTop from '@/components/BackToTop'
 import SectionHeading from '@/components/SectionHeading'
 import FadeIn from '@/components/FadeIn'
 
-const teamMembers = [
-  { name: 'fadia', role: 'Head of Laboratory', image: '/images/logo.png' },
-  { name: 'Deazard', role: 'Vice Head of Laboratory', image: '/images/logo.png' },
-  { name: 'Kirei', role: 'Secretary of Laboratory', image: '/images/logo.png' },
-  { name: 'Refaya', role: 'Enabler Division Lead', image: '/images/logo.png' },
-  { name: 'Bimo', role: 'Competition Division Lead', image: '/images/logo.png' },
-  { name: 'Zikri', role: 'Research & Community Lead', image: '/images/logo.png' },
-  { name: 'Doni', role: 'Event Division Lead', image: '/images/logo.png' },
-  { name: 'Mufid', role: 'Content Division Lead', image: '/images/logo.png' },
-  { name: 'Clarissa', role: 'Study Group division Lead', image: '/images/logo.png' },
-]
-
 const values = [
   {
     icon: '🚀',
@@ -211,27 +199,6 @@ export default function About() {
                 </FadeIn>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 px-4 relative glow-pink-left overflow-hidden">
-        <div className="max-w-6xl mx-auto relative z-10">
-          <SectionHeading eyebrow="Team" title="Meet Our Team" subtitle="Orang-orang hebat di balik EISD Laboratory." />
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-            {teamMembers.map((member, index) => (
-              <FadeIn key={member.name} direction="up" delay={0.05 * (index + 1)}>
-                <div className="group text-center">
-                  <div className="relative w-28 h-28 mx-auto mb-4 rounded-2xl overflow-hidden bg-white border-2 border-white/60 shadow-lg group-hover:shadow-xl group-hover:border-primary/30 transition-all duration-300">
-                    <Image src={member.image} alt={member.name} fill className="object-contain p-3" />
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-sm group-hover:text-primary transition-colors">{member.name}</h4>
-                  <p className="text-gray-500 text-xs mt-1">{member.role}</p>
-                </div>
-              </FadeIn>
-            ))}
           </div>
         </div>
       </section>

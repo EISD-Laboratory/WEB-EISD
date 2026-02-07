@@ -201,14 +201,14 @@
   .glow-blue-top-right::before {
     content: '';
     position: absolute;
-    top: 10%;
-    right: 5%;
-    width: 750px;
-    height: 550px;
-    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.75) 0%, rgba(147, 197, 253, 0.35) 40%, rgba(147, 197, 253, 0.10) 65%, transparent 80%);
+    top: 50%;
+    right: 0;
+    width: min(700px, 80vw);
+    height: min(500px, 80vh);
+    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.6) 0%, rgba(147, 197, 253, 0.25) 35%, rgba(147, 197, 253, 0.08) 55%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(30%, -20%);
+    transform: translate(15%, -50%);
   }
   
   /* 2. Blue - Left Middle (Focus Area) */
@@ -219,14 +219,14 @@
   .glow-blue-left::before {
     content: '';
     position: absolute;
-    top: 30%;
-    left: 5%;
-    width: 700px;
-    height: 500px;
-    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.65) 0%, rgba(147, 197, 253, 0.30) 40%, rgba(147, 197, 253, 0.08) 65%, transparent 80%);
+    top: 50%;
+    left: 0;
+    width: min(650px, 75vw);
+    height: min(450px, 75vh);
+    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.55) 0%, rgba(147, 197, 253, 0.22) 35%, rgba(147, 197, 253, 0.06) 55%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(-30%, -10%);
+    transform: translate(-15%, -50%);
   }
   
   /* 3. Pink - Left Bottom (Division) */
@@ -237,14 +237,14 @@
   .glow-pink-left::before {
     content: '';
     position: absolute;
-    bottom: 20%;
-    left: 5%;
-    width: 750px;
-    height: 550px;
-    background: radial-gradient(ellipse, rgba(251, 207, 232, 0.75) 0%, rgba(251, 207, 232, 0.35) 40%, rgba(251, 207, 232, 0.12) 65%, transparent 80%);
+    top: 50%;
+    left: 0;
+    width: min(700px, 80vw);
+    height: min(500px, 80vh);
+    background: radial-gradient(ellipse, rgba(251, 207, 232, 0.6) 0%, rgba(251, 207, 232, 0.25) 35%, rgba(251, 207, 232, 0.08) 55%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(-30%, 10%);
+    transform: translate(-15%, -50%);
   }
   
   /* 4. Blue - Right Middle (Highlights) */
@@ -255,14 +255,14 @@
   .glow-blue-right::before {
     content: '';
     position: absolute;
-    top: 35%;
-    right: 5%;
-    width: 700px;
-    height: 500px;
-    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.60) 0%, rgba(147, 197, 253, 0.25) 40%, rgba(147, 197, 253, 0.08) 65%, transparent 80%);
+    top: 50%;
+    right: 0;
+    width: min(650px, 75vw);
+    height: min(450px, 75vh);
+    background: radial-gradient(ellipse, rgba(147, 197, 253, 0.5) 0%, rgba(147, 197, 253, 0.2) 35%, rgba(147, 197, 253, 0.06) 55%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(30%, -5%);
+    transform: translate(15%, -50%);
   }
   
   /* 5. Pink - Bottom Left (Form) */
@@ -273,14 +273,14 @@
   .glow-pink-bottom::before {
     content: '';
     position: absolute;
-    bottom: 10%;
-    left: 5%;
-    width: 750px;
-    height: 550px;
-    background: radial-gradient(ellipse, rgba(251, 207, 232, 0.80) 0%, rgba(251, 207, 232, 0.40) 40%, rgba(251, 207, 232, 0.15) 65%, transparent 80%);
+    top: 50%;
+    left: 0;
+    width: min(700px, 80vw);
+    height: min(500px, 80vh);
+    background: radial-gradient(ellipse, rgba(251, 207, 232, 0.65) 0%, rgba(251, 207, 232, 0.3) 35%, rgba(251, 207, 232, 0.1) 55%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(-30%, 15%);
+    transform: translate(-15%, -50%);
   }
   
   /* Gradient Text Animated */
