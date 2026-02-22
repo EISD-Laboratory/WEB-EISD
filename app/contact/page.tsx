@@ -19,9 +19,9 @@ export default function Contact() {
       <section className="pt-28 pb-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
-            <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-1.5 rounded-full mb-5">
+            <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-              <span className="text-xs font-semibold text-primary tracking-wide uppercase">Get in Touch</span>
+              <span className="text-sm font-semibold font-medium text-primary tracking-wide uppercase">Get in Touch</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gray-900">Contact </span>
