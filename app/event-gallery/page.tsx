@@ -100,10 +100,10 @@ export default function EventGallery() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 glass-card px-5 py-2.5 rounded-full shadow-soft mb-6 shimmer-enhanced"
+              className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced"
             >
-              <div className="w-2 h-2 bg-primary rounded-full pulse-subtle" />
-              <span className="text-sm text-gray-700 font-medium">Events & Gallery</span>
+              <div className="w-1.5 h-1.5 bg-accent-green rounded-full pulse-subtle" />
+              <span className="text-sm font-semibold font-medium text-primary">Events & Gallery</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">

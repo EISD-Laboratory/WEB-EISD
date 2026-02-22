@@ -57,9 +57,9 @@ export default function About() {
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
             <FadeIn direction="up" delay={0.2}>
               <div className="text-center">
-                <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/60 px-4 py-1.5 rounded-full mb-5">
+                <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-5 shimmer-enhanced">
                   <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-                  <span className="text-xs font-semibold text-primary tracking-wide uppercase">About Us</span>
+                  <span className="text-xs font-semibold font-medium text-primary tracking-wide uppercase">About Us</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
                   <span className="text-gray-600">Welcome To</span><br />

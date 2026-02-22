@@ -19,7 +19,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-1.5 rounded-full mb-8 w-fit"
+          className="inline-flex w-fit items-center gap-2 glass-card px-4 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced"
         >
           <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
           <span className="text-xs font-semibold text-primary tracking-wide uppercase">Laboratory Profile</span>
@@ -107,7 +107,7 @@ export default function Hero() {
 
         {/* Label */}
         <div className="absolute bottom-6 right-6 z-20">
-          <div className="bg-white/90 backdrop-blur-sm border border-white/60 rounded-xl px-4 py-2 shadow-sm">
+          <div className="bg-white/90 backdrop-blur-sm border border-white/60 rounded-xl px-4 py-2 shadow-sm shimmer-enhanced">
             <p className="text-xs font-semibold text-gray-700">EISD Laboratory <span className="text-accent-green">V6</span></p>
           </div>
         </div>

@@ -4,8 +4,10 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { navItems } from '@/lib/data'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -32,17 +34,29 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-7">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                scrolled ? 'text-gray-600' : 'text-gray-700'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href; // Cek: Apakah URL sekarang sama dengan link menu ini?
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`relative text-sm font-medium transition-all duration-300 pb-1 group
+                  ${isActive 
+                    ? 'text-primary' // Warna biru jika aktif (sesuaikan variabel warna proyek Anda)
+                    : scrolled ? 'text-gray-600 hover:text-primary' : 'text-gray-700 hover:text-primary'
+                  }`}
+              >
+                {item.label}
+                
+                {/* Garis Bawah (Garis Biru) */}
+                <span 
+                  className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300
+                    ${isActive ? 'w-full' : 'w-0'}`} 
+                />
+              </a>
+            );
+          })}
         </div>
 
         {/* Desktop CTA */}
