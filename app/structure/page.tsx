@@ -25,8 +25,8 @@ interface Division {
 }
 
 const coreDivision = [
-  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/logo.png', linkedin: '#' },
   { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/DEZA.png', linkedin: 'https://www.linkedin.com/in/deazard/' },
+  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/logo.png', linkedin: '#' },
   { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/logo.png', linkedin: '#' },
 ]
 
@@ -203,13 +203,13 @@ export default function Structure() {
       </section>
 
       {/* Core Division — Compact horizontal */}
-      <section className="py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-8 px-4 w-full">
+        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center">
           <FadeIn direction="up" delay={0.15}>
             <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">Core Division</p>
-            <div className="flex items-end justify-center gap-8 md:gap-14">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 items-center justify-items-center w-full">
               {coreDivision.map((member, i) => {
-                const isKetua = i === 0
+                const isKetua = member.role === 'Ketua Lab';
                 return (
                   <PersonCard
                     key={member.code}
@@ -262,38 +262,138 @@ export default function Structure() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
             >
-              {/* Division title */}
-              <div className="text-center mb-8">
+              <div className="mt-18 text-center mb-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{activeDivision.name}</h2>
                 <div className={`mx-auto mt-2 h-1 w-16 rounded-full bg-gradient-to-r ${activeDivision.gradient}`} />
               </div>
 
-              {/* Koordinator + Members in a single grid */}
-              <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+              {/* MEMBERS */}
+              <div className="mt-6 flex flex-col items-center gap-10">
+
+                {/* KOORDINATOR */}
                 {koordinator && (
-                  <PersonCard
-                    name={koordinator.name}
-                    code={koordinator.code}
-                    image={koordinator.image}
-                    linkedin={koordinator.linkedin}
-                    badge="Koordinator"
-                    badgeGradient={activeDivision.gradient}
-                    size="md"
-                  />
+                  <div className="flex justify-center w-full">
+                    <PersonCard
+                      name={koordinator.name}
+                      code={koordinator.code}
+                      image={koordinator.image}
+                      linkedin={koordinator.linkedin}
+                      badge="Koordinator"
+                      badgeGradient={activeDivision.gradient}
+                      size="md"
+                    />
+                  </div>
                 )}
-                {members.map((member) => (
-                  <PersonCard
-                    key={member.code}
-                    name={member.name}
-                    code={member.code}
-                    image={member.image}
-                    linkedin={member.linkedin}
-                    size="sm"
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+
+                {/* MEMBERS */}
+                {(() => {
+                  const count = members.length
+
+                  // ===== 1–4 ORANG =====
+                  if (count <= 4) {
+                    const cols =
+                      count === 1
+                        ? 'grid-cols-1'
+                        : count === 2
+                        ? 'grid-cols-2'
+                        : count === 3
+                        ? 'grid-cols-3'
+                        : 'grid-cols-4'
+
+                    return (
+                      <div className="w-full max-w-3xl mx-auto px-4">
+                        <div
+                          className={`grid ${cols} gap-6 md:gap-8 justify-items-center items-start justify-center`}
+                        >
+                          {members.map((member) => (
+                            <PersonCard
+                              key={member.code}
+                              name={member.name}
+                              code={member.code}
+                              image={member.image}
+                              linkedin={member.linkedin}
+                              size="sm"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  }
+
+                  // ===== 5 ORANG (3-2 CENTER) =====
+                  if (count === 5) {
+                    return (
+                      <div className="flex flex-col items-center gap-8">
+
+                        {/* ROW ATAS */}
+                        <div className="grid grid-cols-3 gap-6 md:gap-8 justify-items-center">
+                          {members.slice(0, 3).map((member) => (
+                            <PersonCard
+                              key={member.code}
+                              name={member.name}
+                              code={member.code}
+                              image={member.image}
+                              linkedin={member.linkedin}
+                              size="sm"
+                            />
+                          ))}
+                        </div>
+
+                        {/* ROW BAWAH */}
+                        <div className="flex justify-center gap-6 md:gap-8">
+                          {members.slice(3).map((member) => (
+                            <PersonCard
+                              key={member.code}
+                              name={member.name}
+                              code={member.code}
+                              image={member.image}
+                              linkedin={member.linkedin}
+                              size="sm"
+                            />
+                          ))}
+                        </div>
+
+                      </div>
+                    )
+                  }
+
+                  // ===== 6 ORANG (3-3) =====
+                  if (count === 6) {
+                    return (
+                      <div className="grid grid-cols-3 gap-6 md:gap-8 justify-items-center">
+                        {members.map((member) => (
+                          <PersonCard
+                            key={member.code}
+                            name={member.name}
+                            code={member.code}
+                            image={member.image}
+                            linkedin={member.linkedin}
+                            size="sm"
+                          />
+                        ))}
+                      </div>
+                    )
+                  }
+
+                  // ===== DEFAULT (7+ ORANG) =====
+                  return (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+                      {members.map((member) => (
+                        <PersonCard
+                          key={member.code}
+                          name={member.name}
+                          code={member.code}
+                          image={member.image}
+                          linkedin={member.linkedin}
+                          size="sm"
+                        />
+                      ))}
+                    </div>
+                  )
+                })()}
+            </div>
+          </motion.div>
+        </AnimatePresence>
         </div>
       </section>
 
