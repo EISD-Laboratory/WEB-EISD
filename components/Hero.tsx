@@ -13,8 +13,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-stretch pt-16 md:pt-0">
       {/* ── Left: Text content ── */}
-      <div className="w-full md:w-5/12 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-20 py-16 md:py-24 relative z-10">
-        {/* Badge */}
+      <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-20 py-16 md:py-24 relative z-10">        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,7 +52,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="flex items-center gap-6 mb-8"
+          className="flex flex-wrap items-center gap-6 mb-8" 
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="flex items-center gap-3">
