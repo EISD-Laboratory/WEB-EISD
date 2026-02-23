@@ -21,7 +21,6 @@ export default function Divisions() {
     'from-rose-500 via-pink-500 to-purple-500',
   ]
 
-  // Desktop: horizontal position for each card
   const getDesktopPosition = (index: number) => {
     const diff = index - activeIndex
     const half = Math.floor(totalCards / 2)
@@ -34,11 +33,11 @@ export default function Divisions() {
       case 0:
         return { x: 0, scale: 1, opacity: 1, zIndex: 3 }
       case 1:
-        return { x: 340, scale: 0.88, opacity: 0.45, zIndex: 2 }
+        return { x: 260, scale: 0.85, opacity: 0.5, zIndex: 2 }
       case -1:
-        return { x: -340, scale: 0.88, opacity: 0.45, zIndex: 2 }
+        return { x: -260, scale: 0.85, opacity: 0.5, zIndex: 2 }
       default:
-        return { x: normalizedDiff > 0 ? 500 : -500, scale: 0.8, opacity: 0, zIndex: 1 }
+        return { x: normalizedDiff > 0 ? 400 : -400, scale: 0.75, opacity: 0, zIndex: 1 }
     }
   }
 
@@ -50,22 +49,20 @@ export default function Divisions() {
     })
   }, [totalCards])
 
-  // Swipe handler for mobile
   const handleDragEnd = useCallback((_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 50
     if (info.offset.x < -swipeThreshold) {
-      navigate(1) // swipe left -> next
+      navigate(1) 
     } else if (info.offset.x > swipeThreshold) {
-      navigate(-1) // swipe right -> prev
+      navigate(-1) 
     }
   }, [navigate])
 
-  // Mobile slide variants
   const mobileVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 300 : -300,
+      x: dir > 0 ? 250 : -250,
       opacity: 0,
-      scale: 0.92,
+      scale: 0.9,
     }),
     center: {
       x: 0,
@@ -73,9 +70,9 @@ export default function Divisions() {
       scale: 1,
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? -300 : 300,
+      x: dir > 0 ? -250 : 250,
       opacity: 0,
-      scale: 0.92,
+      scale: 0.9,
     }),
   }
 
@@ -83,36 +80,34 @@ export default function Divisions() {
   const activeGradient = gradients[activeIndex % gradients.length]
 
   return (
-    <section className="py-16 px-4 relative">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="py-12 px-4 relative overflow-x-hidden">
+      <div className="max-w-6xl mx-auto relative z-10">
         <SectionHeading 
           eyebrow="Division"
           title="Meet Our Division" 
           subtitle="From strategy to execution, these teams keep the lab running, growing, and innovating."
         />
 
-        <div className="relative mt-12">
-          {/* Navigation Buttons */}
+        <div className="relative mt-10">
           <button
             onClick={() => navigate(-1)}
-            className="absolute -left-1 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
+            className="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
             onClick={() => navigate(1)}
-            className="absolute -right-1 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
+            className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
-          {/* ===== Desktop: Horizontal Stacked Cards (unchanged) ===== */}
-          <div className="hidden md:flex relative items-center justify-center px-8" style={{ height: '420px' }}>
+          <div className="hidden lg:flex relative items-center justify-center px-8" style={{ height: '360px' }}>
             {divisions.map((card, index) => {
               const position = getDesktopPosition(index)
               const isCenter = index === activeIndex
@@ -122,7 +117,7 @@ export default function Divisions() {
                 <motion.div
                   key={card.id}
                   className="absolute"
-                  style={{ width: '320px' }}
+                  style={{ width: '280px' }}
                   initial={false}
                   animate={{
                     x: position.x,
@@ -133,28 +128,28 @@ export default function Divisions() {
                   transition={{ type: "spring", stiffness: 120, damping: 25, mass: 0.8 }}
                 >
                   {isCenter && (
-                    <div className={`absolute -inset-3 bg-gradient-to-br ${gradientClass} rounded-3xl opacity-20 blur-2xl`} />
+                    <div className={`absolute -inset-2 bg-gradient-to-br ${gradientClass} rounded-3xl opacity-20 blur-xl`} />
                   )}
 
-                  <div className={`relative rounded-3xl p-6 border transition-all duration-300 min-h-[380px] flex flex-col overflow-hidden ${
+                  <div className={`relative rounded-2xl p-5 border transition-all duration-300 min-h-[320px] flex flex-col overflow-hidden ${
                     isCenter
-                      ? 'bg-white shadow-2xl border-primary/20 ring-1 ring-primary/10'
-                      : 'bg-white/60 shadow-md border-white/80'
+                      ? 'bg-white shadow-xl border-primary/20 ring-1 ring-primary/10'
+                      : 'bg-white/60 shadow-sm border-white/80'
                   }`}>
                     <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradientClass}`} />
 
-                    <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                    <h3 className={`text-lg font-bold mb-2 transition-colors duration-300 ${
                       isCenter ? 'text-primary' : 'text-gray-900'
                     }`}>{card.title}</h3>
 
-                    <p className={`text-sm leading-relaxed mb-4 flex-grow ${
+                    <p className={`text-xs leading-relaxed mb-4 flex-grow ${
                       isCenter ? 'text-gray-700' : 'text-gray-500'
                     }`}>{card.description}</p>
 
-                    <div className={`relative rounded-2xl overflow-hidden border h-36 transition-colors duration-300 mt-auto ${
+                    <div className={`relative rounded-xl overflow-hidden border h-28 transition-colors duration-300 mt-auto ${
                       isCenter ? 'bg-gray-50 border-primary/20' : 'bg-gray-50/50 border-gray-100'
                     }`}>
-                      <Image src={card.image} alt={card.title} width={1200} height={800} className="w-full h-full object-contain p-4" />
+                      <Image src={card.image} alt={card.title} width={400} height={300} className="w-full h-full object-contain p-3" />
                     </div>
                   </div>
                 </motion.div>
@@ -162,8 +157,7 @@ export default function Divisions() {
             })}
           </div>
 
-          {/* ===== Mobile: Single full-width card with swipe + slide ===== */}
-          <div className="md:hidden relative mx-10">
+          <div className="lg:hidden relative mx-auto max-w-[320px] px-2">
             <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
                 key={activeIndex}
@@ -183,45 +177,37 @@ export default function Divisions() {
                 }}
                 className="w-full cursor-grab active:cursor-grabbing"
               >
-                {/* Glow aura */}
-                <div className={`absolute -inset-3 bg-gradient-to-br ${activeGradient} rounded-2xl opacity-15 blur-xl pointer-events-none`} />
+                <div className={`absolute -inset-2 bg-gradient-to-br ${activeGradient} rounded-2xl opacity-15 blur-lg pointer-events-none`} />
 
-                {/* Card */}
-                <div className="relative bg-white rounded-2xl shadow-xl border border-primary/15 ring-1 ring-primary/5 overflow-hidden">
-                  {/* Gradient top */}
+                <div className="relative bg-white rounded-2xl shadow-lg border border-primary/15 ring-1 ring-primary/5 overflow-hidden">
                   <div className={`h-1.5 bg-gradient-to-r ${activeGradient}`} />
 
                   <div className="p-5">
-                    {/* Title */}
-                    <h3 className="text-lg font-bold text-primary mb-2">
+                    <h3 className="text-base font-bold text-primary mb-2">
                       {activeCard.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    <p className="text-xs text-gray-600 leading-relaxed mb-4">
                       {activeCard.description}
                     </p>
 
-                    {/* Image - auto height, no cut off */}
-                    <div className="relative rounded-xl overflow-hidden border border-primary/10 bg-gray-50">
+                    <div className="relative rounded-xl overflow-hidden border border-primary/10 bg-gray-50 h-32 flex items-center justify-center">
                       <Image
                         src={activeCard.image}
                         alt={activeCard.title}
-                        width={800}
-                        height={500}
-                        className="w-full h-auto object-contain p-4"
+                        width={400}
+                        height={300}
+                        className="w-full h-full object-contain p-3"
                       />
                     </div>
                   </div>
 
-                  {/* Gradient bottom */}
                   <div className={`h-1 bg-gradient-to-r ${activeGradient}`} />
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Progress Indicators */}
           <div className="flex justify-center gap-2 mt-6">
             {divisions.map((_, index) => (
               <button
@@ -232,16 +218,16 @@ export default function Divisions() {
                 }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? 'w-8 bg-gradient-to-r from-primary to-accent-green'
+                    ? 'w-6 bg-gradient-to-r from-primary to-accent-green'
                     : 'w-2 bg-gray-300 hover:bg-gray-400'
                 }`}
               />
             ))}
           </div>
 
-          <p className="text-center mt-4 text-sm text-gray-400">
-            <span className="hidden md:inline">Click arrows or dots to navigate</span>
-            <span className="md:hidden">Swipe or tap dots to navigate</span>
+          <p className="text-center mt-3 text-xs text-gray-400">
+            <span className="hidden lg:inline">Click arrows or dots to navigate</span>
+            <span className="lg:hidden">Swipe or tap dots to navigate</span>
           </p>
         </div>
       </div>
