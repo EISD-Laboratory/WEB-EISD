@@ -189,7 +189,7 @@ export default function Structure() {
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-              <span className="text-sm font-semibold font-medium text-primary tracking-wide uppercase">Organization</span>
+              <span className="text-sm font-semibold text-primary tracking-wide uppercase">Organization</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gray-900">Our </span>
