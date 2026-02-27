@@ -41,21 +41,20 @@ export default function FocusArea() {
           subtitle="Code, Create, Launch, Learn."
         />
 
-        {/* Grid Layout */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-8">
           {items.map((item, index) => (
             <div
               key={item.id}
-              className="rounded-3xl border-2 border-primary/25 bg-white shadow-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="rounded-3xl border-2 border-primary/25 bg-white shadow-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col h-full"
             >
-              <div className={`h-1.5 bg-gradient-to-r ${iconGradient}`} />
+              <div className={`h-1.5 w-full shrink-0 bg-gradient-to-r ${iconGradient}`} />
 
-              <div className="flex flex-col items-center text-center p-7">
-                <div className={`rounded-2xl bg-gradient-to-br ${iconGradient} flex items-center justify-center shadow-lg mb-4 w-20 h-20`}>
+              <div className="flex flex-col items-center text-center p-7 flex-grow">
+                <div className={`rounded-2xl bg-gradient-to-br ${iconGradient} flex items-center justify-center shadow-lg mb-4 w-20 h-20 shrink-0`}>
                   <span className="text-4xl">{item.icon}</span>
                 </div>
 
-                <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-900 mb-2 shadow-md">
+                <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-900 mb-2 shadow-md shrink-0">
                   <span className="text-white text-[10px] font-bold">{String(index + 1).padStart(2, '0')}</span>
                 </div>
 
@@ -64,7 +63,7 @@ export default function FocusArea() {
                 <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
               </div>
 
-              <div className={`h-1 bg-gradient-to-r ${iconGradient}`} />
+              <div className={`h-1 w-full mt-auto shrink-0 bg-gradient-to-r ${iconGradient}`} />
             </div>
           ))}
         </div>
