@@ -103,9 +103,7 @@ export default function About() {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Visi</h3>
                 <p className="text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                Menjadikan laboratorium riset yang membentuk mahasiswa yang inovatif dalam menciptakan produk dan memiliki kemampuan yang tinggi khususnya dalam bidang perangkat lunak.
                 </p>
               </div>
             </FadeIn>
@@ -120,19 +118,15 @@ export default function About() {
                 <ul className="text-gray-600 leading-relaxed space-y-3">
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    Mendukung segala kegiatan anggota-anggota dalam satu tahun kedepan dalam mengikuti lomba-lomba minimal dua kegiatan lomba.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    Membuat produk-produk yang bisa digunakan bagi lingkungan universitas maupun masyarakat.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    Menciptakan sumber daya manusia yang dapat bersaing dan siap dalam menghadapi perubahan industri.
                   </li>
                 </ul>
               </div>
