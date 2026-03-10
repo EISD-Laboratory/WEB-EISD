@@ -183,7 +183,7 @@ export default function Divisions() {
                         alt={card.title} 
                         width={400} 
                         height={300} 
-                        className="w-full h-full object-contain p-3" 
+                        className="object-cover" 
                         priority={isCenter}
                       />
                     </div>
