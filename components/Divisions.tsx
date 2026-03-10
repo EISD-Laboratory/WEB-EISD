@@ -175,7 +175,7 @@ export default function Divisions() {
                       isCenter ? 'text-gray-700' : 'text-gray-500'
                     }`}>{card.description}</p>
 
-                    <div className={`relative rounded-xl overflow-hidden border h-28 transition-colors duration-300 mt-auto ${
+                    <div className={`relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-primary/10 bg-gray-50 mt-auto shrink-0 ${
                       isCenter ? 'bg-gray-50 border-primary/20' : 'bg-gray-50/50 border-gray-100'
                     }`}>
                       <Image 
@@ -227,13 +227,13 @@ export default function Divisions() {
                       {activeCard.description}
                     </p>
 
-                    <div className="relative rounded-xl overflow-hidden border border-primary/10 bg-gray-50 h-32 flex items-center justify-center mt-auto shrink-0">
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-primary/10 bg-gray-50 mt-auto shrink-0">
                       <Image
                         src={activeCard.image}
                         alt={activeCard.title}
                         width={400}
                         height={300}
-                        className="w-full h-full object-contain p-3"
+                        className="object-cover object-top"
                         priority
                       />
                     </div>
