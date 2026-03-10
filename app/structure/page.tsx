@@ -25,9 +25,9 @@ interface Division {
 }
 
 const coreDivision = [
-  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/DEZA.png', linkedin: 'https://www.linkedin.com/in/deazard/' },
-  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/logo.png', linkedin: '#' },
-  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/logo.png', linkedin: '#' },
+  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/core/DEZA.png', linkedin: 'https://www.linkedin.com/in/deazard/' },
+  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/members/core/FADIA.png', linkedin: '#' },
+  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/members/core/KIREI.png', linkedin: '#' },
 ]
 
 const divisions: Division[] = [
@@ -36,10 +36,10 @@ const divisions: Division[] = [
     icon: '🏆',
     gradient: 'from-amber-500 to-orange-500',
     members: [
-      { name: 'Bimo Alfarizy Lukman', code: 'FRZY', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Azzahra Aulia Khoirunnisa', code: 'ZAAR', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Nashwa Alya Zahra Pratiwi', code: 'NAZP', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Dhydo Aryo Jayanata', code: 'JAYY', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Bimo Alfarizy Lukman', code: 'FRZY', role: 'koordinator', image: '/images/members/competition/BIMO.jpg', linkedin: '#' },
+      { name: 'Azzahra Aulia Khoirunnisa', code: 'ZAAR', role: 'member', image: '/images/members/competition/ZAHRA.jpg', linkedin: '#' },
+      { name: 'Nashwa Alya Zahra Pratiwi', code: 'NAZP', role: 'member', image: '/images/members/competition/NASHWA.jpeg', linkedin: '#' },
+      { name: 'Dhydo Aryo Jayanata', code: 'JAYY', role: 'member', image: '/images/members/competition/DHYDO.jpg', linkedin: '#' },
     ],
   },
   {
@@ -47,12 +47,12 @@ const divisions: Division[] = [
     icon: '✍️',
     gradient: 'from-pink-500 to-rose-500',
     members: [
-      { name: 'Muhammad Mufid Taqiyuddin', code: 'VIDS', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Maurithania Joleesha Maria Tjakra', code: 'NIYO', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Muhammad Reyhan Armadani', code: 'REYY', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Renasya Cahya Handayani', code: 'IYAN', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Dinar Muhammad Akbar', code: 'DNMA', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Zhafran Ahmad Zaidan', code: 'FRAN', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Muhammad Mufid Taqiyuddin', code: 'VIDS', role: 'koordinator', image: '/images/members/content/MUFID.png', linkedin: '#' },
+      { name: 'Maurithania Joleesha Maria Tjakra', code: 'NIYO', role: 'member', image: '/images/members/content/THANIA.jpg', linkedin: '#' },
+      { name: 'Muhammad Reyhan Armadani', code: 'REYY', role: 'member', image: '/images/members/content/REYHAN.jpeg', linkedin: '#' },
+      { name: 'Renasya Cahya Handayani', code: 'IYAN', role: 'member', image: '/images/members/content/RENASYA.jpg', linkedin: '#' },
+      { name: 'Dinar Muhammad Akbar', code: 'DNMA', role: 'member', image: '/images/members/content/DINAR.jpg', linkedin: '#' },
+      { name: 'Zhafran Ahmad Zaidan', code: 'FRAN', role: 'member', image: '/images/members/content/ZHAFRAN.jpg', linkedin: '#' },
     ],
   },
   {
@@ -60,11 +60,11 @@ const divisions: Division[] = [
     icon: '⚙️',
     gradient: 'from-emerald-500 to-teal-500',
     members: [
-      { name: 'Refaya Azzam Maheswara', code: 'PAYY', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Muhammad Fatih', code: 'mfth', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Fasya Arinal Hudha', code: 'SYRN', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Elsa Ainun Yusniar', code: 'ESNY', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Aisyah Nur Raihandany Putri', code: 'ASYH', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Refaya Azzam Maheswara', code: 'PAYY', role: 'koordinator', image: '/images/members/enabler/REFAYA.jpg', linkedin: '#' },
+      { name: 'Muhammad Fatih', code: 'mfth', role: 'member', image: '/images/members/enabler/FATIH.jpg', linkedin: '#' },
+      { name: 'Fasya Arinal Hudha', code: 'SYRN', role: 'member', image: '/images/members/enabler/FASYA.png', linkedin: '#' },
+      { name: 'Elsa Ainun Yusniar', code: 'ESNY', role: 'member', image: '/images/members/enabler/ELSA.jpg', linkedin: '#' },
+      { name: 'Aisyah Nur Raihandany Putri', code: 'ASYH', role: 'member', image: '/images/members/enabler/AISYAH.jpg', linkedin: '#' },
     ],
   },
   {
@@ -72,11 +72,11 @@ const divisions: Division[] = [
     icon: '🎪',
     gradient: 'from-indigo-500 to-purple-500',
     members: [
-      { name: 'Muhammad Luthfi Tukhfattur Romadhoni', code: 'MLTR', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Djaudza Djiyya Muhammad', code: 'DJZA', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Viki Firmansyah', code: 'VIKS', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Rosita Jian Syahiirah', code: 'RORA', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Jian Hazel Sitorus', code: 'ZELL', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Muhammad Luthfi Tukhfattur Romadhoni', code: 'MLTR', role: 'koordinator', image: '/images/members/event/DHONI.JPG', linkedin: '#' },
+      { name: 'Djaudza Djiyya Muhammad', code: 'DJZA', role: 'member', image: '/images/members/event/DJAUDZA.png', linkedin: '#' },
+      { name: 'Viki Firmansyah', code: 'VIKS', role: 'member', image: '/images/members/event/VIKI.jpg', linkedin: '#' },
+      { name: 'Rosita Jian Syahiirah', code: 'RORA', role: 'member', image: '/images/members/event/JIAN.jpeg', linkedin: '#' },
+      { name: 'Jian Hazel Sitorus', code: 'ZELL', role: 'member', image: '/images/members/event/HAZEL.jpg', linkedin: '#' },
     ],
   },
   {
@@ -84,13 +84,13 @@ const divisions: Division[] = [
     icon: '🔬',
     gradient: 'from-cyan-500 to-blue-500',
     members: [
-      { name: 'Hilmi Zikri', code: 'ZIKK', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Zuhri Pratisto Basuki', code: 'ZRII', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Rasya Akbar Lazuardi', code: 'LAZY', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Rizky Saputra Al Amir', code: 'EKAA', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Alif Muslim Abdurrahman', code: 'MSLMN', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Anisa Hanun', code: 'ASAA', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Fairuzia Meyla Fatinah', code: 'FZMY', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Hilmi Zikri', code: 'ZIKK', role: 'koordinator', image: '/images/members/rnc/ZIKRI.jpeg', linkedin: '#' },
+      { name: 'Zuhri Pratisto Basuki', code: 'ZRII', role: 'member', image: '/images/members/rnc/ZUHRI.JPG', linkedin: '#' },
+      { name: 'Rasya Akbar Lazuardi', code: 'LAZY', role: 'member', image: '/images/members/rnc/RASYA.png', linkedin: '#' },
+      { name: 'Rizky Saputra Al Amir', code: 'EKAA', role: 'member', image: '/images/members/rnc/EKA.jpeg', linkedin: '#' },
+      { name: 'Alif Muslim Abdurrahman', code: 'MSLMN', role: 'member', image: '/images/members/rnc/ALIF.jpg', linkedin: '#' },
+      { name: 'Anisa Hanun', code: 'ASAA', role: 'member', image: '/images/members/rnc/ASA.jpg', linkedin: '#' },
+      { name: 'Fairuzia Meyla Fatinah', code: 'FZMY', role: 'member', image: '/images/members/rnc/ZIA.jpg', linkedin: '#' },
     ],
   },
   {
@@ -98,10 +98,10 @@ const divisions: Division[] = [
     icon: '📚',
     gradient: 'from-violet-500 to-purple-600',
     members: [
-      { name: 'Clarissa Tompunu', code: 'CARL', role: 'koordinator', image: '/images/logo.png', linkedin: '#' },
-      { name: 'M. Paksi Pratama', code: 'MPP', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Naswa Gyna Sahira', code: 'SGYN', role: 'member', image: '/images/logo.png', linkedin: '#' },
-      { name: 'Siti Amany Fakhirah Riby', code: 'SAFR', role: 'member', image: '/images/logo.png', linkedin: '#' },
+      { name: 'Clarissa Tompunu', code: 'CARL', role: 'koordinator', image: '/images/members/studygroup/CLARISSA.png', linkedin: '#' },
+      { name: 'M. Paksi Pratama', code: 'MPP', role: 'member', image: '/images/members/studygroup/PAKSI.jpg', linkedin: '#' },
+      { name: 'Naswa Gyna Sahira', code: 'SGYN', role: 'member', image: '/images/members/studygroup/NASWA.JPEG', linkedin: '#' },
+      { name: 'Siti Amany Fakhirah Riby', code: 'SAFR', role: 'member', image: '/images/members/studygroup/AMANY.jpeg', linkedin: '#' },
     ],
   },
 ]
