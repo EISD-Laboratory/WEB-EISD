@@ -2,11 +2,11 @@
 
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollProgressBar from '@/components/ScrollProgressBar'
 import BackToTop from '@/components/BackToTop'
-import SectionHeading from '@/components/SectionHeading'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
 
@@ -103,7 +103,7 @@ export default function EventGallery() {
               className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced"
             >
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full pulse-subtle" />
-              <span className="text-sm font-semibold font-medium text-primary">Events & Gallery</span>
+              <span className="text-sm font-semibold text-primary">Events & Gallery</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -211,7 +211,8 @@ export default function EventGallery() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {filteredEvents.map((event, index) => (
                     <FadeIn key={event.id} direction="up" delay={0.1 * (index + 1)}>
-                      <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg border border-white/60 hover:shadow-2xl transition-all duration-300 h-full">
+                      <Link href={`/event-gallery/${event.id}`} className="block">
+                        <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg border border-white/60 hover:shadow-2xl transition-all duration-300 h-full">
                         <div className="flex flex-col sm:flex-row">
                           {/* Image */}
                           <div className="relative h-48 sm:h-auto sm:w-2/5 bg-gray-50 overflow-hidden flex-shrink-0">
@@ -259,6 +260,7 @@ export default function EventGallery() {
                           </div>
                         </div>
                       </div>
+                      </Link>
                     </FadeIn>
                   ))}
                 </div>
