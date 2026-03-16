@@ -9,6 +9,7 @@ import BackToTop from '@/components/BackToTop'
 import SectionHeading from '@/components/SectionHeading'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const categories = ['All', 'Workshop', 'Seminar', 'Competition', 'Study Group']
 
@@ -125,55 +126,57 @@ export default function Events() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEvents.map((event, index) => (
               <FadeIn key={event.id} direction="up" delay={0.1 * (index + 1)}>
-                <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg border border-white/60 hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  {/* Image */}
-                  <div className="relative h-48 bg-gray-50 border-b border-gray-100 overflow-hidden">
-                    <Image
-                      src={event.image}
-                      alt={event.title}
-                      fill
-                      className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Status Badge */}
-                    <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold ${
-                      event.status === 'upcoming'
-                        ? 'bg-accent-green text-white'
-                        : 'bg-gray-200 text-gray-600'
-                    }`}>
-                      {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
+                <Link href={`/events/${event.id}`} className="block">  // Bungkus dengan Link, gunakan class "block" untuk link penuh
+                  <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg border border-white/60 hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                    {/* Image */}
+                    <div className="relative h-48 bg-gray-50 border-b border-gray-100 overflow-hidden">
+                      <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Status Badge */}
+                      <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold ${
+                        event.status === 'upcoming'
+                          ? 'bg-accent-green text-white'
+                          : 'bg-gray-200 text-gray-600'
+                      }`}>
+                        {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
+                      </div>
+                      {/* Gradient overlay bottom */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${event.gradient}`} />
                     </div>
-                    {/* Gradient overlay bottom */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${event.gradient}`} />
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      {/* Category & Date */}
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${event.gradient} text-white`}>
+                          {event.category}
+                        </span>
+                        <span className="text-xs text-gray-400">{event.date}</span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                        {event.title}
+                      </h3>
+
+                      <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
+                        {event.description}
+                      </p>
+
+                      {/* Location */}
+                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {event.location}
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    {/* Category & Date */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${event.gradient} text-white`}>
-                        {event.category}
-                      </span>
-                      <span className="text-xs text-gray-400">{event.date}</span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                      {event.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
-                      {event.description}
-                    </p>
-
-                    {/* Location */}
-                    <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {event.location}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               </FadeIn>
             ))}
           </div>

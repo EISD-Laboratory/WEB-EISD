@@ -1,0 +1,22 @@
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.galleryScroll {
+  animation: infiniteScroll 30s linear infinite;
+}
+
+.galleryScroll:hover {
+  animation-play-state: paused;
+}
+
+.galleryItem {
+  width: 400px;
+  height: 200px;
+  flex-shrink: 0;
+}

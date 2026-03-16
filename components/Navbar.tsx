@@ -35,7 +35,10 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-7">
           {navItems.map((item) => {
-            const isActive = pathname === item.href; // Cek: Apakah URL sekarang sama dengan link menu ini?
+            // Cek: Apakah URL sekarang sama dengan link menu, atau di dalam subpath menu tersebut
+            const isActive = 
+              pathname === item.href || 
+              (item.href !== '/' && pathname.startsWith(item.href + '/'));
 
             return (
               <a
