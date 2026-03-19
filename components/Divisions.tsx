@@ -117,7 +117,6 @@ export default function Divisions() {
           <button
             onClick={() => navigate(-1)}
             aria-label="Previous card"
-            // Perubahan di baris bawah: menggunakan border-0 md:border md:border-gray-200
             className="absolute left-0 md:left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-0 md:border md:border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary md:hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -128,7 +127,6 @@ export default function Divisions() {
           <button
             onClick={() => navigate(1)}
             aria-label="Next card"
-            // Perubahan di baris bawah: menggunakan border-0 md:border md:border-gray-200
             className="absolute right-0 md:right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-0 md:border md:border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:text-primary md:hover:border-primary/30 hover:shadow-lg transition-all duration-200"
           >
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

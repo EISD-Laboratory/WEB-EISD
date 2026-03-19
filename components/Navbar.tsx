@@ -35,7 +35,6 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-7">
           {navItems.map((item) => {
-            // Cek: Apakah URL sekarang sama dengan link menu, atau di dalam subpath menu tersebut
             const isActive = 
               pathname === item.href || 
               (item.href !== '/' && pathname.startsWith(item.href + '/'));
@@ -46,7 +45,7 @@ export default function Navbar() {
                 href={item.href}
                 className={`relative text-sm font-medium transition-all duration-300 pb-1 group
                   ${isActive 
-                    ? 'text-primary' // Warna biru jika aktif (sesuaikan variabel warna proyek Anda)
+                    ? 'text-primary'
                     : scrolled ? 'text-gray-600 hover:text-primary' : 'text-gray-700 hover:text-primary'
                   }`}
               >
