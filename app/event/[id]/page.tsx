@@ -105,7 +105,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
             <section className="pt-8 px-4 md:px-8 bg-white max-w-[1440px] mx-auto">
                 <FadeIn direction="up" delay={0.15}>
                     <Link 
-                        href="/event-gallery" 
+                        href="/event" 
                         className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold text-sm group"
                     >
                         <svg 
@@ -221,7 +221,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                     {otherEvents.map((otherEvent) => (
                                         <Link 
                                             key={otherEvent.id} 
-                                            href={`/event-gallery/${otherEvent.id}`}
+                                            href={`/event/${otherEvent.id}`}
                                             className="group block"
                                         >
                                             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
