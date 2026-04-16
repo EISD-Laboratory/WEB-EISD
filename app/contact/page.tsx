@@ -37,22 +37,30 @@ export default function Contact() {
       {/* 2x2 Grid Cards */}
       <section className="px-4 pb-10">
         <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Location */}
+
+          {/* WhatsApp */}
           <FadeIn direction="up" delay={0.1}>
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 h-full flex flex-col">
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <a
+              href="https://wa.me/6285111048176"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white rounded-2xl border border-gray-100 shadow-sm p-6 h-full flex flex-col hover:border-green-200 hover:shadow-md transition-all duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl bg-[#25D366] flex items-center justify-center mb-4 shadow-md">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.057 23.428a.75.75 0 00.916.916l5.566-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.693 9.693 0 01-4.964-1.368l-.356-.212-3.299.874.874-3.299-.212-.356A9.693 9.693 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z" />
                 </svg>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1">Location</h3>
-              <p className="text-sm text-gray-500 leading-relaxed flex-1">
-                Telkom University Landmark Tower (TULT)<br />
-                <span className="font-medium text-gray-700">Ruangan 0810</span> — Lantai 8<br />
-                Bandung, Jawa Barat
-              </p>
-            </div>
+              <h3 className="text-base font-bold text-gray-900 mb-1">WhatsApp</h3>
+              <p className="text-sm text-gray-500 flex-1 mb-4">+62 851-1104-8176</p>
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#25D366] group-hover:text-green-600 transition-colors">
+                <span>Chat Now</span>
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </a>
           </FadeIn>
 
           {/* Email */}
@@ -61,14 +69,14 @@ export default function Contact() {
               href="mailto:eisdlaboratory@gmail.com"
               className="group bg-white rounded-2xl border border-gray-100 shadow-sm p-6 h-full flex flex-col hover:border-primary/20 hover:shadow-md transition-all duration-300"
             >
-              <div className="w-11 h-11 rounded-xl bg-accent-green/10 flex items-center justify-center mb-4 group-hover:bg-accent-green/20 transition-colors">
-                <svg className="w-5 h-5 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-11 h-11 rounded-xl bg-accent-green/10 flex items-center justify-center mb-4 group-hover:bg-accent-blue/20 transition-colors">
+                <svg className="w-5 h-5 text-accent-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-1">Email</h3>
               <p className="text-sm text-gray-500 flex-1 mb-4">eisdlaboratory@gmail.com</p>
-              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:text-accent-green transition-colors">
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:text-accent-blue transition-colors">
                 <span>Send Email</span>
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -124,6 +132,7 @@ export default function Contact() {
               </div>
             </a>
           </FadeIn>
+
         </div>
       </section>
 
