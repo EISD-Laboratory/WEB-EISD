@@ -43,6 +43,8 @@ export default function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : '_self'}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className={`relative text-sm font-medium transition-all duration-300 pb-1 group
                   ${isActive 
                     ? 'text-primary'
@@ -108,6 +110,8 @@ export default function Navbar() {
                 <a
                   key={item.label}
                   href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   onClick={() => setMobileOpen(false)}
                   className="block text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 px-3 py-2.5 rounded-lg transition-all duration-200"
                 >
