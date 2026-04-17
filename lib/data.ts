@@ -102,3 +102,11 @@ export const navItems = [
   { label: "Articles", href: "/articles" },
   { label: 'Study Group', href: 'https://www.eisd-studygroup.site/' }
 ]
+
+export const announcementConfig = {
+  message: 'Bergabunglah bersama kami dan tingkatkan skillmu!',
+  highlightText: '✦ Study Group EISD',
+  ctaLabel: 'Gabung Sekarang →',
+  ctaHref: 'https://www.eisd-studygroup.site/',
+  storageKey: 'eisd-announcement-dismissed',
+};
