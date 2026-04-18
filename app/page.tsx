@@ -12,12 +12,6 @@ import AnnouncementBar from '@/components/AnnouncementBar'
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full">
-        <AnnouncementBar />
-        <Navbar />
-      </header>
-      
       <Hero />
       
       <FadeIn direction="up" delay={0.3}>
@@ -31,9 +25,6 @@ export default function Home() {
       <FadeIn direction="up" delay={0.3}>
         <ArticlesPreview />
       </FadeIn>
-      
-      <Footer />
-      <BackToTop />
     </main>
   )
 }

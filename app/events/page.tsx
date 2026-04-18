@@ -69,8 +69,6 @@ export default function Events() {
 
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-12 px-4 relative">
@@ -209,9 +207,6 @@ export default function Events() {
           </FadeIn>
         </div>
       </section>
-
-      <Footer />
-      <BackToTop />
     </main>
   )
 }

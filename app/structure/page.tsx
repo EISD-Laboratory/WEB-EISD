@@ -8,6 +8,7 @@ import ScrollProgressBar from '@/components/ScrollProgressBar'
 import BackToTop from '@/components/BackToTop'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
+import AnnouncementBar from '@/components/AnnouncementBar'
 
 interface MemberData {
   name: string
@@ -188,6 +189,7 @@ export default function Structure() {
   return (
     <main className="min-h-screen">
       <ScrollProgressBar />
+      <AnnouncementBar/>
       <Navbar />
 
       {/* Hero */}
@@ -424,9 +426,6 @@ export default function Structure() {
           </FadeIn>
         </div>
       </section>
-
-      <Footer />
-      <BackToTop />
     </main>
   )
 }

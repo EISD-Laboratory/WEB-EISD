@@ -12,11 +12,8 @@ const linkedinPath = 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.03
 export default function Contact() {
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <Navbar />
-
       {/* Hero */}
-      <section className="pt-28 pb-8 px-4">
+      <section className="pt-[200px] pb-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
@@ -154,9 +151,6 @@ export default function Contact() {
           </FadeIn>
         </div>
       </section>
-
-      <Footer />
-      <BackToTop />
     </main>
   )
 }

@@ -42,9 +42,6 @@ const milestones = [
 export default function About() {
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative pt-28 md:pt-32 pb-0">
         {/* Full-width photo background */}
@@ -193,9 +190,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <BackToTop />
     </main>
   )
 }
