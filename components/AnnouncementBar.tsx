@@ -40,8 +40,6 @@ export default function AnnouncementBar() {
 
                 <div className="flex items-start sm:items-center gap-3 flex-1">
                     <span className="relative flex h-2.5 w-2.5 shrink-0 mt-1 sm:mt-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: '#00d97a' }}></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: '#00d97a' }}></span>
                     </span>
                     <p className="text-xs sm:text-sm font-medium text-white/90 leading-snug">
                         <span className="font-bold hidden sm:inline-block mr-2" style={{ color: '#00d97a' }}>{announcementConfig.highlightText}</span>

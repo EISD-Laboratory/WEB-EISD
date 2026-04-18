@@ -126,6 +126,12 @@ function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 
     lg: 'w-32 h-32 md:w-36 md:h-36',
   }
 
+  const imageSizes = {
+    sm: '(max-width: 768px) 80px, 96px',
+    md: '(max-width: 768px) 96px, 112px',
+    lg: '(max-width: 768px) 128px, 144px',
+  };
+
   return (
     <div
       className="group text-center"
@@ -139,6 +145,7 @@ function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 
           src={image}
           alt={name}
           fill
+          sizes={imageSizes[size]}
           className={isPlaceholder ? 'object-contain p-2' : 'object-cover'}
         />
         {linkedin && linkedin !== '#' && (
