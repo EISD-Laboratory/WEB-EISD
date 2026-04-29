@@ -97,7 +97,7 @@ export const highlights = [
 export const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Event", href: "/event" },
+  { label: "Events", href: "/events" },
   { label: "Structure", href: "/structure" },
   { label: "Articles", href: "/articles" },
   { label: 'Study Group', href: 'https://www.eisd-studygroup.site/' }

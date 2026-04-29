@@ -1,56 +1,66 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import BackToTop from '@/components/BackToTop'
 import FadeIn from '@/components/FadeIn'
-import styles from '../EventDetail.module.css'
+import styles from './EventDetail.module.css'
 
 const events = [
     {
         id: 1,
-        title: 'Study Group 2025',
-        category: 'Study Group',
-        date: 'Maret - September 2025',
-        location: 'Telkom University',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique sollicitudin orci aliquam nec dictum orci phasellus lectus molestie. Tristique diam in phasellus tristique et. Ac non id dictum tellus rhoncus praesent scelerisque. Eu purus nunc mattis bibendum. Ut est a tellus vitae.\n\nNetus erat vulputate placerat nulla viverra ut eget. Semper pulvinar cras molestie sit tempus. Condimentum pharetra et platea ultricies blandit id mauris. Sit neque lacus morbi aliquam ante nulla tristique ut eu. Accumsan volutpat ac cum eget sed.\n\nSed non eu nullam morbi. Ullamcorper libero in lacus et lorem eros vulputate. Facilisis semper quis mattis a urna sed. Sed nibh tincidunt adipiscing pellentesque venenatis a morbi ac. Massa scelerisque fusce urna et scelerisque volutpat mauris a posuere. Nibh proin eleifend eu a viverra. Vitae venenatis euismod dictumst enim pharetra duis id. Arcu est aliquet dolor diam consequat cursus.',
-        image: '/images/logo.png',
-        status: 'upcoming' as const,
-        gradient: 'from-purple-500 to-blue-500',
+        title: 'Webinar AIoT',
+        category: 'Workshop',
+        date: 'Maret 2025',
+        location: 'Online',
+        description: 'Workshop yang menggabungkan Artificial Intelligence dan Internet of Things (AIoT), membahas bagaimana perangkat pintar dapat saling terhubung dan memproses data secara cerdas. Kegiatan ini hadir sebagai wadah bagi mahasiswa untuk mendalami konsep-konsep terkini di bidang teknologi kecerdasan buatan yang dipadukan dengan ekosistem perangkat IoT.\n\nPeserta diajak untuk memahami arsitektur sistem AIoT secara menyeluruh — mulai dari cara kerja sensor dan aktuator, alur pengiriman data melalui jaringan, hingga bagaimana model machine learning diterapkan langsung pada perangkat edge. Materi disampaikan oleh para praktisi dan akademisi yang berpengalaman di bidangnya, sehingga peserta mendapatkan wawasan yang seimbang antara teori dan praktik nyata di industri.\n\nMelalui sesi ini, EISD Laboratory berharap dapat menginspirasi lebih banyak mahasiswa untuk mengeksplorasi dan berkontribusi dalam pengembangan solusi berbasis AIoT yang inovatif — khususnya untuk menjawab tantangan-tantangan nyata di masyarakat dan industri Indonesia.',
+        image: '/images/events/workshop/Webinar AIoT/cover card Webinar AIoT.png',
+        heroBanner: '/images/events/workshop/Webinar AIoT/Webinar AIoT_2.jpeg',
+        status: 'completed' as const,
+        gradient: 'from-emerald-500 to-teal-500',
+        gallery: [
+            '/images/events/workshop/Webinar AIoT/Webinar AIoT_1.jpeg',
+            '/images/events/workshop/Webinar AIoT/Webinar AIoT_2.jpeg',
+            '/images/events/workshop/Webinar AIoT/Webinar AIoT_3.jpeg',
+            '/images/events/workshop/Webinar AIoT/Webinar AIoT_4.jpeg',
+            '/images/events/workshop/Webinar AIoT/Webinar AIoT_5.jpeg',
+        ],
     },
     {
         id: 2,
-        title: 'Belajar Blender',
+        title: 'Webinar Android Development',
         category: 'Workshop',
-        date: '22 Februari 2025',
-        location: 'Lab EISD, Telkom University',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.',
-        image: '/images/logo.png',
-        status: 'upcoming' as const,
-        gradient: 'from-emerald-500 to-teal-500',
+        date: 'Mei 2025',
+        location: 'Online',
+        description: 'Workshop yang membahas dasar hingga pengembangan aplikasi Android, mulai dari konsep UI, logika aplikasi, hingga implementasi sederhana menggunakan tools modern. Kegiatan ini dirancang untuk memberikan pemahaman komprehensif bagi mahasiswa yang ingin memulai perjalanan mereka di dunia pengembangan aplikasi mobile berbasis Android.\n\nPeserta diajak untuk mengeksplorasi ekosistem pengembangan Android secara langsung — mulai dari perancangan antarmuka pengguna (UI) yang intuitif, penerapan logika aplikasi yang terstruktur, hingga penggunaan tools dan framework modern seperti Android Studio dan Jetpack Compose. Materi disampaikan secara interaktif dengan pendekatan hands-on sehingga peserta dapat langsung mempraktikkan konsep yang dipelajari.\n\nMelalui workshop ini, EISD Laboratory mendorong mahasiswa untuk tidak sekadar belajar teori, tetapi juga membangun portofolio nyata berupa aplikasi Android sederhana yang siap dikembangkan lebih lanjut. Sebuah langkah awal yang kuat untuk menjadi mobile developer yang kompeten.',
+        image: '/images/events/workshop/Webinar Android Development/Webinar Android_5.jpeg',
+        heroBanner: '/images/events/workshop/Webinar Android Development/Webinar Android_1.jpeg',
+        status: 'completed' as const,
+        gradient: 'from-blue-500 to-indigo-500',
+        gallery: [
+            '/images/events/workshop/Webinar Android Development/Webinar Android_1.jpeg',
+            '/images/events/workshop/Webinar Android Development/Webinar Android_2.jpeg',
+            '/images/events/workshop/Webinar Android Development/Webinar Android_3.jpeg',
+            '/images/events/workshop/Webinar Android Development/Webinar Android_4.jpeg',
+            '/images/events/workshop/Webinar Android Development/Webinar Android_5.jpeg',
+        ],
     },
     {
         id: 3,
-        title: 'Quality Assurance Workshop',
+        title: 'Company Visit',
         category: 'Seminar',
-        date: '10 November 2025',
-        location: 'Auditorium Telkom University',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.',
-        image: '/images/logo.png',
+        date: 'Mei 2025',
+        location: 'Google Indonesia, Jakarta',
+        description: 'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata. Kegiatan ini memberikan kesempatan eksklusif bagi anggota EISD Laboratory untuk menginjakkan kaki langsung di kantor Google Indonesia — salah satu perusahaan teknologi terbesar dan paling berpengaruh di dunia.\n\nSelama kunjungan, peserta mendapatkan gambaran nyata tentang bagaimana Google membangun produk berskala global, mulai dari culture of innovation yang diterapkan di lingkungan kerja, proses pengembangan software yang agile, hingga bagaimana tim-tim di Google berkolaborasi lintas fungsi untuk menciptakan solusi yang berdampak bagi miliaran pengguna. Sesi sharing dengan profesional Google Indonesia juga membuka wawasan baru tentang jalur karier di industri teknologi.\n\nMelalui Company Visit ini, EISD Laboratory ingin memperluas perspektif anggotanya bahwa dunia kerja di bidang teknologi penuh dengan peluang yang menarik. Pengalaman melihat langsung ekosistem kerja Google menjadi motivasi kuat bagi para anggota untuk terus berkembang, berinovasi, dan mempersiapkan diri menjadi talenta digital terbaik.',
+        image: '/images/events/seminar/Company Visit/banner card.JPG',
+        heroBanner: '/images/events/seminar/Company Visit/IMG_7697.JPG',
         status: 'completed' as const,
-        gradient: 'from-pink-500 to-rose-500',
-    },
-    {
-        id: 4,
-        title: 'Hackathon EISD 2025',
-        category: 'Competition',
-        date: 'Desember 2025',
-        location: 'Telkom University',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
-        image: '/images/logo.png',
-        status: 'completed' as const,
-        gradient: 'from-amber-500 to-orange-500',
+        gradient: 'from-red-500 to-orange-500',
+        gallery: [
+            '/images/events/seminar/Company Visit/IMG_7611.JPG',
+            '/images/events/seminar/Company Visit/IMG_7612.JPG',
+            '/images/events/seminar/Company Visit/IMG_7615.JPG',
+            '/images/events/seminar/Company Visit/IMG_7697.JPG',
+            '/images/events/seminar/Company Visit/IMG_7698.JPG',
+        ],
     },
 ]
 
@@ -78,25 +88,26 @@ export default function EventDetail({ params }: { params: { id: string } }) {
         notFound()
     }
 
-    const otherEvents = events.filter((e) => e.id !== event.id && e.status === 'upcoming')
+    const availableOtherEvents = events.filter((e) => e.id !== event.id)
+    const randomOtherEvent = availableOtherEvents[Math.floor(Math.random() * availableOtherEvents.length)]
+    const otherEvents = randomOtherEvent ? [randomOtherEvent] : []
 
     return (
         <main className="min-h-screen">
-            <Navbar />
 
             {/* Banner/Hero Image Section*/}
             <FadeIn direction="down" delay={0.1}>
                 <section className="w-full pt-16 md:pt-16">
-                    <div className="relative h-64 md:h-[400px] bg-gray-200 w-full overflow-hidden">
-                        <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/black-scales.png')] mix-blend-overlay"></div>
+                    <div className="relative h-64 md:h-[400px] bg-gray-900 w-full overflow-hidden">
                         <Image
-                            src={event.image}
+                            src={event.heroBanner ?? event.image}
                             alt={event.title}
                             fill
-                            className="object-contain p-6 md:p-12 z-10"
+                            className="object-cover z-10"
                             priority
                         />
-                        <div className="absolute inset-0 shadow-inner pointer-events-none z-20" />
+                        <div className="absolute inset-0 bg-black/30 z-20" />
+                        <div className="absolute inset-0 shadow-inner pointer-events-none z-30" />
                     </div>
                 </section>
             </FadeIn>
@@ -105,7 +116,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
             <section className="pt-8 px-4 md:px-8 bg-white max-w-[1440px] mx-auto">
                 <FadeIn direction="up" delay={0.15}>
                     <Link 
-                        href="/event" 
+                        href="/events" 
                         className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors font-semibold text-sm group"
                     >
                         <svg 
@@ -140,7 +151,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                     <span className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide ${
                                         event.status === 'upcoming'
                                             ? 'bg-accent-green text-white'
-                                            : 'bg-gray-200 text-gray-600'
+                                            : 'bg-emerald-500 text-white'
                                     }`}>
                                         {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
                                     </span>
@@ -175,39 +186,41 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                 ))}
                             </div>
 
-                            {/* Bottom Gallery - Infinite Horizontal Scroll */}
-                            <div className="relative w-full overflow-hidden">
-                                <div className={`${styles.galleryScroll} flex gap-6 w-full`}>
-                                    {/* First set of items */}
-                                    {[1, 2, 3].map((item) => (
-                                        <div 
-                                            key={`item-${item}`}
-                                            className={`${styles.galleryItem} bg-gray-50 rounded-xl p-8 flex items-center justify-center relative`}
-                                        >
-                                            <Image
-                                                src={event.image}
-                                                alt={`Gallery ${item}`}
-                                                fill
-                                                className="object-contain p-6"
-                                            />
-                                        </div>
-                                    ))}
-                                    {/* Duplicate set for seamless infinite scroll */}
-                                    {[1, 2, 3].map((item) => (
-                                        <div 
-                                            key={`item-duplicate-${item}`}
-                                            className={`${styles.galleryItem} bg-gray-50 rounded-xl p-8 flex items-center justify-center relative`}
-                                        >
-                                            <Image
-                                                src={event.image}
-                                                alt={`Gallery ${item}`}
-                                                fill
-                                                className="object-contain p-6"
-                                            />
-                                        </div>
-                                    ))}
+                            {/* Bottom Gallery - Horizontal Scroll */}
+                            {event.gallery && event.gallery.length > 0 && (
+                                <div className="relative w-full overflow-hidden">
+                                    <div className={`${styles.galleryScroll} flex gap-4 w-full`}>
+                                        {/* First set */}
+                                        {event.gallery.map((src, idx) => (
+                                            <div
+                                                key={`img-${idx}`}
+                                                className={`${styles.galleryItem} rounded-xl overflow-hidden relative flex-shrink-0`}
+                                            >
+                                                <Image
+                                                    src={src}
+                                                    alt={`${event.title} photo ${idx + 1}`}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        ))}
+                                        {/* Duplicate set for seamless infinite scroll */}
+                                        {event.gallery.map((src, idx) => (
+                                            <div
+                                                key={`img-dup-${idx}`}
+                                                className={`${styles.galleryItem} rounded-xl overflow-hidden relative flex-shrink-0`}
+                                            >
+                                                <Image
+                                                    src={src}
+                                                    alt={`${event.title} photo ${idx + 1}`}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </FadeIn>
                     </div>
 
@@ -221,20 +234,20 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                     {otherEvents.map((otherEvent) => (
                                         <Link 
                                             key={otherEvent.id} 
-                                            href={`/event/${otherEvent.id}`}
+                                            href={`/events/${otherEvent.id}`}
                                             className="group block"
                                         >
                                             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
                                                 {/* Card Image */}
-                                                <div className="relative h-48 bg-gray-50 w-full p-8 flex items-center justify-center">
+                                                <div className="relative h-48 bg-gray-50 w-full flex items-center justify-center overflow-hidden">
                                                     <Image
                                                         src={otherEvent.image}
                                                         alt={otherEvent.title}
                                                         fill
-                                                        className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                     />
                                                     {/* Gradient Line di bawah gambar */}
-                                                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${otherEvent.gradient}`} />
+                                                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${otherEvent.gradient}`} />
                                                 </div>
 
                                                 {/* Card Content */}
@@ -243,7 +256,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                                         <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
                                                             otherEvent.status === 'upcoming'
                                                                 ? 'bg-accent-green text-white'
-                                                                : 'bg-gray-200 text-gray-600'
+                                                                : 'bg-emerald-500 text-white'
                                                         }`}>
                                                             {otherEvent.status === 'upcoming' ? 'Upcoming' : 'Completed'}
                                                         </span>
@@ -279,8 +292,6 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                 </div>
             </section>
 
-            <Footer />
-            <BackToTop />
         </main>
     )
 }
