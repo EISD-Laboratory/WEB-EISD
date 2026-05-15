@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     siteName: 'Lab EISD',
     images: [
       {
-        url: '/images/og-image-v2.webp',
+        url: '/images/og-image-whatsapp.jpg',
         width: 1200,
         height: 630,
         alt: 'EISD Laboratory Team',
-        type: 'image/webp',
+        type: 'image/jpeg',
       },
     ],
     locale: 'en_US',
