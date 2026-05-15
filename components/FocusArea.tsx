@@ -1,13 +1,13 @@
 'use client'
 
-import { BrainCircuit, Code2, Palette, Rocket, type LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import SectionHeading from './SectionHeading'
 
 type FocusAreaItem = {
   id: number
   title: string
   description: string
-  icon: LucideIcon
+  image: string
   accent: string
   gradient: string
 }
@@ -16,32 +16,32 @@ const focusAreas: FocusAreaItem[] = [
   {
     id: 1,
     title: 'Software Development',
-    description: 'Building scalable applications and innovative software solutions for real-world problems.',
-    icon: Code2,
+    description: 'Building end-to-end web applications, from frontend and backend logic to deployment.',
+    image: '/images/imgfocusarea/softdev.webp',
     accent: 'text-primary bg-primary/10 border-primary/15',
     gradient: 'from-primary via-blue-500 to-cyan-500',
   },
   {
     id: 2,
-    title: 'UI / UX Design',
-    description: 'Creating beautiful and intuitive user experiences with modern design principles.',
-    icon: Palette,
+    title: 'UI/UX Design',
+    description: 'Turning user problems into intuitive digital solutions through research, design, and testing.',
+    image: '/images/imgfocusarea/uiux.webp',
     accent: 'text-primary bg-primary/10 border-primary/15',
     gradient: 'from-primary via-purple-500 to-pink-500',
   },
   {
     id: 3,
     title: 'Intelligence System',
-    description: 'Exploring AI, machine learning, and Internet of Things for smart solutions.',
-    icon: BrainCircuit,
+    description: 'Designing and building IoT-based solutions from sensor data to web and business integration.',
+    image: '/images/imgfocusarea/is.webp',
     accent: 'text-primary bg-primary/10 border-primary/15',
     gradient: 'from-accent-green via-teal-500 to-cyan-500',
   },
   {
     id: 4,
-    title: 'Technopreneurship',
-    description: 'Developing entrepreneurial mindset and building tech-based startups.',
-    icon: Rocket,
+    title: 'Technopreneur',
+    description: 'Validating ideas and turning them into viable digital products through strategy and execution.',
+    image: '/images/imgfocusarea/techno.webp',
     accent: 'text-primary bg-primary/10 border-primary/15',
     gradient: 'from-accent-green via-emerald-500 to-primary',
   },
@@ -68,15 +68,21 @@ export default function FocusArea() {
 }
 
 function FocusAreaCard({ item, index }: { item: FocusAreaItem; index: number }) {
-  const Icon = item.icon
-
   return (
     <div className="rounded-2xl border border-primary/15 ring-1 ring-primary/5 bg-white shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
       <div className={`h-1 w-full shrink-0 bg-gradient-to-r ${item.gradient}`} />
 
       <div className="flex flex-col items-center text-center p-7 flex-grow">
         <div className={`rounded-2xl border flex items-center justify-center mb-4 w-16 h-16 shrink-0 ${item.accent}`}>
-          <Icon className="w-8 h-8" strokeWidth={1.8} />
+          <div className="relative h-10 w-10">
+            <Image
+              src={item.image}
+              alt={`${item.title} illustration`}
+              fill
+              sizes="40px"
+              className="object-contain"
+            />
+          </div>
         </div>
 
         <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 mb-2 shrink-0">
