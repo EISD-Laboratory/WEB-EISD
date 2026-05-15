@@ -2,27 +2,23 @@
 
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import ScrollProgressBar from '@/components/ScrollProgressBar'
-import BackToTop from '@/components/BackToTop'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
 
-const galleryCategories = ['All', 'Events', 'Workshop', 'Team', 'Competition']
+const galleryCategories = ['All', 'Events', 'Webinar', 'Team', 'Competition']
 
 const galleryItems = [
-  { id: 1, title: 'Web Dev Bootcamp 2025', category: 'Workshop', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
+  { id: 1, title: 'Web Dev Bootcamp 2025', category: 'webinar', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
   { id: 2, title: 'Team Building Activity', category: 'Team', image: '/images/logo.png', span: 'col-span-1 md:col-span-2 row-span-1' },
   { id: 3, title: 'Hackathon EISD 2024', category: 'Competition', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
-  { id: 4, title: 'AI Workshop Session', category: 'Workshop', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
+  { id: 4, title: 'AI webinar Session', category: 'webinar', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
   { id: 5, title: 'Annual Lab Gathering', category: 'Events', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
   { id: 6, title: 'Tech Seminar 2024', category: 'Events', image: '/images/logo.png', span: 'col-span-1 md:col-span-2 row-span-1' },
   { id: 7, title: 'Competition Team Photo', category: 'Competition', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
   { id: 8, title: 'Lab Members 2024', category: 'Team', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
-  { id: 9, title: 'UI/UX Design Workshop', category: 'Workshop', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
+  { id: 9, title: 'UI/UX Design webinar', category: 'webinar', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
   { id: 10, title: 'Open Recruitment 2024', category: 'Events', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
-  { id: 11, title: 'IoT Project Demo', category: 'Workshop', image: '/images/logo.png', span: 'col-span-1 md:col-span-2 row-span-1' },
+  { id: 11, title: 'IoT Project Demo', category: 'webinar', image: '/images/logo.png', span: 'col-span-1 md:col-span-2 row-span-1' },
   { id: 12, title: 'National Competition Win', category: 'Competition', image: '/images/logo.png', span: 'col-span-1 row-span-1' },
 ]
 
@@ -36,9 +32,6 @@ export default function Gallery() {
 
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <Navbar />
-
       {/* Hero */}
       <section className="pt-32 pb-12 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10 text-center">
@@ -176,8 +169,6 @@ export default function Gallery() {
         )}
       </AnimatePresence>
 
-      <Footer />
-      <BackToTop />
     </main>
   )
 }

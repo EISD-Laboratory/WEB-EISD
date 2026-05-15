@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollProgressBar from '@/components/ScrollProgressBar'
 import BackToTop from '@/components/BackToTop'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +40,7 @@ export default function RootLayout({
 
         <Footer />
         <BackToTop />
+        <Toaster position="top-center" />
       </body>
     </html>
   )

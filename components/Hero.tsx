@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-stretch pt-16 md:pt-0">
       {/* ── Left: Text content ── */}
-      <div className="w-full md:w-1/2 lg:w-5/12 flex flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-20 py-16 md:py-24 relative z-10">        {/* Badge */}
+      <div className="w-full md:w-[32%] lg:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-16 md:py-24 relative z-10">        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,11 +98,11 @@ export default function Hero() {
           src="/images/fotostudio.JPG"
           alt="EISD Laboratory Team"
           fill
-          className="object-cover"
+          className="object-cover object-[20%_35%]"
           priority
         />
         {/* Gradient fade on left edge */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#FAFBFF] to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#FAFBFF] via-[#FAFBFF]/65 to-transparent z-4" />
 
         {/* Label */}
         <div className="absolute bottom-6 right-6 z-20">

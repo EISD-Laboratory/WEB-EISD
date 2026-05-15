@@ -7,28 +7,42 @@ import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
 
 /* ── Data ── */
-const eventCategories = ['All', 'Workshop', 'Seminar', 'Competition', 'Study Group']
+const eventCategories = ['All', 'Webinar', 'Seminar', 'Competition', 'Study Group']
 
-const events = [
+type EventStatus = 'upcoming' | 'completed'
+
+type Event = {
+  id: number
+  title: string
+  category: string
+  date: string
+  location: string
+  description: string
+  image: string
+  status: EventStatus
+  gradient: string
+}
+
+const events: Event[] = [
   {
     id: 1,
-    title: 'Webinar AIoT',
-    category: 'Workshop',
-    date: 'Maret 2025',
+    title: 'Webinar No-Code vs Pro-Code',
+    category: 'Webinar',
+    date: 'April 2026',
     location: 'Online',
-    description: 'Workshop yang menggabungkan Artificial Intelligence dan Internet of Things (AIoT).',
-    image: '/images/events/workshop/Webinar AIoT/cover card Webinar AIoT.png',
+    description: 'Webinar membahas perbandingan No-Code dan Pro-Code dalam industri.',
+    image: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.jpeg',
     status: 'completed' as const,
     gradient: 'from-emerald-500 to-teal-500',
   },
   {
     id: 2,
-    title: 'Webinar Android Development',
-    category: 'Workshop',
-    date: 'Mei 2025',
-    location: 'Online',
-    description: 'Workshop yang membahas dasar hingga pengembangan aplikasi Android, mulai dari konsep UI, logika aplikasi, hingga implementasi sederhana menggunakan tools modern.',
-    image: '/images/events/workshop/Webinar Android Development/Webinar Android_5.jpeg',
+    title: 'Kuliah Umum Manajemen Proyek Sistem Informasi',
+    category: 'Seminar',
+    date: 'Mei 2026',
+    location: 'Auditorium Gedung Damar Telkom University',
+    description: 'Kuliah umum tentang komunikasi efektif antara tim IT dan bisnis..',
+    image: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.jpeg',
     status: 'completed' as const,
     gradient: 'from-blue-500 to-indigo-500',
   },
@@ -36,11 +50,11 @@ const events = [
     id: 3,
     title: 'Company Visit',
     category: 'Seminar',
-    date: 'Mei 2025',
-    location: 'Google Indonesia, Jakarta',
+    date: 'Mei 2026',
+    location: 'AWS Indonesia, Jakarta',
     description: 'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata.',
-    image: '/images/events/seminar/Company Visit/banner card.png',
-    status: 'completed' as const,
+    image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.png',
+    status: 'upcoming' as const,
     gradient: 'from-red-500 to-orange-500',
   },
 ]
@@ -48,7 +62,7 @@ const events = [
 const getCategoryTextColor = (category: string) => {
   switch (category) {
     case 'Study Group': return 'text-purple-600'
-    case 'Workshop': return 'text-emerald-500'
+    case 'Webinar': return 'text-emerald-500'
     case 'Seminar': return 'text-blue-500'
     case 'Competition': return 'text-pink-500'
     default: return 'text-gray-900'
@@ -65,7 +79,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-gray-50/50">
 
       {/* Hero Section */}
-      <section className="pt-32 pb-12 px-4 relative">
+      <section className="pt-20 pb-8 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <FadeIn direction="up" delay={0.2}>
             <motion.div
@@ -115,63 +129,79 @@ export default function EventsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredEvents.map((event, index) => {
               const textColor = getCategoryTextColor(event.category)
+              const isUpcoming = event.status === 'upcoming'
+              const card = (
+                <div className={`group relative bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 h-full flex flex-col sm:flex-row ${
+                  isUpcoming ? 'cursor-default' : 'hover:shadow-lg'
+                }`}>
+                  
+                  <div className="w-full sm:w-[45%] relative flex items-center bg-gray-50 justify-center overflow-hidden">
+                    <div className="relative w-full h-40 sm:h-full min-h-[160px]">
+                      <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className={`object-cover transition-transform duration-500 ${
+                          isUpcoming ? '' : 'group-hover:scale-105'
+                        }`}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 sm:h-full sm:w-1 sm:right-auto sm:left-[45%] sm:top-0 bg-gradient-to-r sm:bg-gradient-to-b ${event.gradient}`} />
+
+                  <div className="w-full sm:w-[55%] p-6 sm:pl-8 sm:my-6 flex flex-col justify-center">
+                    
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide ${
+                        isUpcoming
+                          ? 'bg-[#FF8A00] text-white' 
+                          : 'bg-emerald-500 text-white' 
+                      }`}>
+                        {isUpcoming ? 'Upcoming' : 'Completed'}
+                      </span>
+                      <span className="text-[11px] text-gray-400 font-medium">
+                        {event.date}
+                      </span>
+                    </div>
+
+                    <p className={`text-[11px] font-bold mb-1 ${textColor}`}>
+                      {event.category}
+                    </p>
+
+                    <h3 className={`text-[17px] font-extrabold text-gray-900 mb-2 leading-tight transition-colors ${
+                      isUpcoming ? '' : 'group-hover:text-primary'
+                    }`}>
+                      {event.title}
+                    </h3>
+
+                    {!isUpcoming && (
+                      <p className="text-[12px] text-gray-500 leading-relaxed mb-4 line-clamp-3">
+                        {event.description}
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-1.5 text-[11px] text-gray-400 mt-auto font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                      </svg>
+                      <span className="truncate">{event.location}</span>
+                    </div>
+                  </div>
+
+                </div>
+              )
               
               return (
                 <FadeIn key={event.id} direction="up" delay={0.1 * (index + 1)}>
-                  <Link href={`/events/${event.id}`} className="block h-full">
-                    <div className="group relative bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all duration-300 h-full flex flex-col sm:flex-row">
-                      
-                      <div className="w-full sm:w-[45%] relative flex items-center bg-gray-50 justify-center overflow-hidden">
-                        <div className="relative w-full h-40 sm:h-full min-h-[160px]">
-                          <Image
-                            src={event.image}
-                            alt={event.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                      </div>
-
-                      <div className={`absolute bottom-0 left-0 right-0 h-1 sm:h-full sm:w-1 sm:right-auto sm:left-[45%] sm:top-0 bg-gradient-to-r sm:bg-gradient-to-b ${event.gradient}`} />
-
-                      <div className={`w-full sm:w-[55%] p-6 sm:pl-8 sm:my-6 flex flex-col justify-center`}>
-                        
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide ${
-                            event.status === 'upcoming'
-                              ? 'bg-[#FF8A00] text-white' 
-                              : 'bg-emerald-500 text-white' 
-                          }`}>
-                            {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
-                          </span>
-                          <span className="text-[11px] text-gray-400 font-medium">
-                            {event.date}
-                          </span>
-                        </div>
-
-                        <p className={`text-[11px] font-bold mb-1 ${textColor}`}>
-                          {event.category}
-                        </p>
-
-                        <h3 className="text-[17px] font-extrabold text-gray-900 mb-2 leading-tight group-hover:text-primary transition-colors">
-                          {event.title}
-                        </h3>
-
-                        <p className="text-[12px] text-gray-500 leading-relaxed mb-4 line-clamp-3">
-                          {event.description}
-                        </p>
-
-                        <div className="flex items-center gap-1.5 text-[11px] text-gray-400 mt-auto font-medium">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0Z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                          </svg>
-                          <span className="truncate">{event.location}</span>
-                        </div>
-                      </div>
-
-                    </div>
-                  </Link>
+                  {isUpcoming ? (
+                    card
+                  ) : (
+                    <Link href={`/events/${event.id}`} className="block h-full">
+                      {card}
+                    </Link>
+                  )}
                 </FadeIn>
               )
             })}
@@ -194,8 +224,7 @@ export default function EventsPage() {
               <div className="relative z-10">
                 <h2 className="text-2xl md:text-3xl font-bold mb-3">Ingin Mengikuti Event Kami?</h2>
                 <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ikuti media sosial kami
-                  untuk informasi event terbaru.
+                  Ikuti media sosial kami untuk informasi event terbaru.
                 </p>
                 <button className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
                   Follow Our Instagram

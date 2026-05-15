@@ -4,63 +4,77 @@ import Link from 'next/link'
 import FadeIn from '@/components/FadeIn'
 import styles from './EventDetail.module.css'
 
-const events = [
+type EventStatus = 'upcoming' | 'completed'
+
+type Event = {
+    id: number
+    title: string
+    category: string
+    date: string
+    location: string
+    description: string
+    image: string
+    heroBanner?: string
+    heroPosition?: 'top' | 'center'
+    status: EventStatus
+    gradient: string
+    gallery: string[]
+}
+
+const events: Event[] = [
     {
         id: 1,
-        title: 'Webinar AIoT',
-        category: 'Workshop',
-        date: 'Maret 2025',
+        title: 'Webinar No-Code vs Pro-Code',
+        category: 'Webinar',
+        date: 'April 2026',
         location: 'Online',
-        description: 'Workshop yang menggabungkan Artificial Intelligence dan Internet of Things (AIoT), membahas bagaimana perangkat pintar dapat saling terhubung dan memproses data secara cerdas. Kegiatan ini hadir sebagai wadah bagi mahasiswa untuk mendalami konsep-konsep terkini di bidang teknologi kecerdasan buatan yang dipadukan dengan ekosistem perangkat IoT.\n\nPeserta diajak untuk memahami arsitektur sistem AIoT secara menyeluruh — mulai dari cara kerja sensor dan aktuator, alur pengiriman data melalui jaringan, hingga bagaimana model machine learning diterapkan langsung pada perangkat edge. Materi disampaikan oleh para praktisi dan akademisi yang berpengalaman di bidangnya, sehingga peserta mendapatkan wawasan yang seimbang antara teori dan praktik nyata di industri.\n\nMelalui sesi ini, EISD Laboratory berharap dapat menginspirasi lebih banyak mahasiswa untuk mengeksplorasi dan berkontribusi dalam pengembangan solusi berbasis AIoT yang inovatif — khususnya untuk menjawab tantangan-tantangan nyata di masyarakat dan industri Indonesia.',
-        image: '/images/events/workshop/Webinar AIoT/cover card Webinar AIoT.png',
-        heroBanner: '/images/events/workshop/Webinar AIoT/Webinar AIoT_2.jpeg',
+        description: 'Webinar yang membahas perbandingan pendekatan No-Code dan Pro-Code dalam pengembangan serta integrasi sistem enterprise di era transformasi digital. Kegiatan ini hadir sebagai wadah bagi mahasiswa untuk memahami bagaimana perusahaan modern memilih teknologi yang tepat dalam membangun sistem yang cepat, scalable, dan tetap mudah dikembangkan. \n\n Peserta akan diajak mengenal karakteristik, kelebihan, serta tantangan dari kedua pendekatan tersebut. Mulai dari bagaimana platform No-Code mampu mempercepat proses development dan automasi bisnis, hingga bagaimana Pro-Code memberikan fleksibilitas, kontrol, dan kemampuan kustomisasi yang lebih mendalam untuk kebutuhan sistem berskala besar. Karena ternyata dunia teknologi tidak pernah puas bikin pilihan sederhana. Selalu harus ada dua kubu yang saling merasa paling benar. \n\n Materi akan disampaikan oleh narasumber yang memiliki pengalaman langsung di bidang pengembangan sistem dan industri teknologi, sehingga peserta dapat memperoleh wawasan praktis mengenai implementasi nyata No-Code maupun Pro-Code dalam dunia kerja. Melalui webinar ini, EISD Laboratory berharap peserta dapat memahami tren teknologi terkini serta menentukan pendekatan yang paling relevan sesuai kebutuhan bisnis dan pengembangan sistem di masa depan..',
+        image: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.jpeg',
+        heroBanner: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.jpeg',
+        heroPosition: 'top',
         status: 'completed' as const,
         gradient: 'from-emerald-500 to-teal-500',
         gallery: [
-            '/images/events/workshop/Webinar AIoT/Webinar AIoT_1.jpeg',
-            '/images/events/workshop/Webinar AIoT/Webinar AIoT_2.jpeg',
-            '/images/events/workshop/Webinar AIoT/Webinar AIoT_3.jpeg',
-            '/images/events/workshop/Webinar AIoT/Webinar AIoT_4.jpeg',
-            '/images/events/workshop/Webinar AIoT/Webinar AIoT_5.jpeg',
+            '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_1.jpeg',
+            '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_2.jpeg',
+            '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_3.jpeg',
+            '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_4.jpeg',
         ],
     },
     {
         id: 2,
-        title: 'Webinar Android Development',
-        category: 'Workshop',
-        date: 'Mei 2025',
-        location: 'Online',
-        description: 'Workshop yang membahas dasar hingga pengembangan aplikasi Android, mulai dari konsep UI, logika aplikasi, hingga implementasi sederhana menggunakan tools modern. Kegiatan ini dirancang untuk memberikan pemahaman komprehensif bagi mahasiswa yang ingin memulai perjalanan mereka di dunia pengembangan aplikasi mobile berbasis Android.\n\nPeserta diajak untuk mengeksplorasi ekosistem pengembangan Android secara langsung — mulai dari perancangan antarmuka pengguna (UI) yang intuitif, penerapan logika aplikasi yang terstruktur, hingga penggunaan tools dan framework modern seperti Android Studio dan Jetpack Compose. Materi disampaikan secara interaktif dengan pendekatan hands-on sehingga peserta dapat langsung mempraktikkan konsep yang dipelajari.\n\nMelalui workshop ini, EISD Laboratory mendorong mahasiswa untuk tidak sekadar belajar teori, tetapi juga membangun portofolio nyata berupa aplikasi Android sederhana yang siap dikembangkan lebih lanjut. Sebuah langkah awal yang kuat untuk menjadi mobile developer yang kompeten.',
-        image: '/images/events/workshop/Webinar Android Development/Webinar Android_5.jpeg',
-        heroBanner: '/images/events/workshop/Webinar Android Development/Webinar Android_1.jpeg',
+        title: 'Kuliah Umum Manajemen Proyek Sistem Informasi',
+        category: 'Seminar',
+        date: 'Mei 2026',
+        location: 'Auditorium Gedung Damar Telkom University',
+        description: 'Kuliah umum yang membahas pentingnya komunikasi efektif antara tim IT dan stakeholder bisnis dalam proses pengembangan serta pengelolaan proyek sistem informasi. Kegiatan ini hadir untuk membantu mahasiswa memahami bagaimana perbedaan perspektif antara sisi teknis dan bisnis sering kali menjadi tantangan utama dalam sebuah proyek digital. \n\n Peserta akan diajak mempelajari cara menyampaikan kebutuhan bisnis ke dalam solusi teknologi yang tepat, sekaligus memahami bagaimana tim IT dapat menerjemahkan aspek teknis agar lebih mudah dipahami oleh stakeholder non-teknis. Materi juga akan membahas pentingnya kolaborasi, manajemen ekspektasi, serta strategi komunikasi yang mampu menjaga proyek tetap berjalan secara efektif, tepat waktu, dan sesuai tujuan bisnis. Karena dalam dunia kerja nyata, error terbesar sering kali bukan berasal dari sistem, tapi dari miskomunikasi antar manusia yang merasa sudah saling paham. \n\n Melalui sesi ini, peserta diharapkan dapat memperoleh gambaran nyata mengenai peran komunikasi dalam keberhasilan proyek sistem informasi, sekaligus memahami keterampilan yang dibutuhkan untuk menjadi penghubung yang efektif antara kebutuhan bisnis dan implementasi teknologi di dunia industri.',
+        image: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.jpeg',
+        heroBanner: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.jpeg',
+        heroPosition: 'top',
         status: 'completed' as const,
         gradient: 'from-blue-500 to-indigo-500',
         gallery: [
-            '/images/events/workshop/Webinar Android Development/Webinar Android_1.jpeg',
-            '/images/events/workshop/Webinar Android Development/Webinar Android_2.jpeg',
-            '/images/events/workshop/Webinar Android Development/Webinar Android_3.jpeg',
-            '/images/events/workshop/Webinar Android Development/Webinar Android_4.jpeg',
-            '/images/events/workshop/Webinar Android Development/Webinar Android_5.jpeg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (1).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (2).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (3).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (4).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (5).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (6).jpg',
+            '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi (7).jpg',
         ],
     },
     {
         id: 3,
         title: 'Company Visit',
         category: 'Seminar',
-        date: 'Mei 2025',
-        location: 'Google Indonesia, Jakarta',
+        date: 'Mei 2026',
+        location: 'AWS Indonesia, Jakarta',
         description: 'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata. Kegiatan ini memberikan kesempatan eksklusif bagi anggota EISD Laboratory untuk menginjakkan kaki langsung di kantor Google Indonesia — salah satu perusahaan teknologi terbesar dan paling berpengaruh di dunia.\n\nSelama kunjungan, peserta mendapatkan gambaran nyata tentang bagaimana Google membangun produk berskala global, mulai dari culture of innovation yang diterapkan di lingkungan kerja, proses pengembangan software yang agile, hingga bagaimana tim-tim di Google berkolaborasi lintas fungsi untuk menciptakan solusi yang berdampak bagi miliaran pengguna. Sesi sharing dengan profesional Google Indonesia juga membuka wawasan baru tentang jalur karier di industri teknologi.\n\nMelalui Company Visit ini, EISD Laboratory ingin memperluas perspektif anggotanya bahwa dunia kerja di bidang teknologi penuh dengan peluang yang menarik. Pengalaman melihat langsung ekosistem kerja Google menjadi motivasi kuat bagi para anggota untuk terus berkembang, berinovasi, dan mempersiapkan diri menjadi talenta digital terbaik.',
-        image: '/images/events/seminar/Company Visit/banner card.JPG',
-        heroBanner: '/images/events/seminar/Company Visit/IMG_7697.JPG',
-        status: 'completed' as const,
+        image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.png',
+        heroBanner: '/images/events/seminar/Company Visit/comvis_AWS_sampul.png',
+        status: 'upcoming' as const,
         gradient: 'from-red-500 to-orange-500',
-        gallery: [
-            '/images/events/seminar/Company Visit/IMG_7611.JPG',
-            '/images/events/seminar/Company Visit/IMG_7612.JPG',
-            '/images/events/seminar/Company Visit/IMG_7615.JPG',
-            '/images/events/seminar/Company Visit/IMG_7697.JPG',
-            '/images/events/seminar/Company Visit/IMG_7698.JPG',
-        ],
+        gallery: [],
     },
 ]
 
@@ -68,7 +82,7 @@ const events = [
 const getCategoryColor = (category: string) => {
     switch (category) {
         case 'Study Group': return 'text-purple-600'
-        case 'Workshop': return 'text-teal-500'
+        case 'webinar': return 'text-teal-500'
         case 'Seminar': return 'text-pink-500'
         case 'Competition': return 'text-amber-500'
         default: return 'text-primary'
@@ -76,19 +90,21 @@ const getCategoryColor = (category: string) => {
 }
 
 export async function generateStaticParams() {
-    return events.map((event) => ({
-        id: event.id.toString(),
-    }))
+    return events
+        .filter((event) => event.status !== 'upcoming')
+        .map((event) => ({
+            id: event.id.toString(),
+        }))
 }
 
 export default function EventDetail({ params }: { params: { id: string } }) {
     const event = events.find((e) => e.id.toString() === params.id)
 
-    if (!event) {
+    if (!event || event.status === 'upcoming') {
         notFound()
     }
 
-    const availableOtherEvents = events.filter((e) => e.id !== event.id)
+    const availableOtherEvents = events.filter((e) => e.id !== event.id && e.status !== 'upcoming')
     const randomOtherEvent = availableOtherEvents[Math.floor(Math.random() * availableOtherEvents.length)]
     const otherEvents = randomOtherEvent ? [randomOtherEvent] : []
 
@@ -103,7 +119,11 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                             src={event.heroBanner ?? event.image}
                             alt={event.title}
                             fill
-                            className="object-cover z-10"
+                            className={`object-cover z-10 ${
+                                event.heroPosition === 'top'
+                                    ? 'object-top'
+                                    : 'object-center'
+                            }`}
                             priority
                         />
                         <div className="absolute inset-0 bg-black/30 z-20" />
@@ -148,12 +168,8 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                             {/* Header Info (Badge, Date, Category, Title, Location) */}
                             <div className="mb-8">
                                 <div className="flex items-center gap-4 mb-4">
-                                    <span className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide ${
-                                        event.status === 'upcoming'
-                                            ? 'bg-accent-green text-white'
-                                            : 'bg-emerald-500 text-white'
-                                    }`}>
-                                        {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
+                                    <span className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide bg-emerald-500 text-white">
+                                        Completed
                                     </span>
                                     <span className="text-sm text-gray-400 font-medium">
                                         {event.date}

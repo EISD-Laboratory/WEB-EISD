@@ -2,13 +2,10 @@
 
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import ScrollProgressBar from '@/components/ScrollProgressBar'
-import BackToTop from '@/components/BackToTop'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
-import AnnouncementBar from '@/components/AnnouncementBar'
+import { BookOpen, CalendarDays, Microscope, PenLine, Settings, Trophy, type LucideIcon } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 interface MemberData {
   name: string
@@ -20,7 +17,7 @@ interface MemberData {
 
 interface Division {
   name: string
-  icon: string
+  icon: LucideIcon
   gradient: string
   members: MemberData[]
 }
@@ -34,7 +31,7 @@ const coreDivision = [
 const divisions: Division[] = [
   {
     name: 'Competition',
-    icon: '🏆',
+    icon: Trophy,
     gradient: 'from-amber-500 to-orange-500',
     members: [
       { name: 'Bimo Alfarizy Lukman', code: 'FRZY', role: 'koordinator', image: '/images/members/competition/BIMO.webp', linkedin: '#' },
@@ -45,7 +42,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Content',
-    icon: '✍️',
+    icon: PenLine,
     gradient: 'from-pink-500 to-rose-500',
     members: [
       { name: 'Muhammad Mufid Taqiyuddin', code: 'VIDS', role: 'koordinator', image: '/images/members/content/MUFID.webp', linkedin: '#' },
@@ -58,7 +55,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Enabler',
-    icon: '⚙️',
+    icon: Settings,
     gradient: 'from-emerald-500 to-teal-500',
     members: [
       { name: 'Refaya Azzam Maheswara', code: 'PAYY', role: 'koordinator', image: '/images/members/enabler/REFAYA.webp', linkedin: '#' },
@@ -70,7 +67,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Event',
-    icon: '🎪',
+    icon: CalendarDays,
     gradient: 'from-indigo-500 to-purple-500',
     members: [
       { name: 'Muhammad Luthfi Tukhfattur Romadhoni', code: 'MLTR', role: 'koordinator', image: '/images/members/event/DHONI.webp', linkedin: '#' },
@@ -82,7 +79,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Research & Community',
-    icon: '🔬',
+    icon: Microscope,
     gradient: 'from-cyan-500 to-blue-500',
     members: [
       { name: 'Hilmi Zikri', code: 'ZIKK', role: 'koordinator', image: '/images/members/rnc/ZIKRI.webp', linkedin: '#' },
@@ -96,7 +93,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Study Group',
-    icon: '📚',
+    icon: BookOpen,
     gradient: 'from-violet-500 to-purple-600',
     members: [
       { name: 'Clarissa Tompunu', code: 'CARL', role: 'koordinator', image: '/images/members/studygroup/CLARISSA.webp', linkedin: '#' },
@@ -188,12 +185,8 @@ export default function Structure() {
 
   return (
     <main className="min-h-screen">
-      <ScrollProgressBar />
-      <AnnouncementBar/>
-      <Navbar />
-
       {/* Hero */}
-      <section className="pt-28 pb-8 px-4">
+      <section className="pt-20 pb-8 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
@@ -245,20 +238,24 @@ export default function Structure() {
           {/* Tab Bar */}
           <FadeIn direction="up" delay={0.1}>
             <div className="flex flex-wrap justify-center gap-2 mb-10">
-              {divisions.map((div, i) => (
-                <button
-                  key={div.name}
-                  onClick={() => setActiveTab(i)}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                    i === activeTab
-                      ? 'bg-primary text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  <span>{div.icon}</span>
-                  <span className="hidden sm:inline">{div.name}</span>
-                </button>
-              ))}
+              {divisions.map((div, i) => {
+                const Icon = div.icon
+
+                return (
+                  <button
+                    key={div.name}
+                    onClick={() => setActiveTab(i)}
+                    className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                      i === activeTab
+                        ? 'bg-primary text-white shadow-md'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" strokeWidth={1.8} />
+                    <span className="hidden sm:inline">{div.name}</span>
+                  </button>
+                )
+              })}
             </div>
           </FadeIn>
 
@@ -418,7 +415,11 @@ export default function Structure() {
                   EISD Laboratory selalu membuka kesempatan bagi mahasiswa yang ingin belajar,
                   berkembang, dan berkontribusi di bidang teknologi.
                 </p>
-                <button className="bg-white text-primary font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <button
+                  type="button"
+                  onClick={() => toast('Coming Soon')}
+                  className="bg-white text-primary font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
                   Join Open Recruitment
                 </button>
               </div>

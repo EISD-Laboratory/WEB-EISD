@@ -53,7 +53,7 @@ export const divisions = [
   {
     id: 5,
     title: "Event Division",
-    description: "Organizing tech events, workshops, and seminars for students.",
+    description: "Organizing tech events, webinar, and seminar for students.",
     image: "/images/division/Event.png",
   },
   {
@@ -87,7 +87,7 @@ export const highlights = [
   },
   {
     id: 3,
-    category: "Workshop",
+    category: "webinar",
     title: "Web Development Bootcamp",
     description: "Successfully organized a 3-day intensive web development bootcamp with 100+ participants.",
     image: "/images/logo.png",

@@ -2,31 +2,31 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import ScrollProgressBar from '@/components/ScrollProgressBar'
-import BackToTop from '@/components/BackToTop'
+import { BrainCircuit, Gauge, Lightbulb, Target, Zap, type LucideIcon } from 'lucide-react'
 import SectionHeading from '@/components/SectionHeading'
 import FadeIn from '@/components/FadeIn'
 
-const values = [
+type CoreValue = {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
+const values: CoreValue[] = [
   {
-    icon: '🚀',
+    icon: Zap,
     title: 'Fast',
     description: 'Bergerak cepat dalam mengembangkan solusi teknologi dan merespons tantangan industri.',
-    gradient: 'from-purple-500 to-blue-500',
   },
   {
-    icon: '🧠',
+    icon: BrainCircuit,
     title: 'Smart',
     description: 'Mengutamakan pendekatan cerdas dan berbasis data dalam setiap pengembangan proyek.',
-    gradient: 'from-emerald-500 to-teal-500',
   },
   {
-    icon: '⚡',
+    icon: Gauge,
     title: 'Efficient',
     description: 'Mengoptimalkan proses dan sumber daya untuk menghasilkan output terbaik.',
-    gradient: 'from-amber-500 to-orange-500',
   },
 ]
 
@@ -43,20 +43,20 @@ export default function About() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-28 md:pt-32 pb-0">
+      <section className="relative pt-20 pb-0">
         {/* Full-width photo background */}
         <div className="relative w-full h-[320px] md:h-[420px] overflow-hidden">
-          <Image src="/images/fotostudio.JPG" alt="EISD Laboratory Team" fill className="object-cover object-top" priority />
+          <Image src="/images/fotostudio.JPG" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 translate-x-8" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/70 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFF] via-transparent to-transparent" />
 
           {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-start px-4 pt-6 md:pt-8 z-10">
             <FadeIn direction="up" delay={0.2}>
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-5 shimmer-enhanced">
                   <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-                  <span className="text-xs font-semibold font-medium text-primary tracking-wide uppercase">About Us</span>
+                  <span className="text-xs font-semibold text-primary tracking-wide uppercase">About Us</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
                   <span className="text-gray-600">Welcome To</span><br />
@@ -95,12 +95,12 @@ export default function About() {
             <FadeIn direction="left" delay={0.2}>
               <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 h-full">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-purple-600 rounded-t-3xl" />
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center mb-5 shadow-lg">
-                  <span className="text-2xl">🔭</span>
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 text-primary flex items-center justify-center mb-5">
+                  <Lightbulb className="w-7 h-7" strokeWidth={1.8} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Visi</h3>
                 <p className="text-gray-600 leading-relaxed">
-                Menjadikan laboratorium riset yang membentuk mahasiswa yang inovatif dalam menciptakan produk dan memiliki kemampuan yang tinggi khususnya dalam bidang perangkat lunak.
+                  Menjadikan laboratorium riset yang membentuk mahasiswa yang inovatif dalam menciptakan produk dan memiliki kemampuan yang tinggi khususnya dalam bidang perangkat lunak.
                 </p>
               </div>
             </FadeIn>
@@ -108,8 +108,8 @@ export default function About() {
             <FadeIn direction="right" delay={0.3}>
               <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 h-full">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-green to-emerald-500 rounded-t-3xl" />
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-green to-emerald-500 flex items-center justify-center mb-5 shadow-lg">
-                  <span className="text-2xl">🎯</span>
+                <div className="w-14 h-14 rounded-2xl bg-accent-green/10 border border-accent-green/20 text-accent-green flex items-center justify-center mb-5">
+                  <Target className="w-7 h-7" strokeWidth={1.8} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Misi</h3>
                 <ul className="text-gray-600 leading-relaxed space-y-3">
@@ -135,26 +135,29 @@ export default function About() {
       {/* Core Values */}
       <section className="py-16 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
-          <SectionHeading eyebrow="Values" title="Core Values" subtitle="Fast, Smart, Efficient — prinsip yang kami pegang." />
+          <SectionHeading eyebrow="Values" title="Core Values" subtitle="Fast, Smart, Efficient - prinsip yang kami pegang." />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            {values.map((value, index) => (
-              <FadeIn key={value.title} direction="up" delay={0.1 * (index + 1)}>
-                <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 text-center hover:shadow-2xl transition-all duration-300 h-full">
-                  <div className={`absolute -inset-0.5 bg-gradient-to-br ${value.gradient} rounded-3xl opacity-0 group-hover:opacity-10 blur transition-opacity duration-500 -z-10`} />
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mx-auto mb-5 shadow-lg`}>
-                    <span className="text-3xl">{value.icon}</span>
+            {values.map((value, index) => {
+              const Icon = value.icon
+
+              return (
+                <FadeIn key={value.title} direction="up" delay={0.1 * (index + 1)}>
+                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 text-center hover:shadow-2xl transition-shadow duration-300 h-full">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 text-primary flex items-center justify-center mx-auto mb-5">
+                      <Icon className="w-8 h-8" strokeWidth={1.8} />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Milestones — Horizontal timeline */}
+      {/* Milestones */}
       <section className="py-16 px-4 relative">
         <div className="max-w-5xl mx-auto">
           <SectionHeading eyebrow="Journey" title="Our Milestones" subtitle="Perjalanan EISD Laboratory dari awal hingga sekarang." />
