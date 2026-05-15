@@ -13,7 +13,7 @@ import { Toaster } from 'react-hot-toast'
 const inter = Inter({ subsets: ['latin'] })
 
 const siteUrl = 'https://www.eisd.site/'
-const title = 'Lab EISD - Enterprise Intelligence System Development Laboratory'
+const title = 'EISD Laboratory - Enterprise Intelligence System Development Laboratory'
 const description = 'Laboratory focused on software development, IoT, AI, and digital innovation'
 
 export const metadata: Metadata = {
