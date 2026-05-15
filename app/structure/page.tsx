@@ -23,7 +23,7 @@ interface Division {
 }
 
 const coreDivision = [
-  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/core/DEZA.webp', linkedin: 'https://www.linkedin.com/in/deazard/' },
+  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/core/DEZA.webp', linkedin: '#' },
   { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/members/core/FADIA.webp', linkedin: '#' },
   { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/members/core/KIREI.webp', linkedin: '#' },
 ]
@@ -210,18 +210,26 @@ export default function Structure() {
           <FadeIn direction="up" delay={0.15}>
             <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">Core Division</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 items-center justify-items-center w-full">
-              {coreDivision.map((member, i) => {
-                const isKetua = member.role === 'Ketua Lab';
+              {coreDivision.map((member) => {
+                const isKetua = member.role === 'Ketua Lab'
+                const mobileOrder =
+                  member.role === 'Ketua Lab'
+                    ? 'order-1 sm:order-2'
+                    : member.role === 'Wakil Ketua Lab'
+                    ? 'order-2 sm:order-1'
+                    : 'order-3 sm:order-3'
+
                 return (
-                  <PersonCard
-                    key={member.code}
-                    name={member.name}
-                    code={member.code}
-                    image={member.image}
-                    linkedin={member.linkedin}
-                    badge={member.role}
-                    size={isKetua ? 'lg' : 'md'}
-                  />
+                  <div key={member.code} className={mobileOrder}>
+                    <PersonCard
+                      name={member.name}
+                      code={member.code}
+                      image={member.image}
+                      linkedin={member.linkedin}
+                      badge={member.role}
+                      size={isKetua ? 'lg' : 'md'}
+                    />
+                  </div>
                 )
               })}
             </div>
