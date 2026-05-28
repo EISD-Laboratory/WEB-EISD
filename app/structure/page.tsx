@@ -75,6 +75,7 @@ const divisions: Division[] = [
       { name: 'Viki Firmansyah', code: 'VIKS', role: 'member', image: '/images/members/event/VIKI.webp', linkedin: '#' },
       { name: 'Rosita Jian Syahiirah', code: 'RORA', role: 'member', image: '/images/members/event/JIAN.webp', linkedin: '#' },
       { name: 'Jian Hazel Sitorus', code: 'ZELL', role: 'member', image: '/images/members/event/HAZEL.webp', linkedin: '#' },
+      { name: 'Jehezkiel Agna', code: 'JEZA', role: 'member', image: '/images/members/event/JEZA.webp', linkedin: '#' },
     ],
   },
   {
