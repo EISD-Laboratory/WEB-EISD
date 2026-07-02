@@ -1,6 +1,14 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import NextImage from 'next/image'
+import ImageWithFallback from '@/components/ImageWithFallback'
 import Link from 'next/link'
+
+const Image = (props: any) => {
+    if (typeof props.src === 'string' && props.src.endsWith('.avif')) {
+        return <ImageWithFallback {...props} />
+    }
+    return <NextImage {...props} />
+}
 import FadeIn from '@/components/FadeIn'
 import styles from './EventDetail.module.css'
 
@@ -137,25 +145,24 @@ export default function EventDetail({ params }: { params: { id: string } }) {
         <main className="min-h-screen">
 
             {/* Banner/Hero Image Section*/}
-            <FadeIn direction="down" delay={0.1}>
-                <section className="w-full pt-16 md:pt-16">
-                    <div className="relative h-64 md:h-[400px] bg-gray-900 w-full overflow-hidden">
-                        <Image
-                            src={event.heroBanner ?? event.image}
-                            alt={event.title}
-                            fill
-                            className={`object-cover z-10 ${
-                                event.heroPosition === 'top'
-                                    ? 'object-top'
-                                    : 'object-center'
-                            }`}
-                            priority
-                        />
-                        <div className="absolute inset-0 bg-black/30 z-20" />
-                        <div className="absolute inset-0 shadow-inner pointer-events-none z-30" />
-                    </div>
-                </section>
-            </FadeIn>
+            <section className="w-full pt-16 md:pt-16">
+                <div className="relative h-64 md:h-[400px] bg-gray-900 w-full overflow-hidden">
+                    <Image
+                        src={event.heroBanner ?? event.image}
+                        alt={event.title}
+                        fill
+                        sizes="100vw"
+                        className={`object-cover z-10 ${
+                            event.heroPosition === 'top'
+                                ? 'object-top'
+                                : 'object-center'
+                        }`}
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-black/30 z-20" />
+                    <div className="absolute inset-0 shadow-inner pointer-events-none z-30" />
+                </div>
+            </section>
 
             {/* Back Button Section */}
             <section className="pt-8 px-4 md:px-8 bg-white max-w-[1440px] mx-auto">
@@ -241,6 +248,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                                     src={src}
                                                     alt={`${event.title} photo ${idx + 1}`}
                                                     fill
+                                                    sizes="(max-width: 768px) 50vw, 33vw"
                                                     className="object-cover"
                                                 />
                                             </div>
@@ -255,6 +263,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                                     src={src}
                                                     alt={`${event.title} photo ${idx + 1}`}
                                                     fill
+                                                    sizes="(max-width: 768px) 50vw, 33vw"
                                                     className="object-cover"
                                                 />
                                             </div>
@@ -285,6 +294,7 @@ export default function EventDetail({ params }: { params: { id: string } }) {
                                                         src={otherEvent.image}
                                                         alt={otherEvent.title}
                                                         fill
+                                                        sizes="(max-width: 768px) 100vw, 33vw"
                                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                     />
                                                     {/* Gradient Line di bawah gambar */}
