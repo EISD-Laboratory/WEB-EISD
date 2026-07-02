@@ -57,6 +57,17 @@ const events: Event[] = [
     status: 'upcoming' as const,
     gradient: 'from-red-500 to-orange-500',
   },
+  {
+    id: 4,
+    title: 'Unity Nights Study Group EISD',
+    category: 'Study Group',
+    date: 'Mei 2026',
+    location: 'Auditorium TULT Lantai 16',
+    description: "Malam kebersamaan Study Group EISD yang menghadirkan sesi pemaparan Final Project, bonding lintas divisi, konsultasi bersama LO, dan berbagai games seru untuk membangun chemistry serta kolaborasi tim.",    
+    image: '/images/events/unity_night/unity_night_cover.avif',
+    status: 'completed' as const,
+    gradient: 'from-emerald-500 to-teal-500',
+  },
 ]
 
 const getCategoryTextColor = (category: string) => {

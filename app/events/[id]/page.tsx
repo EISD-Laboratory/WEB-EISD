@@ -76,6 +76,31 @@ const events: Event[] = [
         gradient: 'from-red-500 to-orange-500',
         gallery: [],
     },
+    {
+        id: 4,
+        title: 'Unity Nights Study Group EISD',
+        category: 'Study Group',
+        date: 'Mei 2026',
+        location: 'Auditorium TULT Lantai 16',
+        description: `Unity Nights Study Group EISD merupakan kegiatan kebersamaan yang dirancang untuk mempererat hubungan antara peserta Study Group dengan para asisten EISD Laboratory melalui suasana yang santai, hangat, dan penuh interaksi. Acara ini menjadi ruang bagi seluruh peserta untuk saling mengenal lebih dekat, berbagi pengalaman, serta membangun koneksi yang tidak hanya bermanfaat selama kegiatan Study Group berlangsung, tetapi juga untuk perjalanan akademik dan pengembangan diri ke depannya.
+
+        Selain menjadi ajang kebersamaan, Unity Nights juga menjadi momen penting untuk pemaparan Final Project yang akan dikerjakan oleh seluruh peserta Study Group. Dalam kegiatan ini, peserta akan diperkenalkan pada gambaran proyek, pembagian tim lintas divisi, serta alur pelaksanaan yang akan dijalani selama program berlangsung. Dengan adanya pertemuan secara langsung, diharapkan setiap anggota tim dapat mulai membangun chemistry, memahami karakter satu sama lain, serta menjalin komunikasi yang efektif sebelum proses pengerjaan proyek dimulai.
+
+        Selama kegiatan berlangsung, peserta juga akan diajak mengikuti berbagai aktivitas menarik, mulai dari sesi ngobrol santai dan konsultasi bersama para Liaison Officer (LO) serta asisten EISD Laboratory, hingga beragam games interaktif yang dirancang untuk membangun kerja sama, komunikasi, dan kekompakan antar peserta. Karena belajar bersama bukan hanya tentang memahami materi, tetapi juga tentang membangun lingkungan yang suportif, menyenangkan, dan penuh semangat untuk bertumbuh bersama.
+
+        Melalui Unity Nights Study Group EISD, EISD Laboratory berharap seluruh peserta dapat menjalin hubungan yang lebih erat, merasa lebih nyaman untuk berdiskusi maupun berkolaborasi, serta membangun fondasi kerja tim yang solid. Dengan semangat kebersamaan, acara ini diharapkan menjadi langkah awal dalam membentuk tim Final Project yang mampu bekerja secara efektif, saling mendukung, dan menghasilkan karya terbaik selama Study Group berlangsung.`,
+        image: '/images/events/unity_night/unity_night_cover.avif',
+        heroBanner: '/images/events/unity_night/unity_night_cover.avif',
+        heroPosition: 'top',
+        status: 'completed' as const,
+        gradient: 'from-emerald-500 to-teal-500',
+        gallery: [
+            '/images/events/unity_night/unity_nights_1.avif',
+            '/images/events/unity_night/unity_nights_2.avif',
+            '/images/events/unity_night/unity_nights_3.avif',
+            '/images/events/unity_night/unity_nights_4.avif'
+        ],
+    }
 ]
 
 // Helper function untuk warna kategori text
