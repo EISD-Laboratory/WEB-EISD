@@ -12,23 +12,31 @@ const MEDIUM_FEED_URL = 'https://medium.com/feed/@eisdlaboratory'
 const WORDS_PER_MINUTE = 200
 
 const MEDIUM_ARTICLE_LINKS = [
+  'https://medium.com/@eisdlaboratory/hemat-98-token-saat-search-kode-dalam-waktu-kurang-dari-1-detik-642aa2490f96',
   'https://medium.com/@eisdlaboratory/scrapling-adaptive-web-scraping-tanpa-bergantung-pada-selector-e173724f31d1',
   'https://medium.com/@eisdlaboratory/cv-kamu-bahkan-gak-dibaca-manusia-ca294154dbdf',
 ]
 
 const FALLBACK_ARTICLES: Article[] = [
   {
+    title: 'Hemat 98% Token Saat Search Kode dalam Waktu kurang dari 1 Detik.',
+    readTime: '5 min read',
+    date: 'Jun 25, 2026',
+    link: MEDIUM_ARTICLE_LINKS[0],
+    image: 'https://cdn-images-1.medium.com/max/1024/1*C22EEAC6hoHRKAchjJ_9BA.png',
+  },
+  {
     title: 'Scrapling: Adaptive Web Scraping Tanpa Bergantung pada Selector',
     readTime: '3 min read',
     date: 'Apr 27, 2026',
-    link: MEDIUM_ARTICLE_LINKS[0],
+    link: MEDIUM_ARTICLE_LINKS[1],
     image: 'https://cdn-images-1.medium.com/max/1024/1*uiMDlECsLrdmOijs4VRXmw.jpeg',
   },
   {
     title: 'CV Kamu Bahkan Gak Dibaca Manusia.',
     readTime: '6 min read',
     date: 'May 5, 2026',
-    link: MEDIUM_ARTICLE_LINKS[1],
+    link: MEDIUM_ARTICLE_LINKS[2],
     image: 'https://cdn-images-1.medium.com/max/1024/1*RicjsK0XkOfuhtUqhdKaug.png',
   },
 ]
