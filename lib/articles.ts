@@ -15,6 +15,7 @@ const MEDIUM_ARTICLE_LINKS = [
   'https://medium.com/@eisdlaboratory/hemat-98-token-saat-search-kode-dalam-waktu-kurang-dari-1-detik-642aa2490f96',
   'https://medium.com/@eisdlaboratory/scrapling-adaptive-web-scraping-tanpa-bergantung-pada-selector-e173724f31d1',
   'https://medium.com/@eisdlaboratory/cv-kamu-bahkan-gak-dibaca-manusia-ca294154dbdf',
+  'https://medium.com/@eisdlaboratory/tailwind-bikin-pusing-bootstrap-bikin-nyaman-tapi-mana-yang-sebenarnya-lebih-worth-it-e0f0d543c970',
 ]
 
 const FALLBACK_ARTICLES: Article[] = [
@@ -38,6 +39,14 @@ const FALLBACK_ARTICLES: Article[] = [
     date: 'May 5, 2026',
     link: MEDIUM_ARTICLE_LINKS[2],
     image: 'https://cdn-images-1.medium.com/max/1024/1*RicjsK0XkOfuhtUqhdKaug.png',
+  },
+
+  {
+    title: 'Tailwind Bikin Pusing, Bootstrap Bikin Nyaman — Tapi Mana yang Sebenarnya Lebih Worth It?',
+    readTime: '5 min read',
+    date: 'Jun, 2026',
+    link: MEDIUM_ARTICLE_LINKS[3],
+    image: '/images/logo.png',
   },
 ]
 

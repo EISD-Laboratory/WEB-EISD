@@ -52,9 +52,9 @@ const events: Event[] = [
     category: 'Seminar',
     date: 'Mei 2026',
     location: 'AWS Indonesia, Jakarta',
-    description: 'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata.',
+    description: 'Kunjungan eksklusif ke AWS Indonesia, Jakarta melihat langsung ekosistem cloud terbesar di dunia, budaya kerja kelas dunia, dan penerapan teknologi nyata di industri.',
     image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.webp',
-    status: 'upcoming' as const,
+    status: 'completed' as const,
     gradient: 'from-red-500 to-orange-500',
   },
   {
@@ -237,9 +237,14 @@ export default function EventsPage() {
                 <p className="text-white/80 mb-6 max-w-xl mx-auto">
                   Ikuti media sosial kami untuk informasi event terbaru.
                 </p>
-                <button className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  Follow Our Instagram
-                </button>
+                <a
+                  href="https://www.instagram.com/peopleateisd/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105 inline-block"
+                    >
+                      Follow Our Instagram
+                    </a>
               </div>
             </div>
           </FadeIn>
