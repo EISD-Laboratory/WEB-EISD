@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="relative mb-2 h-16 w-40">
               <Image
-                src="/images/Vertical Logo.png"
+                src="/images/Vertical Logo.webp"
                 alt="EISD Laboratory Logo"
                 fill
                 className="object-contain object-left"
