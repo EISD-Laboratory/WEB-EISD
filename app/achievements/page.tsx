@@ -36,7 +36,7 @@ const achievements: Achievement[] = [
     competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
     category: 'AI and IoT Climate Tech Solution',
     level: 'Internasional',
-    result: 'Juara 3',
+    result: '3rd Place',
     image: '/images/achievements/1.webp',
   },
   {
@@ -57,7 +57,7 @@ const achievements: Achievement[] = [
     competitionName: 'INVOSTIK 2025',
     category: 'Essay',
     level: 'Nasional',
-    result: 'Juara 1',
+    result: '1st Place',
     image: '/images/achievements/3.webp',
   },
   {
@@ -79,7 +79,7 @@ const achievements: Achievement[] = [
     competitionName: 'ICT Business Development - ITASE FEST 6.0',
     category: 'Business Development',
     level: 'Nasional',
-    result: 'Juara 2',
+    result: '2nd Place',
     image: '/images/achievements/5.webp',
   },
   {
@@ -87,7 +87,7 @@ const achievements: Achievement[] = [
     members: [
       { name: 'Arya Kamal', code: 'AYRA' },
       { name: 'Farid Ghani', code: 'GNOY' },
-      { name: 'CHarles R Barnabas', code: 'BUZZ' },
+      { name: 'Charles R Barnabas', code: 'BUZZ' },
       { name: 'Bimo Alfarizy', code: 'FRZY' }
     ],
     competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
@@ -106,6 +106,17 @@ const achievements: Achievement[] = [
     level: 'Internasional',
     result: 'Finalist',
     image: '/images/achievements/7.webp',
+  },
+  {
+    id: 8,
+    members: [
+      { name: 'Muhammad Emirsyah Makarim', code: 'MIWZ' },
+    ],
+    competitionName: 'Gemastik XVII',
+    category: 'Pengembangan Perangkat Lunak',
+    level: 'Nasional',
+    result: '2nd Place',
+    image: '/images/achievements/8.webp',
   }
 ]
 

@@ -53,7 +53,7 @@ const events: Event[] = [
     date: 'Mei 2026',
     location: 'AWS Indonesia, Jakarta',
     description: 'Kunjungan eksklusif ke AWS Indonesia untuk melihat ekosistem cloud dan teknologi industri.',
-    image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.webp',
+    image: '/images/events/seminar/Company Visit AWS/comvis_AWS_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-red-500 to-orange-500',
   },
@@ -100,7 +100,18 @@ const events: Event[] = [
     image: '/images/events/competition/eisd_compe/eisd-compe-cover.webp',
     status: 'upcoming' as const,
     gradient: 'from-yellow-500 to-orange-500',
-  }
+  },
+  {
+    id: 8,
+    title: 'Company Visit',
+    category: 'Seminar',
+    date: 'May 2025',
+    location: 'Google Indonesia, Jakarta',
+    description: 'Kunjungan eksklusif ke Google Indonesia untuk melihat ekosistem cloud dan teknologi industri.',
+    image: '/images/events/seminar/Company Visit Google/comvis-google-cover.webp',
+    status: 'upcoming' as const,
+    gradient: 'from-cyan-500 to-blue-500',
+  },
 ]
 
 const getCategoryTextColor = (category: string) => {
@@ -180,7 +191,7 @@ export default function EventsPage() {
                 }`}>
                   
                   <div className="w-full sm:w-[45%] relative flex items-center bg-gray-50 justify-center overflow-hidden">
-                    <div className="relative w-full h-40 sm:h-full min-h-[160px]">
+                    <div className="relative w-full aspect-[4/5]">
                       <Image
                         src={event.image}
                         alt={event.title}
