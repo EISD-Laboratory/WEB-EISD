@@ -40,8 +40,8 @@ const events: Event[] = [
     title: 'Kuliah Umum Manajemen Proyek Sistem Informasi',
     category: 'Seminar',
     date: 'Mei 2026',
-    location: 'Auditorium Gedung Damar Telkom University',
-    description: 'Kuliah umum tentang komunikasi efektif antara tim IT dan bisnis..',
+    location: 'Auditorium Gedung Damar, Telkom University',
+    description: 'Kuliah umum tentang komunikasi efektif antara tim IT dan bisnis.',
     image: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-blue-500 to-indigo-500',
@@ -52,7 +52,7 @@ const events: Event[] = [
     category: 'Seminar',
     date: 'Mei 2026',
     location: 'AWS Indonesia, Jakarta',
-    description: 'Kunjungan eksklusif ke AWS Indonesia, Jakarta melihat langsung ekosistem cloud terbesar di dunia, budaya kerja kelas dunia, dan penerapan teknologi nyata di industri.',
+    description: 'Kunjungan eksklusif ke AWS Indonesia untuk melihat ekosistem cloud dan teknologi industri.',
     image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-red-500 to-orange-500',
@@ -62,12 +62,45 @@ const events: Event[] = [
     title: 'Unity Nights Study Group EISD',
     category: 'Study Group',
     date: 'Mei 2026',
-    location: 'Auditorium TULT Lantai 16',
-    description: "Malam kebersamaan Study Group EISD yang menghadirkan sesi pemaparan Final Project, bonding lintas divisi, konsultasi bersama LO, dan berbagai games seru untuk membangun chemistry serta kolaborasi tim.",    
-    image: '/images/events/unity_night/unity_night_cover.avif',
+    location: 'Auditorium TULT Lantai 16, Telkom University',
+    description: "Malam kebersamaan Study Group EISD untuk mengenal Final Project dan mempererat kolaborasi tim.",    
+    image: '/images/events/studygroup/unity_night/unity_night_cover.webp',
     status: 'completed' as const,
     gradient: 'from-emerald-500 to-teal-500',
   },
+  {
+    id: 5,
+    title: 'Pitching Day',
+    category: 'Study Group',
+    date: 'Juni 2026',
+    location: 'TULT 0810, Telkom University',
+    description: 'Presentasi Final Project sebagai ajang penyampaian ide dan hasil proyek.',
+    image: '/images/events/studygroup/pitching_day/pitching-day-cover.webp',
+    status: 'completed' as const,
+    gradient: 'from-purple-500 to-pink-500',
+  },
+  {
+    id: 6,
+    title: 'Awarding Night',
+    category: 'Study Group',
+    date: 'Juni 2026',
+    location: 'Online',
+    description: 'Acara penghargaan untuk tim-tim terbaik dalam program Study Group EISD.',
+    image: '/images/events/studygroup/awarding_night/awarding-night-cover.webp',
+    status: 'completed' as const,
+    gradient: 'from-pink-500 to-purple-500',
+  },
+  {
+    id: 7,
+    title: 'EISD Competition 2026',
+    category: 'Competition',
+    date: 'September 2026',
+    location: 'Online',
+    description: 'Kompetisi inovasi teknologi untuk mahasiswa di seluruh Indonesia.',
+    image: '/images/events/competition/eisd_compe/eisd-compe-cover.webp',
+    status: 'upcoming' as const,
+    gradient: 'from-yellow-500 to-orange-500',
+  }
 ]
 
 const getCategoryTextColor = (category: string) => {
@@ -90,7 +123,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-gray-50/50">
 
       {/* Hero Section */}
-      <section className="pt-20 pb-8 px-4 relative">
+      <section className="pt-28 pb-8 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <FadeIn direction="up" delay={0.2}>
             <motion.div

@@ -24,8 +24,8 @@ interface Division {
 
 const coreDivision = [
   { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/core/DEZA.webp', linkedin: '#' },
-  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/members/core/FADIA.webp', linkedin: '#' },
-  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/members/core/KIREI.webp', linkedin: '#' },
+  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/members/core/RYUU.webp', linkedin: '#' },
+  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/members/core/IYEY.webp', linkedin: '#' },
 ]
 
 const divisions: Division[] = [
@@ -34,10 +34,10 @@ const divisions: Division[] = [
     icon: Trophy,
     gradient: 'from-amber-500 to-orange-500',
     members: [
-      { name: 'Bimo Alfarizy Lukman', code: 'FRZY', role: 'koordinator', image: '/images/members/competition/BIMO.webp', linkedin: '#' },
-      { name: 'Azzahra Aulia Khoirunnisa', code: 'ZAAR', role: 'member', image: '/images/members/competition/ZAHRA.webp', linkedin: '#' },
-      { name: 'Nashwa Alya Zahra Pratiwi', code: 'NAZP', role: 'member', image: '/images/members/competition/NASHWA.webp', linkedin: '#' },
-      { name: 'Dhydo Aryo Jayanata', code: 'JAYY', role: 'member', image: '/images/members/competition/DHYDO.webp', linkedin: '#' },
+      { name: 'Bimo Alfarizy Lukman', code: 'FRZY', role: 'koordinator', image: '/images/members/competition/FRZY.webp', linkedin: '#' },
+      { name: 'Azzahra Aulia Khoirunnisa', code: 'ZAAR', role: 'member', image: '/images/members/competition/ZAAR.webp', linkedin: '#' },
+      { name: 'Nashwa Alya Zahra Pratiwi', code: 'NAZP', role: 'member', image: '/images/members/competition/NAZP.webp', linkedin: '#' },
+      { name: 'Dhydo Aryo Jayanata', code: 'JAYY', role: 'member', image: '/images/members/competition/JAYY.webp', linkedin: '#' },
     ],
   },
   {
@@ -59,7 +59,7 @@ const divisions: Division[] = [
     gradient: 'from-emerald-500 to-teal-500',
     members: [
       { name: 'Refaya Azzam Maheswara', code: 'PAYY', role: 'koordinator', image: '/images/members/enabler/REFAYA.webp', linkedin: '#' },
-      { name: 'Muhammad Fatih', code: 'mfth', role: 'member', image: '/images/members/enabler/FATIH.webp', linkedin: '#' },
+      { name: 'Muhammad Fatih', code: 'MFTH', role: 'member', image: '/images/members/enabler/FATIH.webp', linkedin: '#' },
       { name: 'Fasya Arinal Hudha', code: 'SYRN', role: 'member', image: '/images/members/enabler/FASYA.webp', linkedin: '#' },
       { name: 'Elsa Ainun Yusniar', code: 'ESNY', role: 'member', image: '/images/members/enabler/ELSA.webp', linkedin: '#' },
       { name: 'Aisyah Nur Raihandany Putri', code: 'ASYH', role: 'member', image: '/images/members/enabler/AISYAH.webp', linkedin: '#' },
@@ -87,7 +87,7 @@ const divisions: Division[] = [
       { name: 'Zuhri Pratisto Basuki', code: 'ZRII', role: 'member', image: '/images/members/rnc/ZUHRI.webp', linkedin: '#' },
       { name: 'Rasya Akbar Lazuardi', code: 'LAZY', role: 'member', image: '/images/members/rnc/RASYA.webp', linkedin: '#' },
       { name: 'Rizky Saputra Al Amir', code: 'EKAA', role: 'member', image: '/images/members/rnc/EKA.webp', linkedin: '#' },
-      { name: 'Alif Muslim Abdurrahman', code: 'MSLMN', role: 'member', image: '/images/members/rnc/ALIF.webp', linkedin: '#' },
+      { name: 'Alif Muslim Abdurrahman', code: 'MSLM', role: 'member', image: '/images/members/rnc/ALIF.webp', linkedin: '#' },
       { name: 'Anisa Hanun', code: 'ASAA', role: 'member', image: '/images/members/rnc/ASA.webp', linkedin: '#' },
       { name: 'Fairuzia Meyla Fatinah', code: 'FZMY', role: 'member', image: '/images/members/rnc/ZIA.webp', linkedin: '#' },
     ],
@@ -98,14 +98,12 @@ const divisions: Division[] = [
     gradient: 'from-violet-500 to-purple-600',
     members: [
       { name: 'Clarissa Tompunu', code: 'CARL', role: 'koordinator', image: '/images/members/studygroup/CLARISSA.webp', linkedin: '#' },
-      { name: 'M. Paksi Pratama', code: 'MPP', role: 'member', image: '/images/members/studygroup/PAKSI.webp', linkedin: '#' },
+      { name: 'M. Paksi Pratama', code: 'PAKS', role: 'member', image: '/images/members/studygroup/PAKSI.webp', linkedin: '#' },
       { name: 'Naswa Gyna Sahira', code: 'SGYN', role: 'member', image: '/images/members/studygroup/NASWA.webp', linkedin: '#' },
       { name: 'Siti Amany Fakhirah Riby', code: 'SAFR', role: 'member', image: '/images/members/studygroup/AMANY.webp', linkedin: '#' },
     ],
   },
 ]
-
-const linkedinPath = 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'
 
 function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 'sm' }: {
   name: string
@@ -120,9 +118,9 @@ function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 
   const isPlaceholder = image === '/images/logo.png'
 
   const sizeClasses = {
-    sm: 'w-20 h-20 md:w-24 md:h-24',
-    md: 'w-24 h-24 md:w-28 md:h-28',
-    lg: 'w-32 h-32 md:w-36 md:h-36',
+    sm: 'w-[6.5rem] h-[6.5rem] md:w-[8rem] md:h-[8rem]',
+    md: 'w-[7.5rem] h-[7.5rem] md:w-[8.5rem] md:h-[8.5rem]',
+    lg: 'w-[9.5rem] h-[9.5rem] md:w-[10.5rem] md:h-[10.5rem]',
   }
 
   const imageSizes = {
@@ -147,24 +145,8 @@ function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 
           sizes={imageSizes[size]}
           className={isPlaceholder ? 'object-contain p-2' : 'object-cover'}
         />
-        {linkedin && linkedin !== '#' && (
-          <motion.a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-blue-600/80 backdrop-blur-sm flex items-center justify-center gap-1.5 z-10"
-          >
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d={linkedinPath} />
-            </svg>
-            <span className="text-white text-xs font-semibold">LinkedIn</span>
-          </motion.a>
-        )}
       </div>
-      <h4 className="text-xs md:text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+      <h4 className="text-xs md:text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors line-clamp-3 leading-tight">
         {name}
       </h4>
       {badge && (
@@ -187,12 +169,12 @@ export default function Structure() {
   return (
     <main className="min-h-screen">
       {/* Hero */}
-      <section className="pt-20 pb-8 px-4">
+      <section className="pt-28 pb-8 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-              <span className="text-sm font-semibold text-primary tracking-wide uppercase">Organization</span>
+              <span className="text-sm font-semibold text-primary">Organization</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gray-900">Our </span>

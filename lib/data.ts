@@ -99,6 +99,7 @@ export const navItems = [
   { label: "About", href: "/about" },
   { label: "Events", href: "/events" },
   { label: "Structure", href: "/structure" },
+  { label: "Achievements", href: "/achievements" },
   { label: "Articles", href: "/articles" },
   { label: 'Study Group', href: 'https://www.eisd-studygroup.site/' }
 ]

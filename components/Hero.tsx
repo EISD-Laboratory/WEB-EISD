@@ -95,7 +95,7 @@ export default function Hero() {
         className="hidden md:block flex-1 relative"
       >
         <Image
-          src="/images/fotostudio.JPG"
+          src="/images/photo-landing.webp"
           alt="EISD Laboratory Team"
           fill
           className="object-cover object-[20%_35%]"
@@ -115,7 +115,7 @@ export default function Hero() {
       {/* ── Mobile: Photo as faint background ── */}
       <div className="md:hidden absolute inset-0 -z-10">
         <Image
-          src="/images/fotostudio.JPG"
+          src="/images/photo-landing.webp"
           alt="EISD Laboratory Team"
           fill
           className="object-cover opacity-[0.07]"

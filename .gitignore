@@ -35,3 +35,7 @@ yarn-error.log*
 next-env.d.ts
 
 .cursor
+
+# local agent docs — not part of the shared codebase
+CLAUDE.md
+DESIGN.md

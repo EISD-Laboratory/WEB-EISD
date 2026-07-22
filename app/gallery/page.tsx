@@ -33,7 +33,7 @@ export default function Gallery() {
   return (
     <main className="min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-12 px-4 relative">
+      <section className="pt-28 pb-12 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <FadeIn direction="up" delay={0.2}>
             <motion.div

@@ -58,7 +58,7 @@
   
   /* Navbar Glass Effect */
   .navbar-glass {
-    @apply bg-white/85 backdrop-blur-md border border-white/40;
+    @apply bg-white/60 backdrop-blur-md border border-white/40;
     box-shadow: 0 12px 40px rgba(17, 24, 39, 0.10);
   }
 

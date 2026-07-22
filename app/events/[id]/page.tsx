@@ -36,7 +36,11 @@ const events: Event[] = [
         category: 'Webinar',
         date: 'April 2026',
         location: 'Online',
-        description: 'Webinar yang membahas perbandingan pendekatan No-Code dan Pro-Code dalam pengembangan serta integrasi sistem enterprise di era transformasi digital. Kegiatan ini hadir sebagai wadah bagi mahasiswa untuk memahami bagaimana perusahaan modern memilih teknologi yang tepat dalam membangun sistem yang cepat, scalable, dan tetap mudah dikembangkan. \n\n Peserta akan diajak mengenal karakteristik, kelebihan, serta tantangan dari kedua pendekatan tersebut. Mulai dari bagaimana platform No-Code mampu mempercepat proses development dan automasi bisnis, hingga bagaimana Pro-Code memberikan fleksibilitas, kontrol, dan kemampuan kustomisasi yang lebih mendalam untuk kebutuhan sistem berskala besar. Karena ternyata dunia teknologi tidak pernah puas bikin pilihan sederhana. Selalu harus ada dua kubu yang saling merasa paling benar. \n\n Materi akan disampaikan oleh narasumber yang memiliki pengalaman langsung di bidang pengembangan sistem dan industri teknologi, sehingga peserta dapat memperoleh wawasan praktis mengenai implementasi nyata No-Code maupun Pro-Code dalam dunia kerja. Melalui webinar ini, EISD Laboratory berharap peserta dapat memahami tren teknologi terkini serta menentukan pendekatan yang paling relevan sesuai kebutuhan bisnis dan pengembangan sistem di masa depan..',
+        description: [
+            'Webinar yang membahas perbandingan pendekatan No-Code dan Pro-Code dalam pengembangan serta integrasi sistem enterprise di era transformasi digital. Kegiatan ini hadir sebagai wadah bagi mahasiswa untuk memahami bagaimana perusahaan modern memilih teknologi yang tepat dalam membangun sistem yang cepat, scalable, dan tetap mudah dikembangkan. ',
+            ' Peserta akan diajak mengenal karakteristik, kelebihan, serta tantangan dari kedua pendekatan tersebut. Mulai dari bagaimana platform No-Code mampu mempercepat proses development dan automasi bisnis, hingga bagaimana Pro-Code memberikan fleksibilitas, kontrol, dan kemampuan kustomisasi yang lebih mendalam untuk kebutuhan sistem berskala besar. Karena ternyata dunia teknologi tidak pernah puas bikin pilihan sederhana. Selalu harus ada dua kubu yang saling merasa paling benar. ',
+            ' Materi akan disampaikan oleh narasumber yang memiliki pengalaman langsung di bidang pengembangan sistem dan industri teknologi, sehingga peserta dapat memperoleh wawasan praktis mengenai implementasi nyata No-Code maupun Pro-Code dalam dunia kerja. Melalui webinar ini, EISD Laboratory berharap peserta dapat memahami tren teknologi terkini serta menentukan pendekatan yang paling relevan sesuai kebutuhan bisnis dan pengembangan sistem di masa depan..',
+        ].join('\n\n'),
         image: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.webp',
         heroBanner: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.webp',
         heroPosition: 'top',
@@ -55,7 +59,11 @@ const events: Event[] = [
         category: 'Seminar',
         date: 'Mei 2026',
         location: 'Auditorium Gedung Damar Telkom University',
-        description: 'Kuliah umum yang membahas pentingnya komunikasi efektif antara tim IT dan stakeholder bisnis dalam proses pengembangan serta pengelolaan proyek sistem informasi. Kegiatan ini hadir untuk membantu mahasiswa memahami bagaimana perbedaan perspektif antara sisi teknis dan bisnis sering kali menjadi tantangan utama dalam sebuah proyek digital. \n\n Peserta akan diajak mempelajari cara menyampaikan kebutuhan bisnis ke dalam solusi teknologi yang tepat, sekaligus memahami bagaimana tim IT dapat menerjemahkan aspek teknis agar lebih mudah dipahami oleh stakeholder non-teknis. Materi juga akan membahas pentingnya kolaborasi, manajemen ekspektasi, serta strategi komunikasi yang mampu menjaga proyek tetap berjalan secara efektif, tepat waktu, dan sesuai tujuan bisnis. Karena dalam dunia kerja nyata, error terbesar sering kali bukan berasal dari sistem, tapi dari miskomunikasi antar manusia yang merasa sudah saling paham. \n\n Melalui sesi ini, peserta diharapkan dapat memperoleh gambaran nyata mengenai peran komunikasi dalam keberhasilan proyek sistem informasi, sekaligus memahami keterampilan yang dibutuhkan untuk menjadi penghubung yang efektif antara kebutuhan bisnis dan implementasi teknologi di dunia industri.',
+        description: [
+            'Kuliah umum yang membahas pentingnya komunikasi efektif antara tim IT dan stakeholder bisnis dalam proses pengembangan serta pengelolaan proyek sistem informasi. Kegiatan ini hadir untuk membantu mahasiswa memahami bagaimana perbedaan perspektif antara sisi teknis dan bisnis sering kali menjadi tantangan utama dalam sebuah proyek digital. ',
+            ' Peserta akan diajak mempelajari cara menyampaikan kebutuhan bisnis ke dalam solusi teknologi yang tepat, sekaligus memahami bagaimana tim IT dapat menerjemahkan aspek teknis agar lebih mudah dipahami oleh stakeholder non-teknis. Materi juga akan membahas pentingnya kolaborasi, manajemen ekspektasi, serta strategi komunikasi yang mampu menjaga proyek tetap berjalan secara efektif, tepat waktu, dan sesuai tujuan bisnis. Karena dalam dunia kerja nyata, error terbesar sering kali bukan berasal dari sistem, tapi dari miskomunikasi antar manusia yang merasa sudah saling paham. ',
+            ' Melalui sesi ini, peserta diharapkan dapat memperoleh gambaran nyata mengenai peran komunikasi dalam keberhasilan proyek sistem informasi, sekaligus memahami keterampilan yang dibutuhkan untuk menjadi penghubung yang efektif antara kebutuhan bisnis dan implementasi teknologi di dunia industri.',
+        ].join('\n\n'),
         image: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.webp',
         heroBanner: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.webp',
         heroPosition: 'top',
@@ -77,7 +85,11 @@ const events: Event[] = [
         category: 'Seminar',
         date: 'Mei 2026',
         location: 'AWS Indonesia, Jakarta',
-        description: 'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata. Kegiatan ini memberikan kesempatan eksklusif bagi anggota EISD Laboratory untuk menginjakkan kaki langsung di kantor AWS Indonesia salah satu platform cloud terbesar dan paling berpengaruh di dunia.\n\nSelama kunjungan, peserta mendapatkan gambaran nyata tentang bagaimana AWS membangun infrastruktur cloud berskala global, mulai dari culture of innovation yang diterapkan di lingkungan kerja, arsitektur sistem yang digunakan oleh jutaan perusahaan, hingga bagaimana tim-tim di AWS berkolaborasi lintas fungsi untuk menciptakan solusi yang berdampak besar bagi industri teknologi. Sesi sharing dengan profesional AWS Indonesia juga membuka wawasan baru tentang jalur karier di bidang cloud computing dan teknologi informasi.\n\nMelalui Company Visit ini, EISD Laboratory ingin memperluas perspektif anggotanya bahwa dunia kerja di bidang teknologi penuh dengan peluang yang menarik. Pengalaman melihat langsung ekosistem kerja AWS menjadi motivasi kuat bagi para anggota untuk terus berkembang, berinovasi, dan mempersiapkan diri menjadi talenta digital terbaik.',
+        description: [
+            'Kunjungan ke perusahaan untuk mengenal dunia kerja secara langsung, memahami budaya industri, serta melihat penerapan teknologi di dunia nyata. Kegiatan ini memberikan kesempatan eksklusif bagi anggota EISD Laboratory untuk menginjakkan kaki langsung di kantor AWS Indonesia salah satu platform cloud terbesar dan paling berpengaruh di dunia.',
+            'Selama kunjungan, peserta mendapatkan gambaran nyata tentang bagaimana AWS membangun infrastruktur cloud berskala global, mulai dari culture of innovation yang diterapkan di lingkungan kerja, arsitektur sistem yang digunakan oleh jutaan perusahaan, hingga bagaimana tim-tim di AWS berkolaborasi lintas fungsi untuk menciptakan solusi yang berdampak besar bagi industri teknologi. Sesi sharing dengan profesional AWS Indonesia juga membuka wawasan baru tentang jalur karier di bidang cloud computing dan teknologi informasi.',
+            'Melalui Company Visit ini, EISD Laboratory ingin memperluas perspektif anggotanya bahwa dunia kerja di bidang teknologi penuh dengan peluang yang menarik. Pengalaman melihat langsung ekosistem kerja AWS menjadi motivasi kuat bagi para anggota untuk terus berkembang, berinovasi, dan mempersiapkan diri menjadi talenta digital terbaik.',
+        ].join('\n\n'),
         image: '/images/events/seminar/Company Visit/comvis_AWS_sampul.webp',
         heroBanner: '/images/events/seminar/Company Visit/comvis_AWS_sampul.webp',
         heroPosition: 'top',
@@ -97,23 +109,76 @@ const events: Event[] = [
         category: 'Study Group',
         date: 'Mei 2026',
         location: 'Auditorium TULT Lantai 16',
-        description: `Unity Nights Study Group EISD merupakan kegiatan kebersamaan yang dirancang untuk mempererat hubungan antara peserta Study Group dengan para asisten EISD Laboratory melalui suasana yang santai, hangat, dan penuh interaksi. Acara ini menjadi ruang bagi seluruh peserta untuk saling mengenal lebih dekat, berbagi pengalaman, serta membangun koneksi yang tidak hanya bermanfaat selama kegiatan Study Group berlangsung, tetapi juga untuk perjalanan akademik dan pengembangan diri ke depannya.
-
-        Selain menjadi ajang kebersamaan, Unity Nights juga menjadi momen penting untuk pemaparan Final Project yang akan dikerjakan oleh seluruh peserta Study Group. Dalam kegiatan ini, peserta akan diperkenalkan pada gambaran proyek, pembagian tim lintas divisi, serta alur pelaksanaan yang akan dijalani selama program berlangsung. Dengan adanya pertemuan secara langsung, diharapkan setiap anggota tim dapat mulai membangun chemistry, memahami karakter satu sama lain, serta menjalin komunikasi yang efektif sebelum proses pengerjaan proyek dimulai.
-
-        Selama kegiatan berlangsung, peserta juga akan diajak mengikuti berbagai aktivitas menarik, mulai dari sesi ngobrol santai dan konsultasi bersama para Liaison Officer (LO) serta asisten EISD Laboratory, hingga beragam games interaktif yang dirancang untuk membangun kerja sama, komunikasi, dan kekompakan antar peserta. Karena belajar bersama bukan hanya tentang memahami materi, tetapi juga tentang membangun lingkungan yang suportif, menyenangkan, dan penuh semangat untuk bertumbuh bersama.
-
-        Melalui Unity Nights Study Group EISD, EISD Laboratory berharap seluruh peserta dapat menjalin hubungan yang lebih erat, merasa lebih nyaman untuk berdiskusi maupun berkolaborasi, serta membangun fondasi kerja tim yang solid. Dengan semangat kebersamaan, acara ini diharapkan menjadi langkah awal dalam membentuk tim Final Project yang mampu bekerja secara efektif, saling mendukung, dan menghasilkan karya terbaik selama Study Group berlangsung.`,
-        image: '/images/events/unity_night/unity_night_cover.avif',
-        heroBanner: '/images/events/unity_night/unity_night_cover.avif',
+        description: [
+            'Unity Nights Study Group EISD merupakan kegiatan kebersamaan yang dirancang untuk mempererat hubungan antara peserta Study Group dengan para asisten EISD Laboratory melalui suasana yang santai, hangat, dan penuh interaksi. Acara ini menjadi ruang bagi seluruh peserta untuk saling mengenal lebih dekat, berbagi pengalaman, serta membangun koneksi yang tidak hanya bermanfaat selama kegiatan Study Group berlangsung, tetapi juga untuk perjalanan akademik dan pengembangan diri ke depannya. ',
+            ' Selain menjadi ajang kebersamaan, Unity Nights juga menjadi momen penting untuk pemaparan Final Project yang akan dikerjakan oleh seluruh peserta Study Group. Dalam kegiatan ini, peserta akan diperkenalkan pada gambaran proyek, pembagian tim lintas divisi, serta alur pelaksanaan yang akan dijalani selama program berlangsung. Dengan adanya pertemuan secara langsung, diharapkan setiap anggota tim dapat mulai membangun chemistry, memahami karakter satu sama lain, serta menjalin komunikasi yang efektif sebelum proses pengerjaan proyek dimulai. ',
+            ' Selama kegiatan berlangsung, peserta juga akan diajak mengikuti berbagai aktivitas menarik, mulai dari sesi ngobrol santai dan konsultasi bersama para Liaison Officer (LO) serta asisten EISD Laboratory, hingga beragam games interaktif yang dirancang untuk membangun kerja sama, komunikasi, dan kekompakan antar peserta. Karena belajar bersama bukan hanya tentang memahami materi, tetapi juga tentang membangun lingkungan yang suportif, menyenangkan, dan penuh semangat untuk bertumbuh bersama. ',
+            ' Melalui Unity Nights Study Group EISD, EISD Laboratory berharap seluruh peserta dapat menjalin hubungan yang lebih erat, merasa lebih nyaman untuk berdiskusi maupun berkolaborasi, serta membangun fondasi kerja tim yang solid. Dengan semangat kebersamaan, acara ini diharapkan menjadi langkah awal dalam membentuk tim Final Project yang mampu bekerja secara efektif, saling mendukung, dan menghasilkan karya terbaik selama Study Group berlangsung.',
+        ].join('\n\n'),
+        image: '/images/events/studygroup/unity_night/unity_night_cover.webp',
+        heroBanner: '/images/events/studygroup/unity_night/unity_night_cover.webp',
         heroPosition: 'top',
         status: 'completed' as const,
         gradient: 'from-emerald-500 to-teal-500',
         gallery: [
-            '/images/events/unity_night/unity_nights_1.avif',
-            '/images/events/unity_night/unity_nights_2.avif',
-            '/images/events/unity_night/unity_nights_3.avif',
-            '/images/events/unity_night/unity_nights_4.avif'
+            '/images/events/studygroup/unity_night/unity_nights_1.webp',
+            '/images/events/studygroup/unity_night/unity_nights_2.webp',
+            '/images/events/studygroup/unity_night/unity_nights_3.webp',
+            '/images/events/studygroup/unity_night/unity_nights_4.webp'
+        ],
+    },
+    {
+        id: 5,
+        title: 'Pitching Day Study Group EISD',
+        category: 'Study Group',
+        date: 'Juni 2026',
+        location: 'TULT 0810, Telkom University',
+        description: [
+            'Pitching Day Study Group EISD merupakan kegiatan presentasi Final Project yang menjadi puncak dari seluruh rangkaian program Study Group. Dalam kegiatan ini, setiap tim peserta akan mempresentasikan ide, konsep, serta hasil pengembangan proyek yang telah mereka kerjakan selama program berlangsung. Pitching Day tidak hanya menjadi ajang untuk menunjukkan kemampuan teknis dan kreativitas peserta, tetapi juga menjadi kesempatan bagi mereka untuk mengasah keterampilan komunikasi, penyampaian ide, serta kemampuan berdiskusi melalui sesi tanya jawab dengan audiens.',
+            'Setiap tim akan diberikan waktu untuk memaparkan proyek mereka secara jelas dan menarik, mulai dari latar belakang permasalahan, solusi yang diusulkan, proses pengembangan, hingga demonstrasi prototipe atau hasil akhir proyek. Melalui sesi ini, peserta diharapkan dapat memperoleh masukan dan evaluasi yang membangun sebagai bahan penyempurnaan proyek serta pengalaman belajar dalam mempresentasikan hasil karya mereka.',
+            'Selain menjadi ajang presentasi, Pitching Day juga menjadi wadah bagi peserta untuk saling bertukar ide, berbagi pengalaman, dan mempererat kolaborasi antaranggota Study Group. Interaksi selama kegiatan diharapkan dapat memperluas wawasan peserta terhadap berbagai pendekatan dalam pengembangan proyek sekaligus mendorong terciptanya diskusi yang aktif dan inspiratif.',
+            'Melalui Pitching Day Study Group EISD, EISD Laboratory berharap seluruh peserta dapat menunjukkan hasil kerja keras mereka dengan percaya diri, memperoleh umpan balik yang bermanfaat, serta semakin termotivasi untuk terus mengembangkan kemampuan dan kualitas proyek yang telah mereka bangun.',
+        ].join('\n\n'),
+        image: '/images/events/studygroup/pitching_day/pitching-day-cover.webp',
+        heroBanner: '/images/events/studygroup/pitching_day/pitching-day-cover.webp',
+        heroPosition: 'top',
+        status: 'completed' as const,
+        gradient: 'from-purple-500 to-pink-500',
+        gallery: [
+            '/images/events/studygroup/pitching_day/pitching-day(1).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(2).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(3).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(4).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(5).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(6).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(7).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(8).webp',
+            '/images/events/studygroup/pitching_day/pitching-day(9).webp',
+        ],
+    },
+    {
+        id: 6, 
+        title: 'Awarding Night',
+        category: 'Study Group',
+        date: 'Juni 2026',
+        location: 'Online',
+        description: [
+            'Awarding Night Study Group EISD merupakan kegiatan penutupan yang dirancang untuk merayakan pencapaian peserta selama program berlangsung. Acara ini menjadi momen spesial bagi seluruh peserta untuk menerima penghargaan atas kerja keras, dedikasi, dan prestasi yang telah mereka raih dalam mengembangkan Final Project. ',
+            'Dalam Awarding Night, ada pengumuman pemenang dari berbagai kategori penghargaan yang telah ditentukan sebelumnya, mencakup kategori Best Software Development Team, Best UI/UX Design Team, Best Intelligence System Team, dan Best Technopreneur Team. Selain penghargaan tim, setiap kategori tersebut juga memiliki penghargaan individu bagi anggota dengan kontribusi terbaik. Sebagai puncak acara, akan diumumkan pula penghargaan Best Team of the Year sebagai apresiasi tertinggi bagi tim dengan performa terbaik secara keseluruhan.',
+            'Selain itu, Awarding Night juga menjadi ajang untuk mempererat hubungan antar peserta dan staff EISD Laboratory melalui suasana yang hangat, penuh apresiasi, dan interaktif. Kegiatan ini diharapkan dapat memberikan pengalaman yang berkesan bagi seluruh peserta, sekaligus menjadi motivasi untuk terus mengembangkan kemampuan mereka di bidang teknologi dan inovasi digital.',
+        ].join('\n\n'),
+        image: '/images/events/studygroup/awarding_night/awarding-night-cover.webp',
+        heroBanner: '/images/events/studygroup/awarding_night/awarding-night-cover.webp',
+        heroPosition: 'top',
+        status: 'completed' as const,
+        gradient: 'from-yellow-500 to-orange-500',
+        gallery: [
+            '/images/events/studygroup/awarding_night/awarding-night(1).webp',
+            '/images/events/studygroup/awarding_night/awarding-night(2).webp',
+            '/images/events/studygroup/awarding_night/awarding-night(3).webp',
+            '/images/events/studygroup/awarding_night/awarding-night(4).webp',
+            '/images/events/studygroup/awarding_night/awarding-night(5).webp',
+            '/images/events/studygroup/awarding_night/awarding-night(6).webp',
         ],
     }
 ]

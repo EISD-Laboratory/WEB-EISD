@@ -4,32 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { navItems } from '@/lib/data'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
-    <nav
-      className={`w-full transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-white/20 backdrop-blur-md shadow-sm'
-      }`}
-    >
+    <nav className="w-full navbar-glass">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-8 h-8 relative">
             <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
           </div>
-          <span className={`font-bold text-sm hidden sm:inline transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-gray-800'}`}>
+          <span className="font-bold text-sm hidden sm:inline text-gray-900">
             EISD Laboratory
           </span>
         </Link>
@@ -43,7 +32,7 @@ export default function Navbar() {
                 href={item.href}
                 target={item.href.startsWith('http') ? '_blank' : '_self'}
                 rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className={`relative text-sm font-medium transition-all duration-300 pb-1 ${isActive ? 'text-primary' : scrolled ? 'text-gray-600 hover:text-primary' : 'text-gray-700 hover:text-primary'}`}
+                className={`relative text-sm font-medium transition-all duration-300 pb-1 ${isActive ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
               >
                 {item.label}
                 <span className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300 ${isActive ? 'w-full' : 'w-0'}`} />
