@@ -94,7 +94,7 @@ const achievements: Achievement[] = [
     category: 'AI and IoT Climate Tech Solution',
     level: 'Internasional',
     result: 'Finalist',
-    image: '/images/achievements/6.png', 
+    image: '/images/achievements/6.webp',
   },
   {
     id: 7,
@@ -105,7 +105,7 @@ const achievements: Achievement[] = [
     category: 'AI and IoT Climate Tech Solution',
     level: 'Internasional',
     result: 'Finalist',
-    image: '/images/achievements/7.png',
+    image: '/images/achievements/7.webp',
   }
 ]
 
