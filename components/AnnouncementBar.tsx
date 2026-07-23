@@ -57,13 +57,13 @@ export default function AnnouncementBar() {
                         style={{ color: '#00d97a' }}
                     >
                         <span className="hidden sm:inline">{announcementConfig.ctaLabel.replace(' →', '')}</span>
-                        <span className="sm:hidden tracking-wide">Gabung</span>
+                        <span className="sm:hidden tracking-wide">Join</span>
                         <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                             <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </Link>
                     <div className="w-[1px] h-4 bg-white/20 hidden sm:block"></div>
-                    <button onClick={handleDismiss} aria-label="Tutup pengumuman" className="rounded-full p-1.5 text-white/60 transition-all hover:bg-white/10 hover:text-white flex-shrink-0">
+                    <button onClick={handleDismiss} aria-label="Dismiss announcement" className="rounded-full p-1.5 text-white/60 transition-all hover:bg-white/10 hover:text-white flex-shrink-0">
                         <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                             <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                         </svg>

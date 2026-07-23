@@ -50,7 +50,7 @@ export default function Gallery() {
               <span className="text-gradient">Our Gallery</span>
             </h1>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Momen-momen terbaik dari berbagai kegiatan dan pencapaian EISD Laboratory.
+              The best moments from various activities and achievements of EISD Laboratory.
             </p>
           </FadeIn>
         </div>
@@ -117,7 +117,7 @@ export default function Gallery() {
 
           {filteredItems.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">Belum ada foto di kategori ini.</p>
+              <p className="text-gray-400 text-lg">No photos in this category yet.</p>
             </div>
           )}
         </div>

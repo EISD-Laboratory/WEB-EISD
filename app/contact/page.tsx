@@ -25,7 +25,7 @@ export default function Contact() {
               <span className="text-primary">Us</span>
             </h1>
             <p className="text-gray-500 text-sm md:text-base max-w-lg mx-auto">
-              Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami.
+              Have a question or want to collaborate? Feel free to reach out to us.
             </p>
           </FadeIn>
         </div>

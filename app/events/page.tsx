@@ -4,7 +4,16 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import FadeIn from '@/components/FadeIn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 /* ── Data ── */
 const eventCategories = ['All', 'Webinar', 'Seminar', 'Competition', 'Study Group']
@@ -30,29 +39,29 @@ const events: Event[] = [
     category: 'Webinar',
     date: 'April 2026',
     location: 'Online',
-    description: 'Webinar membahas perbandingan No-Code dan Pro-Code dalam industri.',
+    description: 'A webinar discussing the comparison between No-Code and Pro-Code in the industry.',
     image: '/images/events/webinar/Webinar No-Code vs Pro-Code/webinar_nocode_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-emerald-500 to-teal-500',
   },
   {
     id: 2,
-    title: 'Kuliah Umum Manajemen Proyek Sistem Informasi',
+    title: 'Public Lecture on Information Systems Project Management',
     category: 'Seminar',
-    date: 'Mei 2026',
+    date: 'May 2026',
     location: 'Auditorium Gedung Damar, Telkom University',
-    description: 'Kuliah umum tentang komunikasi efektif antara tim IT dan bisnis.',
+    description: 'A public lecture on effective communication between IT teams and business.',
     image: '/images/events/seminar/Kuliah Umum MANPROSI/kulum_manprosi_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-blue-500 to-indigo-500',
   },
   {
     id: 3,
-    title: 'Company Visit',
+    title: 'Company Visit AWS',
     category: 'Seminar',
-    date: 'Mei 2026',
+    date: 'May 2026',
     location: 'AWS Indonesia, Jakarta',
-    description: 'Kunjungan eksklusif ke AWS Indonesia untuk melihat ekosistem cloud dan teknologi industri.',
+    description: 'An exclusive visit to AWS Indonesia to explore the cloud ecosystem and industry technology.',
     image: '/images/events/seminar/Company Visit AWS/comvis_AWS_sampul.webp',
     status: 'completed' as const,
     gradient: 'from-red-500 to-orange-500',
@@ -61,9 +70,9 @@ const events: Event[] = [
     id: 4,
     title: 'Unity Nights Study Group EISD',
     category: 'Study Group',
-    date: 'Mei 2026',
+    date: 'May 2026',
     location: 'Auditorium TULT Lantai 16, Telkom University',
-    description: "Malam kebersamaan Study Group EISD untuk mengenal Final Project dan mempererat kolaborasi tim.",    
+    description: "A togetherness night for EISD Study Group to introduce the Final Project and strengthen team collaboration.",
     image: '/images/events/studygroup/unity_night/unity_night_cover.webp',
     status: 'completed' as const,
     gradient: 'from-emerald-500 to-teal-500',
@@ -72,9 +81,9 @@ const events: Event[] = [
     id: 5,
     title: 'Pitching Day',
     category: 'Study Group',
-    date: 'Juni 2026',
+    date: 'June 2026',
     location: 'TULT 0810, Telkom University',
-    description: 'Presentasi Final Project sebagai ajang penyampaian ide dan hasil proyek.',
+    description: 'A Final Project presentation event to share ideas and project results.',
     image: '/images/events/studygroup/pitching_day/pitching-day-cover.webp',
     status: 'completed' as const,
     gradient: 'from-purple-500 to-pink-500',
@@ -83,9 +92,9 @@ const events: Event[] = [
     id: 6,
     title: 'Awarding Night',
     category: 'Study Group',
-    date: 'Juni 2026',
+    date: 'June 2026',
     location: 'Online',
-    description: 'Acara penghargaan untuk tim-tim terbaik dalam program Study Group EISD.',
+    description: 'An awarding event for the best teams in the EISD Study Group program.',
     image: '/images/events/studygroup/awarding_night/awarding-night-cover.webp',
     status: 'completed' as const,
     gradient: 'from-pink-500 to-purple-500',
@@ -96,22 +105,33 @@ const events: Event[] = [
     category: 'Competition',
     date: 'September 2026',
     location: 'Online',
-    description: 'Kompetisi inovasi teknologi untuk mahasiswa di seluruh Indonesia.',
-    image: '/images/events/competition/eisd_compe/eisd-compe-cover.webp',
+    description: 'A technology innovation competition for students across Indonesia.',
+    image: '/images/events/competition/eisd_compe_2026/eisd-compe-2026-cover.webp',
     status: 'upcoming' as const,
     gradient: 'from-yellow-500 to-orange-500',
   },
   {
     id: 8,
-    title: 'Company Visit',
+    title: 'Company Visit Google',
     category: 'Seminar',
     date: 'May 2025',
     location: 'Google Indonesia, Jakarta',
-    description: 'Kunjungan eksklusif ke Google Indonesia untuk melihat ekosistem cloud dan teknologi industri.',
+    description: 'An exclusive visit to Google Indonesia to explore the cloud ecosystem and industry technology.',
     image: '/images/events/seminar/Company Visit Google/comvis-google-cover.webp',
-    status: 'upcoming' as const,
+    status: 'completed' as const,
     gradient: 'from-cyan-500 to-blue-500',
   },
+  {
+    id: 9,
+    title: 'EISD Competition 2025',
+    category: 'Competition',
+    date: 'November 2025',
+    location: 'TULT 16th Floor, Telkom University',
+    description: 'An onsite hackathon where innovation meets real-world problem solving.',
+    image: '/images/events/competition/eisd_compe_2025/eisd-compe-2025-cover.webp',
+    status: 'completed' as const,
+    gradient: 'from-yellow-500 to-orange-500',
+  }
 ]
 
 const getCategoryTextColor = (category: string) => {
@@ -127,8 +147,13 @@ const getCategoryTextColor = (category: string) => {
 /* ── Page Component ── */
 export default function EventsPage() {
   const [eventFilter, setEventFilter] = useState('All')
+  const [shuffledEvents, setShuffledEvents] = useState(events)
 
-  const filteredEvents = eventFilter === 'All' ? events : events.filter(e => e.category === eventFilter)
+  useEffect(() => {
+    setShuffledEvents(shuffle(events))
+  }, [])
+
+  const filteredEvents = eventFilter === 'All' ? shuffledEvents : shuffledEvents.filter(e => e.category === eventFilter)
 
   return (
     <main className="min-h-screen bg-gray-50/50">
@@ -151,7 +176,7 @@ export default function EventsPage() {
               <span className="text-gray-900">Events</span>
             </h1>
             <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Ikuti berbagai kegiatan menarik kami dari perjalanan EISD Laboratory.
+              Follow along with the exciting activities throughout EISD Laboratory&apos;s journey.
             </p>
           </FadeIn>
         </div>
@@ -264,7 +289,7 @@ export default function EventsPage() {
 
           {filteredEvents.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">Belum ada event di kategori ini.</p>
+              <p className="text-gray-400 text-lg">No events in this category yet.</p>
             </div>
           )}
         </div>
@@ -277,9 +302,9 @@ export default function EventsPage() {
             <div className="relative bg-primary rounded-3xl p-10 text-center text-white overflow-hidden">
               <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px]" />
               <div className="relative z-10">
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">Ingin Mengikuti Event Kami?</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">Want to Join Our Events?</h2>
                 <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                  Ikuti media sosial kami untuk informasi event terbaru.
+                  Follow our social media for the latest event updates.
                 </p>
                 <a
                   href="https://www.instagram.com/peopleateisd/"

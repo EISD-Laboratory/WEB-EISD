@@ -39,7 +39,7 @@ function ArticlesHero() {
             <span className="text-primary">Articles</span>
           </h1>
           <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
-            Insight, tutorial, dan opini seputar teknologi dari tim EISD Laboratory.
+            Insight, tutorials, and opinions on technology from the EISD Laboratory team.
           </p>
         </FadeIn>
       </div>
@@ -137,7 +137,7 @@ function MoreOnMediumCta() {
     <section className="px-4 pb-16">
       <div className="max-w-5xl mx-auto text-center">
         <FadeIn direction="up" delay={0.2}>
-          <p className="text-gray-400 text-sm mb-4">Lihat semua artikel kami di Medium</p>
+          <p className="text-gray-400 text-sm mb-4">See all our articles on Medium</p>
           <a
             href={MEDIUM_PROFILE_URL}
             target="_blank"

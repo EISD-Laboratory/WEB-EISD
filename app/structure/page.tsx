@@ -23,9 +23,9 @@ interface Division {
 }
 
 const coreDivision = [
-  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Wakil Ketua Lab', image: '/images/members/core/DEZA.webp', linkedin: '#' },
-  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Ketua Lab', image: '/images/members/core/RYUU.webp', linkedin: '#' },
-  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Sekretaris Lab', image: '/images/members/core/IYEY.webp', linkedin: '#' },
+  { name: 'Deazard Muhammad Arrayyan', code: 'DEZA', role: 'Vice Head of Lab', image: '/images/members/core/DEZA.webp', linkedin: '#' },
+  { name: 'Fadia Rizqa Yunanto', code: 'RYUU', role: 'Head of Lab', image: '/images/members/core/RYUU.webp', linkedin: '#' },
+  { name: 'Kirei Najwa Shafira', code: 'IYEY', role: 'Lab Secretary', image: '/images/members/core/IYEY.webp', linkedin: '#' },
 ]
 
 const divisions: Division[] = [
@@ -181,7 +181,7 @@ export default function Structure() {
               <span className="text-primary">Structure</span>
             </h1>
             <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
-              Kenali orang-orang hebat di balik setiap divisi EISD Laboratory.
+              Get to know the great people behind every division of EISD Laboratory.
             </p>
           </FadeIn>
         </div>
@@ -194,11 +194,11 @@ export default function Structure() {
             <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">Core Division</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 items-center justify-items-center w-full">
               {coreDivision.map((member) => {
-                const isKetua = member.role === 'Ketua Lab'
+                const isKetua = member.role === 'Head of Lab'
                 const mobileOrder =
-                  member.role === 'Ketua Lab'
+                  member.role === 'Head of Lab'
                     ? 'order-1 sm:order-2'
-                    : member.role === 'Wakil Ketua Lab'
+                    : member.role === 'Vice Head of Lab'
                     ? 'order-2 sm:order-1'
                     : 'order-3 sm:order-3'
 
@@ -275,7 +275,7 @@ export default function Structure() {
                       code={koordinator.code}
                       image={koordinator.image}
                       linkedin={koordinator.linkedin}
-                      badge="Koordinator"
+                      badge="Coordinator"
                       badgeGradient={activeDivision.gradient}
                       size="md"
                     />
@@ -401,10 +401,10 @@ export default function Structure() {
             <div className="relative bg-gradient-to-br from-primary to-purple-700 rounded-3xl p-10 text-center text-white overflow-hidden">
               <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]" />
               <div className="relative z-10">
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">Tertarik Bergabung?</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">Interested in Joining?</h2>
                 <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                  EISD Laboratory selalu membuka kesempatan bagi mahasiswa yang ingin belajar,
-                  berkembang, dan berkontribusi di bidang teknologi.
+                  EISD Laboratory always welcomes students who want to learn,
+                  grow, and contribute in the field of technology.
                 </p>
                 <button
                   type="button"

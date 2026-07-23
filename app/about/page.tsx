@@ -16,17 +16,17 @@ const values: CoreValue[] = [
   {
     icon: Zap,
     title: 'Fast',
-    description: 'Bergerak cepat dalam mengembangkan solusi teknologi dan merespons tantangan industri.',
+    description: 'Moving fast in developing technology solutions and responding to industry challenges.',
   },
   {
     icon: BrainCircuit,
     title: 'Smart',
-    description: 'Mengutamakan pendekatan cerdas dan berbasis data dalam setiap pengembangan proyek.',
+    description: 'Prioritizing a smart, data-driven approach in every project we build.',
   },
   {
     icon: Gauge,
     title: 'Efficient',
-    description: 'Mengoptimalkan proses dan sumber daya untuk menghasilkan output terbaik.',
+    description: 'Optimizing processes and resources to produce the best output.',
   },
 ]
 
@@ -80,7 +80,7 @@ export default function About() {
               <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
             </div>
             <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-              Laboratorium kami berfokus pada pengembangan empat bidang utama: <span className="font-medium text-gray-800">technopreneurship</span> untuk menciptakan bisnis digital, <span className="font-medium text-gray-800">software engineering</span> untuk arsitektur sistem yang handal, <span className="font-medium text-gray-800">UI/UX design</span> untuk pengalaman pengguna yang intuitif, dan <span className="font-medium text-gray-800">AI/IoT</span> untuk integrasi sistem cerdas dan terkoneksi.
+              Our laboratory focuses on developing four main fields: <span className="font-medium text-gray-800">technopreneurship</span> to create digital businesses, <span className="font-medium text-gray-800">software engineering</span> for reliable system architecture, <span className="font-medium text-gray-800">UI/UX design</span> for intuitive user experiences, and <span className="font-medium text-gray-800">AI/IoT</span> for smart, connected system integration.
             </p>
           </FadeIn>
         </div>
@@ -89,7 +89,7 @@ export default function About() {
       {/* Vision & Mission */}
       <section className="py-16 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
-          <SectionHeading eyebrow="Our Purpose" title="Visi & Misi" subtitle="Arah dan tujuan yang kami kejar bersama." />
+          <SectionHeading eyebrow="Our Purpose" title="Vision & Mission" subtitle="The direction and goals we pursue together." />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <FadeIn direction="left" delay={0.2}>
@@ -98,9 +98,9 @@ export default function About() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 text-primary flex items-center justify-center mb-5">
                   <Lightbulb className="w-7 h-7" strokeWidth={1.8} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Visi</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Vision</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Menjadikan laboratorium riset yang membentuk mahasiswa yang inovatif dalam menciptakan produk dan memiliki kemampuan yang tinggi khususnya dalam bidang perangkat lunak.
+                  To become a research laboratory that shapes innovative students who can create products and hold strong capabilities, especially in software development.
                 </p>
               </div>
             </FadeIn>
@@ -111,19 +111,19 @@ export default function About() {
                 <div className="w-14 h-14 rounded-2xl bg-accent-green/10 border border-accent-green/20 text-accent-green flex items-center justify-center mb-5">
                   <Target className="w-7 h-7" strokeWidth={1.8} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Misi</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Mission</h3>
                 <ul className="text-gray-600 leading-relaxed space-y-3">
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Mendukung segala kegiatan anggota-anggota dalam satu tahun kedepan dalam mengikuti lomba-lomba minimal dua kegiatan lomba.
+                    Supporting all members&apos; participation in at least two competitions over the coming year.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Membuat produk-produk yang bisa digunakan bagi lingkungan universitas maupun masyarakat.
+                    Building products that can be used by the university community and society at large.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 flex-shrink-0" />
-                    Menciptakan sumber daya manusia yang dapat bersaing dan siap dalam menghadapi perubahan industri.
+                    Developing human resources who can compete and are ready to face industry change.
                   </li>
                 </ul>
               </div>
@@ -135,7 +135,7 @@ export default function About() {
       {/* Core Values */}
       <section className="py-16 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
-          <SectionHeading eyebrow="Values" title="Core Values" subtitle="Fast, Smart, Efficient - prinsip yang kami pegang." />
+          <SectionHeading eyebrow="Values" title="Core Values" subtitle="Fast, Smart, Efficient - the principles we hold onto." />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {values.map((value, index) => {
@@ -160,7 +160,7 @@ export default function About() {
       {/* Milestones */}
       <section className="py-16 px-4 relative">
         <div className="max-w-5xl mx-auto">
-          <SectionHeading eyebrow="Journey" title="Our Milestones" subtitle="Perjalanan EISD Laboratory dari awal hingga sekarang." />
+          <SectionHeading eyebrow="Journey" title="Our Milestones" subtitle="EISD Laboratory's journey from the beginning until now." />
 
           <div className="relative mt-12">
             {/* Horizontal line */}

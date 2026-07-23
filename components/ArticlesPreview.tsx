@@ -12,7 +12,7 @@ export default async function ArticlesPreview() {
         <SectionHeading
           eyebrow="Blog"
           title="Latest Articles"
-          subtitle="Insight dan tutorial teknologi dari tim EISD Laboratory."
+          subtitle="Insight and tech tutorials from the EISD Laboratory team."
         />
 
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-5">

@@ -4,7 +4,16 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Trophy } from 'lucide-react'
 import FadeIn from '@/components/FadeIn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 interface Member {
   name: string
@@ -16,16 +25,16 @@ interface Achievement {
   members: Member[]
   competitionName: string
   category: string
-  level: 'Nasional' | 'Internasional'
+  level: 'National' | 'International'
   result: string
   image: string
 }
 
-const levels = ['All', 'Nasional', 'Internasional'] as const
+const levels = ['All', 'National', 'International'] as const
 
 const levelBadge: Record<Achievement['level'], string> = {
-  Nasional: 'bg-primary/90',
-  Internasional: 'bg-accent-green/90',
+  National: 'bg-primary/90',
+  International: 'bg-accent-green/90',
 }
 
 // Placeholder entries — swap in real achievement photos + copy when ready.
@@ -35,7 +44,7 @@ const achievements: Achievement[] = [
     members: [{ name: 'Clarissa Tompunu', code: 'CARL' }],
     competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
     category: 'AI and IoT Climate Tech Solution',
-    level: 'Internasional',
+    level: 'International',
     result: '3rd Place',
     image: '/images/achievements/1.webp',
   },
@@ -44,7 +53,7 @@ const achievements: Achievement[] = [
     members: [{ name: 'Muhammad Luthfi Tukhfattur Romadhoni', code: 'MLTR' }],
     competitionName: 'Kompetisi Robot Terbang Indonesia',
     category: 'Fixed Wing',
-    level: 'Nasional',
+    level: 'National',
     result: 'Finalist',
     image: '/images/achievements/2.webp',
   },
@@ -56,7 +65,7 @@ const achievements: Achievement[] = [
     ],
     competitionName: 'INVOSTIK 2025',
     category: 'Essay',
-    level: 'Nasional',
+    level: 'National',
     result: '1st Place',
     image: '/images/achievements/3.webp',
   },
@@ -67,7 +76,7 @@ const achievements: Achievement[] = [
     ],
     competitionName: 'ZTE Indonesia Business Plan Competition',
     category: 'Business Plan',
-    level: 'Nasional',
+    level: 'National',
     result: 'Finalist',
     image: '/images/achievements/4.webp',
   },
@@ -78,7 +87,7 @@ const achievements: Achievement[] = [
     ],
     competitionName: 'ICT Business Development - ITASE FEST 6.0',
     category: 'Business Development',
-    level: 'Nasional',
+    level: 'National',
     result: '2nd Place',
     image: '/images/achievements/5.webp',
   },
@@ -92,7 +101,7 @@ const achievements: Achievement[] = [
     ],
     competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
     category: 'AI and IoT Climate Tech Solution',
-    level: 'Internasional',
+    level: 'International',
     result: 'Finalist',
     image: '/images/achievements/6.webp',
   },
@@ -103,7 +112,7 @@ const achievements: Achievement[] = [
     ],
     competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
     category: 'AI and IoT Climate Tech Solution',
-    level: 'Internasional',
+    level: 'International',
     result: 'Finalist',
     image: '/images/achievements/7.webp',
   },
@@ -113,8 +122,8 @@ const achievements: Achievement[] = [
       { name: 'Muhammad Emirsyah Makarim', code: 'MIWZ' },
     ],
     competitionName: 'Gemastik XVII',
-    category: 'Pengembangan Perangkat Lunak',
-    level: 'Nasional',
+    category: 'Software Development',
+    level: 'National',
     result: '2nd Place',
     image: '/images/achievements/8.webp',
   }
@@ -122,10 +131,15 @@ const achievements: Achievement[] = [
 
 export default function Achievements() {
   const [activeLevel, setActiveLevel] = useState<typeof levels[number]>('All')
+  const [shuffledAchievements, setShuffledAchievements] = useState(achievements)
+
+  useEffect(() => {
+    setShuffledAchievements(shuffle(achievements))
+  }, [])
 
   const filtered = activeLevel === 'All'
-    ? achievements
-    : achievements.filter((item) => item.level === activeLevel)
+    ? shuffledAchievements
+    : shuffledAchievements.filter((item) => item.level === activeLevel)
 
   return (
     <main className="min-h-screen">
@@ -148,8 +162,8 @@ export default function Achievements() {
               <span className="text-primary">Achievements</span>
             </h1>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Deretan prestasi anggota EISD Laboratory di berbagai kompetisi tingkat kampus,
-              nasional, hingga internasional.
+              A showcase of EISD Laboratory members&apos; achievements across campus,
+              national, and international competitions.
             </p>
           </FadeIn>
         </div>
@@ -232,7 +246,7 @@ export default function Achievements() {
 
           {filtered.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">Belum ada prestasi di kategori ini.</p>
+              <p className="text-gray-400 text-lg">No achievements in this category yet.</p>
             </div>
           )}
         </div>

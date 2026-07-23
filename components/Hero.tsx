@@ -44,7 +44,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.35 }}
           className="text-gray-500 text-sm lg:text-base leading-relaxed mb-8 max-w-md"
         >
-          Laboratorium riset di Telkom University yang berfokus pada IoT, Software Development, UI/UX, AI, dan Digital Innovation.
+          A research laboratory at Telkom University focused on IoT, Software Development, UI/UX, AI, and Digital Innovation.
         </motion.p>
 
         {/* Stats row */}

@@ -105,9 +105,9 @@ export const navItems = [
 ]
 
 export const announcementConfig = {
-  message: 'Bergabunglah bersama kami dan tingkatkan skillmu!',
+  message: 'Join us and level up your skills!',
   highlightText: '✦ Study Group EISD',
-  ctaLabel: 'Gabung Sekarang →',
+  ctaLabel: 'Join Now →',
   ctaHref: 'https://www.eisd-studygroup.site/',
   storageKey: 'eisd-announcement-dismissed',
 };
