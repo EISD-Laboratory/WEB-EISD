@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
-import { BookOpen, CalendarDays, Microscope, PenLine, Settings, Trophy, type LucideIcon } from 'lucide-react'
+import { BookOpen, CalendarDays, Handshake, Microscope, PenLine, Trophy, type LucideIcon } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface MemberData {
@@ -55,7 +55,7 @@ const divisions: Division[] = [
   },
   {
     name: 'Enabler',
-    icon: Settings,
+    icon: Handshake,
     gradient: 'from-emerald-500 to-teal-500',
     members: [
       { name: 'Refaya Azzam Maheswara', code: 'PAYY', role: 'koordinator', image: '/images/members/enabler/REFAYA.webp', linkedin: '#' },
@@ -174,7 +174,7 @@ export default function Structure() {
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-              <span className="text-sm font-semibold text-primary">Organization</span>
+              <span className="text-sm font-semibold text-primary tracking-wide uppercase">Organization</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gray-900">Our </span>
@@ -286,22 +286,64 @@ export default function Structure() {
                 {(() => {
                   const count = members.length
 
-                  // ===== 1–4 ORANG =====
-                  if (count <= 4) {
-                    const cols =
-                      count === 1
-                        ? 'grid-cols-1'
-                        : count === 2
-                        ? 'grid-cols-2'
-                        : count === 3
-                        ? 'grid-cols-3'
-                        : 'grid-cols-4'
+                  // ===== 1–3 ORANG =====
+                  if (count <= 3) {
+                    const cols = count === 1 ? 'grid-cols-1' : count === 2 ? 'grid-cols-2' : 'grid-cols-3'
 
                     return (
                       <div className="w-full max-w-3xl mx-auto px-4">
                         <div
                           className={`grid ${cols} gap-6 md:gap-8 justify-items-center items-start justify-center`}
                         >
+                          {members.map((member) => (
+                            <PersonCard
+                              key={member.code}
+                              name={member.name}
+                              code={member.code}
+                              image={member.image}
+                              linkedin={member.linkedin}
+                              size="sm"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  }
+
+                  // ===== 4 ORANG (mobile: 3-1, desktop: 1 baris) =====
+                  if (count === 4) {
+                    return (
+                      <div className="w-full max-w-3xl mx-auto px-4">
+                        {/* Mobile: 3 atas, 1 bawah */}
+                        <div className="flex flex-col items-center gap-6 md:hidden">
+                          <div className="grid grid-cols-3 gap-6 justify-items-center">
+                            {members.slice(0, 3).map((member) => (
+                              <PersonCard
+                                key={member.code}
+                                name={member.name}
+                                code={member.code}
+                                image={member.image}
+                                linkedin={member.linkedin}
+                                size="sm"
+                              />
+                            ))}
+                          </div>
+                          <div className="flex justify-center gap-6">
+                            {members.slice(3).map((member) => (
+                              <PersonCard
+                                key={member.code}
+                                name={member.name}
+                                code={member.code}
+                                image={member.image}
+                                linkedin={member.linkedin}
+                                size="sm"
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Desktop: 1 baris 4 kolom */}
+                        <div className="hidden md:grid md:grid-cols-4 md:gap-8 justify-items-center">
                           {members.map((member) => (
                             <PersonCard
                               key={member.code}

@@ -1,30 +1,3 @@
-export const focusAreas = [
-  {
-    id: 1,
-    title: "Software Development",
-    description: "Building scalable applications and innovative software solutions for real-world problems.",
-    icon: "💻",
-  },
-  {
-    id: 2,
-    title: "UI/UX Design",
-    description: "Creating beautiful and intuitive user experiences with modern design principles.",
-    icon: "🎨",
-  },
-  {
-    id: 3,
-    title: "Artificial Intelligence & IoT",
-    description: "Exploring AI, machine learning, and Internet of Things for smart solutions.",
-    icon: "🤖",
-  },
-  {
-    id: 4,
-    title: "Techpreneurship",
-    description: "Developing entrepreneurial mindset and building tech-based startups.",
-    icon: "🚀",
-  },
-]
-
 export const divisions = [
   {
     id: 1,
@@ -67,30 +40,6 @@ export const divisions = [
     title: "Content Division",
     description: "Creating engaging content for social media and documentation.",
     image: "/images/division/Content.webp",
-  },
-]
-
-export const highlights = [
-  {
-    id: 1,
-    category: "Software Development",
-    title: "Building E-Commerce Platform",
-    description: "Developed a full-stack e-commerce platform with modern technologies including payment gateway integration.",
-    image: "/images/logo.png",
-  },
-  {
-    id: 2,
-    category: "Competition",
-    title: "National Hackathon Winner",
-    description: "Our team won first place in the National Technology Innovation Competition 2024.",
-    image: "/images/logo.png",
-  },
-  {
-    id: 3,
-    category: "webinar",
-    title: "Web Development Bootcamp",
-    description: "Successfully organized a 3-day intensive web development bootcamp with 100+ participants.",
-    image: "/images/logo.png",
   },
 ]
 

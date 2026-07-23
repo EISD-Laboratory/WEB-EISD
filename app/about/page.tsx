@@ -56,7 +56,7 @@ export default function About() {
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-5 shimmer-enhanced">
                   <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
-                  <span className="text-xs font-semibold text-primary">About Us</span>
+                  <span className="text-xs font-semibold text-primary tracking-wide uppercase">About Us</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
                   <span className="text-gray-600">Welcome To</span><br />

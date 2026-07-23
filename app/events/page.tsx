@@ -169,7 +169,7 @@ export default function EventsPage() {
               className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced bg-white border border-gray-100"
             >
               <div className="w-1.5 h-1.5 bg-accent-green rounded-full pulse-subtle" />
-              <span className="text-sm font-semibold text-primary">Our Events</span>
+              <span className="text-sm font-semibold text-primary tracking-wide uppercase">Our Events</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">

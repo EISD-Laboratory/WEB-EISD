@@ -154,7 +154,7 @@ export default function Achievements() {
               className="inline-flex items-center gap-2 glass-card px-5 py-2.5 rounded-full shadow-soft mb-6 shimmer-enhanced"
             >
               <div className="w-2 h-2 bg-accent-green rounded-full" />
-              <span className="text-sm text-gray-700 font-medium">Achievements</span>
+              <span className="text-sm font-semibold text-primary tracking-wide uppercase">Our Achievements</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -162,8 +162,8 @@ export default function Achievements() {
               <span className="text-primary">Achievements</span>
             </h1>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              A showcase of EISD Laboratory members&apos; achievements across campus,
-              national, and international competitions.
+              A showcase of EISD Laboratory members&apos; achievements across
+              national and international competitions.
             </p>
           </FadeIn>
         </div>
