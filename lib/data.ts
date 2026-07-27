@@ -60,3 +60,16 @@ export const announcementConfig = {
   ctaHref: 'https://www.eisd-studygroup.site/',
   storageKey: 'eisd-announcement-dismissed',
 };
+
+// Toggle `enabled` off to disable the popup site-wide. Bump `storageKey` (e.g. add
+// `-v2`) when swapping image/link for a new promo, so it reappears for people who
+// already dismissed the old one.
+export const welcomePopupConfig = {
+  enabled: true,
+  image: '/images/welcome-popup.webp',
+  imageAlt: 'EISD Laboratory welcome banner',
+  ctaLabel: 'Learn More',
+  ctaHref: 'https://linktr.ee/eisdcompetition',
+  storageKey: 'eisd-welcome-popup-dismissed',
+  activeUntil: '2026-08-30',
+};

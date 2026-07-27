@@ -92,7 +92,8 @@ const estimateReadTime = (html: string) => {
 
 const getFirstImage = (html: string) => {
   const match = html.match(/<img[^>]+src="([^"]+)"/)
-  return match?.[1] ?? '/images/logo.png'
+  const src = match?.[1]
+  return src && /^https:\/\//.test(src) ? src : '/images/logo.png'
 }
 
 const parseMediumFeed = (feed: string): Article[] =>
