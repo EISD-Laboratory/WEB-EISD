@@ -275,15 +275,19 @@ export async function generateStaticParams() {
         }))
 }
 
-export default function EventDetail({ params }: { params: { id: string } }) {
-    const event = events.find((e) => e.id.toString() === params.id)
+export default async function EventDetail({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params
+    const event = events.find((e) => e.id.toString() === id)
 
     if (!event || event.status === 'upcoming') {
         notFound()
     }
 
     const availableOtherEvents = events.filter((e) => e.id !== event.id && e.status !== 'upcoming')
-    const randomOtherEvent = availableOtherEvents[Math.floor(Math.random() * availableOtherEvents.length)]
+    // Deterministic pick (not Math.random): this renders once at `next build` into static
+    // HTML, so a random pick would just freeze at whatever value that one build happened to
+    // produce, not vary per visitor. (event.id - 1) covers the full range since ids start at 1.
+    const randomOtherEvent = availableOtherEvents[(event.id - 1) % availableOtherEvents.length]
     const otherEvents = randomOtherEvent ? [randomOtherEvent] : []
 
     return (

@@ -11,6 +11,8 @@ export default function AnnouncementBar() {
     useEffect(() => {
         const dismissed = sessionStorage.getItem(announcementConfig.storageKey)
         if (!dismissed) {
+            // sessionStorage doesn't exist during the static build, so this can only run post-mount.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setVisible(true)
         }
     }, [])

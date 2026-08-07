@@ -51,6 +51,8 @@ export default function Divisions() {
       }, 150)
     }
 
+    // window doesn't exist during the static build, so this can only run post-mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024)
 
     window.addEventListener('resize', handleResize)

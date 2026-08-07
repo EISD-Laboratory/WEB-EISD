@@ -150,6 +150,11 @@ export default function EventsPage() {
   const [shuffledEvents, setShuffledEvents] = useState(events)
 
   useEffect(() => {
+    // Must stay in an effect: this is a Client Component, so a lazy useState initializer
+    // would run during both the static prerender and hydration and produce two different
+    // shuffle orders (a real hydration mismatch). Deterministic initial state + post-mount
+    // randomize is the correct SSR-safe pattern here, not a mistake the linter thinks it is.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShuffledEvents(shuffle(events))
   }, [])
 
