@@ -2,7 +2,10 @@
 const nextConfig = {
   output: 'export',
   images: {
-    domains: ['miro.medium.com', 'cdn-images-1.medium.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'miro.medium.com' },
+      { protocol: 'https', hostname: 'cdn-images-1.medium.com' },
+    ],
     unoptimized: true,
   },
 }

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image, { ImageProps } from 'next/image'
 
 interface ImageWithFallbackProps extends ImageProps {
@@ -8,10 +8,12 @@ interface ImageWithFallbackProps extends ImageProps {
 
 export default function ImageWithFallback({ src, fallback, alt, ...props }: ImageWithFallbackProps) {
     const [error, setError] = useState(false)
+    const [prevSrc, setPrevSrc] = useState(src)
 
-    useEffect(() => {
+    if (src !== prevSrc) {
+        setPrevSrc(src)
         setError(false)
-    }, [src])
+    }
 
     const fallbackSrc = fallback || (typeof src === 'string' && src.endsWith('.avif') ? src.replace(/\.avif$/, '.webp') : src)
 

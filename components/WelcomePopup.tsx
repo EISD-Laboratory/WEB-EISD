@@ -15,6 +15,8 @@ export default function WelcomePopup() {
     if (!welcomePopupConfig.enabled) return
     if (new Date() > new Date(`${welcomePopupConfig.activeUntil}T23:59:59`)) return
     const dismissed = sessionStorage.getItem(welcomePopupConfig.storageKey)
+    // sessionStorage doesn't exist during the static build, so this can only run post-mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!dismissed) setVisible(true)
   }, [])
 
