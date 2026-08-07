@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { BrainCircuit, Gauge, Lightbulb, Target, Zap, type LucideIcon } from 'lucide-react'
 import SectionHeading from '@/components/SectionHeading'
 import FadeIn from '@/components/FadeIn'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 type CoreValue = {
   icon: LucideIcon
