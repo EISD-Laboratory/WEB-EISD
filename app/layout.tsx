@@ -10,7 +10,6 @@ import ScrollProgressBar from '@/components/ScrollProgressBar'
 import BackToTop from '@/components/BackToTop'
 import WelcomePopup from '@/components/WelcomePopup'
 import { Toaster } from 'react-hot-toast'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -69,7 +68,6 @@ export default function RootLayout({
         <BackToTop />
         <Toaster position="top-center" />
         <WelcomePopup />
-        <SpeedInsights />
       </body>
     </html>
   )
