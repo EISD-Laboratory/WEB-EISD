@@ -164,7 +164,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-gray-50/50">
 
       {/* Hero Section */}
-      <section className="pt-28 pb-8 px-4 relative">
+      <section className="pb-8 px-4 relative hero-offset">
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <FadeIn direction="up" delay={0.2}>
             <motion.div

@@ -417,6 +417,27 @@
 /* Smooth Scroll */
 html {
   scroll-behavior: smooth;
+  --announcement-bar-height: 0px;
+}
+
+body {
+  @apply text-gray-900;
+  background: linear-gradient(135deg, #FAFBFF 0%, #FFFFFF 50%, #FFFAFC 100%);
+  overflow-x: hidden;
+  padding-top: calc(64px + var(--announcement-bar-height));
+  transition: padding-top 0.3s ease;
+}
+
+/* Hero section offset for fixed header (navbar + announcement bar) */
+.hero-offset {
+  padding-top: calc(32px + var(--announcement-bar-height));
+  transition: padding-top 0.3s ease;
+}
+
+/* Reduced hero offset for pages that need content higher */
+.hero-offset-sm {
+  padding-top: calc(32px + var(--announcement-bar-height));
+  transition: padding-top 0.3s ease;
 }
 
 /* Selection Color */

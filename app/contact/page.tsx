@@ -13,7 +13,7 @@ export default function Contact() {
   return (
     <main className="min-h-screen">
       {/* Hero */}
-      <section className="pt-28 pb-8 px-4">
+      <section className="pb-8 px-4 hero-offset-sm">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
             <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced">

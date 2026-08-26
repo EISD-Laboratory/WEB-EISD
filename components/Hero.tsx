@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
@@ -9,27 +10,53 @@ const stats = [
   { value: '4', label: 'Focus Areas' },
 ]
 
+const ANNOUNCEMENT_STORAGE_KEY = 'eisd-announcement-dismissed'
+
 export default function Hero() {
+  const [announcementVisible, setAnnouncementVisible] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const dismissed = sessionStorage.getItem(ANNOUNCEMENT_STORAGE_KEY)
+      return !dismissed
+    }
+    return true
+  })
+
+  useEffect(() => {
+    const checkDismissed = () => {
+      const dismissed = sessionStorage.getItem(ANNOUNCEMENT_STORAGE_KEY)
+      setAnnouncementVisible(!dismissed)
+    }
+
+    checkDismissed()
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === ANNOUNCEMENT_STORAGE_KEY) {
+        checkDismissed()
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-stretch pt-16 md:pt-0">
-      {/* ── Left: Text content ── */}
-      <div className="w-full md:w-[32%] lg:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-16 md:py-24 relative z-10">        {/* Badge */}
+    <section className="relative min-h-[calc(100vh-64px-var(--announcement-bar-height))] flex items-stretch bg-white">
+      <div className="w-full lg:w-[32%] xl:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-12 lg:pt-12 lg:pb-14 pb-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="inline-flex w-fit items-center gap-2 glass-card px-4 py-2 rounded-full shadow-soft mb-6 shimmer-enhanced"
+          className="inline-flex w-fit items-center gap-2 glass-card px-4 py-2 rounded-full shadow-soft mb-4 shimmer-enhanced"
         >
           <div className="w-1.5 h-1.5 bg-accent-green rounded-full" />
           <span className="text-xs font-semibold text-primary tracking-wide uppercase">Laboratory Profile</span>
         </motion.div>
 
-        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-5xl font-bold leading-[1.15] mb-6"
+          className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-5xl font-bold leading-[1.15] mb-4"
         >
           <span className="text-gray-900">Enterprise Intelligence</span><br />
           <span className="text-gray-900">System </span>
@@ -37,22 +64,20 @@ export default function Hero() {
           <span className="text-primary">Laboratory</span>
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="text-gray-500 text-sm lg:text-base leading-relaxed mb-8 max-w-md"
+          className="text-gray-500 text-sm lg:text-base leading-relaxed mb-6 max-w-md"
         >
           A research laboratory at Telkom University focused on IoT, Software Development, UI/UX, AI, and Digital Innovation.
         </motion.p>
 
-        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="flex flex-wrap items-center gap-6 mb-8" 
+          className="flex flex-wrap items-center gap-6 mb-6" 
         >
           {stats.map((stat, i) => (
             <div key={stat.label} className="flex items-center gap-3">
@@ -65,7 +90,6 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,12 +111,11 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ── Right: Photo edge-to-edge ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="hidden md:block flex-1 relative"
+        className="hidden lg:block flex-1 relative"
       >
         <Image
           src="/images/photo-landing.webp"
@@ -101,19 +124,16 @@ export default function Hero() {
           className="object-cover object-[20%_35%]"
           priority
         />
-        {/* Gradient fade on left edge */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#FAFBFF] via-[#FAFBFF]/65 to-transparent z-4" />
+        <div className="absolute inset-y-0 -left-1 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
 
-        {/* Label */}
-        <div className="absolute bottom-6 right-6 z-20">
+        <div className={`absolute right-6 z-20 transition-all duration-300 ${announcementVisible ? 'bottom-8' : 'xl:bottom-20 bottom-16'}`}>
           <div className="bg-white/90 backdrop-blur-sm border border-white/60 rounded-xl px-4 py-2 shadow-sm shimmer-enhanced">
             <p className="text-xs font-semibold text-gray-700">EISD Laboratory <span className="text-accent-green">V6</span></p>
           </div>
         </div>
       </motion.div>
 
-      {/* ── Mobile: Photo as faint background ── */}
-      <div className="md:hidden absolute inset-0 -z-10">
+      <div className="lg:hidden absolute inset-0 z-0">
         <Image
           src="/images/photo-landing.webp"
           alt="EISD Laboratory Team"

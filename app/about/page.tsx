@@ -43,9 +43,9 @@ export default function About() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-0">
+      <section className="relative">
         {/* Full-width photo background */}
-        <div className="relative w-full h-[320px] md:h-[420px] overflow-hidden">
+        <div className="relative w-full h-[280px] md:h-[360px] overflow-hidden" style={{ marginBottom: '-1px' }}>
           <Image src="/images/photo-landing.webp" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 translate-x-8" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/70 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFF] via-transparent to-transparent" />
@@ -73,7 +73,7 @@ export default function About() {
       </section>
 
       {/* About description */}
-      <section className="py-14 px-4">
+      <section className="py-14 px-4 -mt-px">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn direction="up" delay={0.2}>
             <div className="relative w-16 h-16 mx-auto mb-6">

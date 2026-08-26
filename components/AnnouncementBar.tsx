@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import Link from 'next/link'
 import { announcementConfig } from '@/lib/data'
 
 export default function AnnouncementBar() {
     const [visible, setVisible] = useState(false)
     const [animatingOut, setAnimatingOut] = useState(false)
+    const barRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const dismissed = sessionStorage.getItem(announcementConfig.storageKey)
@@ -16,6 +17,15 @@ export default function AnnouncementBar() {
             setVisible(true)
         }
     }, [])
+
+    useLayoutEffect(() => {
+        if (barRef.current && visible) {
+            const height = barRef.current.offsetHeight
+            document.documentElement.style.setProperty('--announcement-bar-height', `${height}px`)
+        } else {
+            document.documentElement.style.setProperty('--announcement-bar-height', '0px')
+        }
+    }, [visible, animatingOut])
 
     const handleDismiss = () => {
         setAnimatingOut(true)
@@ -29,6 +39,7 @@ export default function AnnouncementBar() {
 
     return (
         <div
+            ref={barRef}
             role="banner"
             className={`
         relative w-full overflow-hidden border-b border-white/10 shrink-0

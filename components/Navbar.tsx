@@ -23,7 +23,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden lg:flex items-center gap-7">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))
             return (
@@ -41,12 +41,12 @@ export default function Navbar() {
           })}
         </div>
 
-        <Link href="/contact" className="hidden md:inline-flex bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
+        <Link href="/contact" className="hidden lg:inline-flex bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
           Contact
         </Link>
 
         <button
-          className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100/50 transition-colors"
+          className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100/50 transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -63,7 +63,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 overflow-hidden"
+            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 overflow-hidden"
           >
             <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => (
