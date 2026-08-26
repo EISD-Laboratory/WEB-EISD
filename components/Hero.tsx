@@ -40,8 +40,8 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-[calc(100vh-64px)] flex items-stretch bg-white">
-      <div className="w-full lg:w-[32%] xl:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-12 lg:pt-0 lg:pb-14 relative z-10">
+    <section className="relative min-h-[calc(100vh-64px-var(--announcement-bar-height))] flex items-stretch bg-white">
+      <div className="w-full lg:w-[32%] xl:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-12 lg:pt-12 lg:pb-14 pb-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
