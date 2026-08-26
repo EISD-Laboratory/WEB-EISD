@@ -11,7 +11,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-stretch pt-16 md:pt-0">
+    <section className="relative min-h-screen flex items-stretch">
       {/* ── Left: Text content ── */}
       <div className="w-full md:w-[32%] lg:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-16 md:py-24 relative z-10">        {/* Badge */}
         <motion.div

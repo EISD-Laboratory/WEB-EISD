@@ -43,7 +43,7 @@ export default function About() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-0">
+      <section className="relative hero-offset">
         {/* Full-width photo background */}
         <div className="relative w-full h-[320px] md:h-[420px] overflow-hidden">
           <Image src="/images/photo-landing.webp" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 translate-x-8" />
