@@ -42,8 +42,8 @@ const achievements: Achievement[] = [
   {
     id: 1,
     members: [{ name: 'Clarissa Tompunu', code: 'CARL' }],
-    competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
-    category: 'AI and IoT Climate Tech Solution',
+    competitionName: 'Youth Development for Climate Tech 2026',
+    category: 'Sustainable Living Lab',
     level: 'International',
     result: '3rd Place',
     image: '/images/achievements/1.webp',
@@ -99,8 +99,8 @@ const achievements: Achievement[] = [
       { name: 'Charles R Barnabas', code: 'BUZZ' },
       { name: 'Bimo Alfarizy', code: 'FRZY' }
     ],
-    competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
-    category: 'AI and IoT Climate Tech Solution',
+    competitionName: 'Youth Development for Climate Tech 2026',
+    category: 'Sustainable Living Lab',
     level: 'International',
     result: 'Finalist',
     image: '/images/achievements/6.webp',
@@ -110,8 +110,8 @@ const achievements: Achievement[] = [
     members: [
       { name: 'Muadzam Haqqani', code: 'MAJA' }
     ],
-    competitionName: 'Youth Development for Climate Tech 2026 by Sustainable Living Lab',
-    category: 'AI and IoT Climate Tech Solution',
+    competitionName: 'Youth Development for Climate Tech 2026',
+    category: 'Sustainable Living Lab',
     level: 'International',
     result: 'Finalist',
     image: '/images/achievements/7.webp',
@@ -126,6 +126,39 @@ const achievements: Achievement[] = [
     level: 'National',
     result: '2nd Place',
     image: '/images/achievements/8.webp',
+  },
+  {
+    id: 9,
+    members: [
+      { name: 'Jian Hazel', code: 'ZELS'},
+    ],
+    competitionName: 'Retail Crisis & Recovery 2026',
+    category: 'Hackathon Python',
+    level: 'National',
+    result: 'Finalist',
+    image: '/images/achievements/9.webp',
+  },
+  {
+    id: 10,
+    members: [
+      { name: 'Azel P Maheswara', code: 'ZEAL'},
+    ],
+    competitionName: 'Youth Development for Climate Tech 2026',
+    category: 'Suistainable Living Lab',
+    level: 'International',
+    result: 'Finalist',
+    image: '/images/achievements/10.webp',
+  },
+  {
+    id: 11,
+    members: [
+      { name: 'Clarissa Tompunu', code: 'CARL' }
+    ],
+    competitionName: 'Lomba UI/UX Design 2025 HMSI',
+    category: 'UI/UX Design',
+    level: 'International',
+    result: '1st Place',
+    image: '/images/achievements/11.webp',
   }
 ]
 

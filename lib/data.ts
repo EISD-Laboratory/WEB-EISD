@@ -71,5 +71,5 @@ export const welcomePopupConfig = {
   ctaLabel: 'Learn More',
   ctaHref: 'https://linktr.ee/eisdcompetition',
   storageKey: 'eisd-welcome-popup-dismissed',
-  activeUntil: '2026-08-30',
+  activeUntil: '2026-09-05',
 };
