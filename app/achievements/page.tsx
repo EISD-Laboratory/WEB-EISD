@@ -152,14 +152,27 @@ const achievements: Achievement[] = [
   {
     id: 11,
     members: [
-      { name: 'Clarissa Tompunu', code: 'CARL' }
+      { name: 'Clarissa Tompunu', code: 'CARL' },
+      { name: 'Naswa Gyna', code: 'SGYN'}
     ],
     competitionName: 'Lomba UI/UX Design 2025 HMSI',
     category: 'UI/UX Design',
-    level: 'International',
+    level: 'National',
     result: '1st Place',
     image: '/images/achievements/11.webp',
-  }
+  },
+    {
+    id: 12,
+    members: [
+      { name: 'Fadia Rizqa', code: 'RYUU' },
+      { name: 'Naswa Gyna', code: 'SGYN'}
+    ],
+    competitionName: 'UI/UX Mini Competition',
+    category: 'UI Digitalk',
+    level: 'National',
+    result: 'Finalist',
+    image: '/images/achievements/12.webp',
+  },
 ]
 
 export default function Achievements() {

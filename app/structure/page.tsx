@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import FadeIn from '@/components/FadeIn'
 import { useState } from 'react'
-import { BookOpen, CalendarDays, Handshake, Microscope, PenLine, Trophy, type LucideIcon } from 'lucide-react'
+import { BookOpen, CalendarDays, Handshake, Microscope, PenLine, Trophy, LaptopMinimal, type LucideIcon } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface MemberData {
@@ -103,6 +103,19 @@ const divisions: Division[] = [
       { name: 'Siti Amany Fakhirah Riby', code: 'SAFR', role: 'member', image: '/images/members/studygroup/AMANY.webp', linkedin: '#' },
     ],
   },
+  {
+    name: 'Practicum',
+    icon: LaptopMinimal,
+    gradient: 'from-blue-500 to-indigo-500',
+    members: [
+      { name: 'Farid Munadhil', code: 'DHIL', role: 'koordinator', image: '/images/members/practicum/FARID.webp', linkedin: '#' },
+      { name: 'Topas Akbar', code: 'TOPS', role: 'member', image: '/images/members/practicum/TOPAS.webp', linkedin: '#' },
+      { name: 'Andrarieza Rizqi Pradana', code: 'EZAA', role: 'member', image: '/images/members/practicum/EZAA.webp', linkedin: '#' },
+      { name: 'Raffi Akbar Firdaus', code: 'AKBR', role: 'member', image: '/images/members/practicum/RAFFI.webp', linkedin: '#' },
+      { name: 'Muhammad Iqbal Abhipraya', code: 'ABHI', role: 'member', image: '/images/members/practicum/ABHI.webp', linkedin: '#' },
+      { name: 'Reza Dwi Saputra', code: 'REZA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
+    ],  
+  }
 ]
 
 function PersonCard({ name, code, image, linkedin, badge, badgeGradient, size = 'sm' }: {
@@ -450,7 +463,7 @@ export default function Structure() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => toast('Coming Soon')}
+                  onClick={() => window.open('https://bit.ly/rekrutmenEISD')}
                   className="bg-white text-primary font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Join Open Recruitment
