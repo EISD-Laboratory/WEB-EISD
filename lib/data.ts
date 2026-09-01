@@ -41,6 +41,12 @@ export const divisions = [
     description: "Creating engaging content for social media and documentation.",
     image: "/images/division/Content.webp",
   },
+  {
+    id: 8,
+    title: "Practicum Division",
+    description: "Managing and coordinating practicum programs within the laboratory.",
+    image: "/images/division/Content.webp"
+  }
 ]
 
 export const navItems = [
@@ -66,10 +72,10 @@ export const announcementConfig = {
 // already dismissed the old one.
 export const welcomePopupConfig = {
   enabled: true,
-  image: '/images/welcome-popup.webp',
+  image: '/images/welcome-popup/oprec.png',
   imageAlt: 'EISD Laboratory welcome banner',
   ctaLabel: 'Learn More',
-  ctaHref: 'https://linktr.ee/eisdcompetition',
+  ctaHref: 'https://bit.ly/rekrutmenEISD',
   storageKey: 'eisd-welcome-popup-dismissed',
-  activeUntil: '2026-09-05',
+  activeUntil: '2026-09-02',
 };
