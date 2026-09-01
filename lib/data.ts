@@ -72,7 +72,7 @@ export const announcementConfig = {
 // already dismissed the old one.
 export const welcomePopupConfig = {
   enabled: true,
-  image: '/images/welcome-popup/oprec.png',
+  image: '/images/welcome-popup/oprec.webp',
   imageAlt: 'EISD Laboratory welcome banner',
   ctaLabel: 'Learn More',
   ctaHref: 'https://bit.ly/rekrutmenEISD',
