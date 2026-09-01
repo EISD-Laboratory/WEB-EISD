@@ -45,7 +45,7 @@ export const divisions = [
     id: 8,
     title: "Practicum Division",
     description: "Managing and coordinating practicum programs within the laboratory.",
-    image: "/images/division/Content.webp"
+    image: "/images/division/Practicum.webp"
   }
 ]
 
