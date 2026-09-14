@@ -59,7 +59,7 @@ export default function About() {
                   <span className="text-xs font-semibold text-primary tracking-wide uppercase">About Us</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
-                  <span className="text-gray-600">Welcome To</span><br />
+                  <span className="text-gray-900">Welcome To</span><br />
                   <span className="text-gray-900">Our </span>
                   <span className="text-primary">Research Laboratory</span>
                 </h1>
@@ -94,7 +94,6 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <FadeIn direction="left" delay={0.2}>
               <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 h-full">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-purple-600 rounded-t-3xl" />
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 text-primary flex items-center justify-center mb-5">
                   <Lightbulb className="w-7 h-7" strokeWidth={1.8} />
                 </div>
@@ -107,7 +106,6 @@ export default function About() {
 
             <FadeIn direction="right" delay={0.3}>
               <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/60 h-full">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-green to-emerald-500 rounded-t-3xl" />
                 <div className="w-14 h-14 rounded-2xl bg-accent-green/10 border border-accent-green/20 text-accent-green flex items-center justify-center mb-5">
                   <Target className="w-7 h-7" strokeWidth={1.8} />
                 </div>

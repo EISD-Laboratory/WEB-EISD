@@ -6,16 +6,6 @@ import { divisions } from '@/lib/data'
 import SectionHeading from './SectionHeading'
 import { useState, useCallback, useEffect } from 'react'
 
-const gradients = [
-  'from-purple-500 via-blue-500 to-cyan-500',
-  'from-pink-500 via-rose-500 to-orange-500',
-  'from-emerald-500 via-teal-500 to-cyan-500',
-  'from-amber-500 via-orange-500 to-red-500',
-  'from-indigo-500 via-purple-500 to-pink-500',
-  'from-cyan-500 via-blue-500 to-indigo-500',
-  'from-rose-500 via-pink-500 to-purple-500',
-]
-
 const mobileVariants = {
   enter: (dir: number) => ({
     x: dir > 0 ? 250 : -250,
@@ -104,7 +94,6 @@ export default function Divisions() {
   }, [navigate])
 
   const activeCard = divisions[activeIndex]
-  const activeGradient = gradients[activeIndex % gradients.length]
 
   return (
     <section className="py-12 px-4 relative overflow-x-hidden">
@@ -140,7 +129,6 @@ export default function Divisions() {
             {divisions.map((card, index) => {
               const position = getDesktopPosition(index)
               const isCenter = index === activeIndex
-              const gradientClass = gradients[index % gradients.length]
 
               return (
                 <motion.div
@@ -156,17 +144,11 @@ export default function Divisions() {
                   }}
                   transition={{ type: "spring", stiffness: 120, damping: 25, mass: 0.8 }}
                 >
-                  {isCenter && (
-                    <div className={`absolute -inset-2 bg-gradient-to-br ${gradientClass} rounded-3xl opacity-20 blur-xl`} />
-                  )}
-
                   <div className={`relative rounded-2xl p-5 border transition-all duration-300 min-h-[320px] flex flex-col overflow-hidden ${
                     isCenter
                       ? 'bg-white shadow-xl border-primary/20 ring-1 ring-primary/10'
                       : 'bg-white/60 shadow-sm border-white/80'
                   }`}>
-                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradientClass}`} />
-
                     <h3 className={`text-lg font-bold mb-2 transition-colors duration-300 ${
                       isCenter ? 'text-primary' : 'text-gray-900'
                     }`}>{card.title}</h3>
@@ -213,11 +195,7 @@ export default function Divisions() {
                 }}
                 className="w-full cursor-grab active:cursor-grabbing"
               >
-                <div className={`absolute -inset-2 bg-gradient-to-br ${activeGradient} rounded-2xl opacity-15 blur-lg pointer-events-none`} />
-
                 <div className="relative bg-white rounded-2xl shadow-lg border border-primary/15 ring-1 ring-primary/5 overflow-hidden flex flex-col h-[320px]">
-                  <div className={`h-1.5 w-full shrink-0 bg-gradient-to-r ${activeGradient}`} />
-
                   <div className="p-5 flex flex-col flex-grow">
                     <h3 className="text-base font-bold text-primary mb-2">
                       {activeCard.title}

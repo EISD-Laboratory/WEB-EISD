@@ -213,7 +213,7 @@ export default function Achievements() {
               <span className="text-primary">Achievements</span>
             </h1>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              A showcase of EISD Laboratory members&apos; achievements across
+              A showcase of EISD Laboratory members achievements across
               national and international competitions.
             </p>
           </FadeIn>

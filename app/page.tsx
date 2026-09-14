@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 import FocusArea from '@/components/FocusArea'
 import Divisions from '@/components/Divisions'
+import SelectionCheck from '@/components/SelectionCheck'
 import ArticlesPreview from '@/components/ArticlesPreview'
 import FadeIn from '@/components/FadeIn'
 
@@ -15,6 +16,10 @@ export default function Home() {
       
       <FadeIn direction="up" delay={0.4}>
         <Divisions />
+      </FadeIn>
+
+      <FadeIn direction="up" delay={0.35}>
+        <SelectionCheck />
       </FadeIn>
 
       <FadeIn direction="up" delay={0.3}>

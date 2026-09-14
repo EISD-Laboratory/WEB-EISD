@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 const stats = [
   { value: '30+', label: 'Members' },
-  { value: '7', label: 'Divisions' },
+  { value: '8', label: 'Divisions' },
   { value: '4', label: 'Focus Areas' },
 ]
 
@@ -107,6 +107,12 @@ export default function Hero() {
             className="bg-white border border-gray-200 hover:border-primary/30 hover:text-primary text-gray-600 px-7 py-3 rounded-full text-sm font-semibold transition-all duration-200"
           >
             Our Team
+          </a>
+          <a
+            href="/#selection-check"
+            className="bg-white border border-gray-200 hover:border-primary/30 hover:text-primary text-gray-600 px-7 py-3 rounded-full text-sm font-semibold transition-all duration-200"
+          >
+            Check Selection Result
           </a>
         </motion.div>
       </div>
