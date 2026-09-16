@@ -113,7 +113,7 @@ const divisions: Division[] = [
       { name: 'Andrarieza Rizqi Pradana', code: 'EZAA', role: 'member', image: '/images/members/practicum/EZAA.webp', linkedin: '#' },
       { name: 'Raffi Akbar Firdaus', code: 'AKBR', role: 'member', image: '/images/members/practicum/RAFFI.webp', linkedin: '#' },
       { name: 'Muhammad Iqbal Abhipraya', code: 'ABHI', role: 'member', image: '/images/members/practicum/ABHI.webp', linkedin: '#' },
-      { name: 'Reza Dwi Saputra', code: 'REZA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
+      { name: 'Reza Dwi Saputra', code: 'REDA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
     ],  
   }
 ]
