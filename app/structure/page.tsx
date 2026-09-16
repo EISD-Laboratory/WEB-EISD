@@ -79,6 +79,19 @@ const divisions: Division[] = [
     ],
   },
   {
+    name: 'Practicum',
+    icon: LaptopMinimal,
+    gradient: 'from-blue-500 to-indigo-500',
+    members: [
+      { name: 'Farid Munadhil', code: 'DHIL', role: 'koordinator', image: '/images/members/practicum/FARID.webp', linkedin: '#' },
+      { name: 'Topas Akbar', code: 'TOPS', role: 'member', image: '/images/members/practicum/TOPAS.webp', linkedin: '#' },
+      { name: 'Andrarieza Rizqi Pradana', code: 'EZAA', role: 'member', image: '/images/members/practicum/EZAA.webp', linkedin: '#' },
+      { name: 'Raffi Akbar Firdaus', code: 'AKBR', role: 'member', image: '/images/members/practicum/RAFFI.webp', linkedin: '#' },
+      { name: 'Muhammad Iqbal Abhipraya', code: 'ABHI', role: 'member', image: '/images/members/practicum/ABHI.webp', linkedin: '#' },
+      { name: 'Reza Dwi Saputra', code: 'REZA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
+    ],
+  },
+  {
     name: 'Research & Community',
     icon: Microscope,
     gradient: 'from-cyan-500 to-blue-500',
@@ -463,7 +476,7 @@ export default function Structure() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => window.open('https://bit.ly/rekrutmenEISD')}
+                  onClick={() => toast('Registration is currently closed. Stay tuned for the next recruitment!', { style: { textAlign: 'center' } })}
                   className="bg-white text-primary font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Join Open Recruitment

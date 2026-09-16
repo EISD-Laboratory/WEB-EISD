@@ -41,7 +41,7 @@ export default function Navbar() {
           })}
         </div>
 
-        <Link href="/contact" className="hidden lg:inline-flex bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
+        <Link href="/contact" className="hidden lg:inline-flex bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
           Contact
         </Link>
 
@@ -50,9 +50,9 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full" animate={mobileOpen ? { rotate: 45, y: 3 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full" animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
           <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} />
-          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
         </button>
       </div>
 
@@ -63,7 +63,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 overflow-hidden"
+            className="lg:hidden border-t border-white/40 overflow-hidden"
           >
             <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => (
@@ -72,7 +72,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-2">
-                <Link href="/contact" className="block text-center bg-primary text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-primary-dark transition-colors">
+                <Link href="/contact" className="block text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
                   Contact
                 </Link>
               </div>

@@ -7,21 +7,21 @@ export const divisions = [
   },
   {
     id: 2,
-    title: "Enabler Division",
-    description: "Managing human resources, internal development, and member coordination to support all laboratory divisions.",
-    image: "/images/division/Enabler.webp",
-  },
-  {
-    id: 3,
     title: "Competition Division",
     description: "Preparing and competing in national and international tech competitions.",
     image: "/images/division/Competition.webp",
   },
   {
+    id: 3,
+    title: "Content Division",
+    description: "Creating engaging content for social media and documentation.",
+    image: "/images/division/Content.webp",
+  },
+  {
     id: 4,
-    title: "Research & Community Division",
-    description: "Conducting research projects and community outreach programs.",
-    image: "/images/division/RNC.webp",
+    title: "Enabler Division",
+    description: "Managing human resources, internal development, and member coordination to support all laboratory divisions.",
+    image: "/images/division/Enabler.webp",
   },
   {
     id: 5,
@@ -31,22 +31,22 @@ export const divisions = [
   },
   {
     id: 6,
+    title: "Practicum Division",
+    description: "Managing and coordinating practicum programs within the laboratory.",
+    image: "/images/division/Practicum.webp"
+  },
+  {
+    id: 7,
+    title: "Research & Community Division",
+    description: "Conducting research projects and community outreach programs.",
+    image: "/images/division/RNC.webp",
+  },
+  {
+    id: 8,
     title: "Study Group Division",
     description: "Facilitating peer learning and knowledge sharing sessions.",
     image: "/images/division/StudyGroup.webp",
   },
-  {
-    id: 7,
-    title: "Content Division",
-    description: "Creating engaging content for social media and documentation.",
-    image: "/images/division/Content.webp",
-  },
-  {
-    id: 8,
-    title: "Practicum Division",
-    description: "Managing and coordinating practicum programs within the laboratory.",
-    image: "/images/division/Practicum.webp"
-  }
 ]
 
 export const navItems = [
@@ -72,10 +72,10 @@ export const announcementConfig = {
 // already dismissed the old one.
 export const welcomePopupConfig = {
   enabled: true,
-  image: '/images/welcome-popup/oprec.webp',
+  image: '/images/welcome-popup/selection-result.webp',
   imageAlt: 'EISD Laboratory welcome banner',
-  ctaLabel: 'Learn More',
-  ctaHref: 'https://bit.ly/rekrutmenEISD',
+  ctaLabel: 'Check Selection Result',
+  ctaHref: '/#selection-check',
   storageKey: 'eisd-welcome-popup-dismissed',
-  activeUntil: '2026-09-02',
+  activeUntil: '2026-09-21',
 };
