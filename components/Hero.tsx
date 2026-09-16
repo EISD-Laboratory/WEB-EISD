@@ -108,12 +108,15 @@ export default function Hero() {
           >
             Our Team
           </a>
-          <a
-            href="/#selection-check"
+          <button
+            type="button"
+            onClick={() =>
+              document.getElementById('selection-check')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
             className="bg-white border border-gray-200 hover:border-primary/30 hover:text-primary text-gray-600 px-7 py-3 rounded-full text-sm font-semibold transition-all duration-200"
           >
             Check Selection Result
-          </a>
+          </button>
         </motion.div>
       </div>
 

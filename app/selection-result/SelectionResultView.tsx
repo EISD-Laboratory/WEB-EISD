@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { SearchX, ArrowLeft, MessageCircle } from 'lucide-react'
@@ -38,6 +38,19 @@ function JoinGroupButton({ link }: { link: string }) {
 export default function SelectionResultView() {
   const [checkedStorage, setCheckedStorage] = useState(false)
   const [nim, setNim] = useState('')
+
+  // `html { scroll-behavior: smooth }` (globals.css) is meant for the Hero's
+  // in-page jump to #selection-check, but it also hijacks Next's router
+  // scroll-to-top on navigation here, so the page can visibly stop mid-scroll
+  // while this view's content height is still settling. Force an instant jump
+  // to the top on mount, bypassing the CSS smooth-scroll for just this landing.
+  useLayoutEffect(() => {
+    const root = document.documentElement
+    const previousScrollBehavior = root.style.scrollBehavior
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    root.style.scrollBehavior = previousScrollBehavior
+  }, [])
 
   // Read the NIM from sessionStorage instead of the URL, so a shared/bookmarked
   // /selection-result link can't leak someone else's selection result.
@@ -81,15 +94,24 @@ export default function SelectionResultView() {
                   <span className="text-gray-400">({result.nim})</span>,
                 </p>
                 <p className="mt-2 text-base sm:text-lg text-gray-600 leading-relaxed">
-                  We are pleased to inform you that you have been selected as a Lab Practicum
-                  Assistant for{' '}
-                  {result.courses.map((course, i) => (
-                    <span key={course}>
-                      {i > 0 && (i === result.courses.length - 1 ? ' and ' : ', ')}
-                      <span className="font-semibold text-primary">{course}</span>
-                    </span>
-                  ))}
-                  .
+                  {result.courses.length > 0 ? (
+                    <>
+                      We are pleased to inform you that you have been selected as a Lab
+                      Practicum Assistant for{' '}
+                      {result.courses.map((course, i) => (
+                        <span key={course}>
+                          {i > 0 && (i === result.courses.length - 1 ? ' and ' : ', ')}
+                          <span className="font-semibold text-primary">{course}</span>
+                        </span>
+                      ))}
+                      .
+                    </>
+                  ) : (
+                    <>
+                      We are pleased to inform you that you have been selected as a{' '}
+                      <span className="font-semibold text-primary">Lab Coordinator</span>.
+                    </>
+                  )}
                 </p>
 
                 <div className="mt-6 flex justify-center">

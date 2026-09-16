@@ -417,6 +417,7 @@
 /* Smooth Scroll */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   --announcement-bar-height: 0px;
 }
 
