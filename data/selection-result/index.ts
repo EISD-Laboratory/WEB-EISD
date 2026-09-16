@@ -2,11 +2,10 @@ import { NotPassedParticipant, PassedParticipant } from './types'
 
 // Lab assistant recruitment selection results for CAAS EISD Ganjil 2026/2027,
 // sourced from REKAPITULASI SELEKSI CAAS EISD GANJIL 2026_2027.xlsx (STATUS ASPRAK
-// sheet). A participant may pass as Practicum Assistant for one or two courses
-// (`courses` is length 1 or 2), or as a general Lab Assistant not tied to any
-// course (`courses: []`). There is a single WhatsApp group shared by every
-// passed participant regardless of role/courses - see ALL_PASSED_WHATSAPP_LINK
-// below.
+// sheet). A participant may pass for one or two courses (`courses` is length 1 or
+// 2). There is a single WhatsApp group shared by every passed participant
+// regardless of which/how many courses they were assigned - see
+// ALL_PASSED_WHATSAPP_LINK below.
 export const PASSED_PARTICIPANTS: PassedParticipant[] = [
   {
     nim: '102022300015',
@@ -283,11 +282,6 @@ export const PASSED_PARTICIPANTS: PassedParticipant[] = [
     name: 'Dinar Muhammad Akbar',
     courses: ['PPL'],
   },
-  {
-    nim: '102022300333',
-    name: 'Fadia Rizqa Yunanto',
-    courses: [],
-  },
 ]
 
 export const NOT_PASSED_PARTICIPANTS: NotPassedParticipant[] = [
@@ -309,6 +303,6 @@ export const NOT_PASSED_PARTICIPANTS: NotPassedParticipant[] = [
 
 // Every passed participant is directed to this single group, no matter how
 // many courses they were assigned as lab assistant for.
-export const ALL_PASSED_WHATSAPP_LINK = 'https://chat.whatsapp.com/GerKWUosxlY5ctS6qENBBp?s=hd&p=i&mlu=0&ilr=4'
+export const ALL_PASSED_WHATSAPP_LINK = 'https://chat.whatsapp.com/CcjFGCVoVXgBfG246BfkYp?mode=gi_t'
 
 export type { NotPassedParticipant, PassedParticipant } from './types'

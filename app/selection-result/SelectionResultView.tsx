@@ -94,24 +94,15 @@ export default function SelectionResultView() {
                   <span className="text-gray-400">({result.nim})</span>,
                 </p>
                 <p className="mt-2 text-base sm:text-lg text-gray-600 leading-relaxed">
-                  {result.courses.length > 0 ? (
-                    <>
-                      We are pleased to inform you that you have been selected as a Lab
-                      Practicum Assistant for{' '}
-                      {result.courses.map((course, i) => (
-                        <span key={course}>
-                          {i > 0 && (i === result.courses.length - 1 ? ' and ' : ', ')}
-                          <span className="font-semibold text-primary">{course}</span>
-                        </span>
-                      ))}
-                      .
-                    </>
-                  ) : (
-                    <>
-                      We are pleased to inform you that you have been selected as a{' '}
-                      <span className="font-semibold text-primary">Lab Coordinator</span>.
-                    </>
-                  )}
+                  We are pleased to inform you that you have been selected as a Lab Practicum
+                  Assistant and Lab Assistant for{' '}
+                  {result.courses.map((course, i) => (
+                    <span key={course}>
+                      {i > 0 && (i === result.courses.length - 1 ? ' and ' : ', ')}
+                      <span className="font-semibold text-primary">{course}</span>
+                    </span>
+                  ))}
+                  .
                 </p>
 
                 <div className="mt-6 flex justify-center">

@@ -1,8 +1,7 @@
 export interface PassedParticipant {
   nim: string
   name: string
-  // One or two courses => selected as Practicum Assistant for those courses.
-  // Empty array => selected as a general Lab Assistant, not tied to a course.
+  // A participant can be selected as lab assistant for one or two courses.
   courses: string[]
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ExternalLink } from 'lucide-react'
+import { X } from 'lucide-react'
 import { welcomePopupConfig } from '@/lib/data'
 
 export default function WelcomePopup() {
@@ -36,12 +36,15 @@ export default function WelcomePopup() {
 
   useEffect(() => {
     if (!visible) return
+    const root = document.documentElement
+    root.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') handleDismiss()
     }
     window.addEventListener('keydown', onKeyDown)
     return () => {
+      root.style.overflow = ''
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKeyDown)
     }
@@ -64,7 +67,9 @@ export default function WelcomePopup() {
           <motion.div
             layout
             className={`relative rounded-3xl overflow-hidden shadow-2xl bg-gray-900 aspect-[4/5] ${
-              zoomed ? 'w-[min(95vw,52rem,88vh)]' : 'w-[min(90vw,28rem,68vh)]'
+              zoomed
+                ? 'w-[min(95vw,52rem,calc((100vh_-_2rem)/1.25))]'
+                : 'w-[min(90vw,28rem,calc((100vh_-_2rem)/1.25))]'
             }`}
             initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -98,12 +103,10 @@ export default function WelcomePopup() {
               <div className="absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/85 via-black/40 to-transparent p-5 pt-16 sm:p-6 sm:pt-20">
                 <Link
                   href={welcomePopupConfig.ctaHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={handleDismiss}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-white shadow-lg transition-colors duration-300 hover:bg-primary-dark"
                 >
                   {welcomePopupConfig.ctaLabel}
-                  <ExternalLink className="w-4 h-4" strokeWidth={1.8} />
                 </Link>
               </div>
             )}
