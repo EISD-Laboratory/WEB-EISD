@@ -69,7 +69,7 @@ export default function SelectionCheck() {
                       setNim(e.target.value.replace(/\D/g, ''))
                       if (error) setError(null)
                     }}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-colors ${
                       error
                         ? 'border-red-300 focus:ring-red-200'
                         : 'border-gray-200 focus:ring-primary/20'
