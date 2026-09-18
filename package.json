@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build:selection-data": "node scripts/build-selection-blobs.mjs",
+    "prebuild": "npm run build:selection-data",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."
