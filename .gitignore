@@ -43,6 +43,9 @@ DESIGN.md
 .claude
 /test-results
 
+/data/selection-result/index.ts
+/data/selection-result/roster.json
+
 /public/selection-data.json
 
 docs/plan-selection-result-static-encrypted.md

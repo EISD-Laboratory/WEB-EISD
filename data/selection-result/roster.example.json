@@ -1,0 +1,6 @@
+{
+  "deadline": "2026-09-21T23:59:59+07:00",
+  "wa": "https://chat.whatsapp.com/EXAMPLE",
+  "passed": [{ "nim": "100000000001", "name": "Contoh Lulus", "courses": ["PPL"] }],
+  "failed": [{ "nim": "100000000002", "name": "Contoh Tidak Lulus" }]
+}
