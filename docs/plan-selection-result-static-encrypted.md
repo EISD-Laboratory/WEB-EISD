@@ -83,14 +83,18 @@ inside passed payloads; no `allPassedWhatsappLink` client export remains.
   Note: `SelectionCheck.tsx` / `SelectionResultView.tsx` still import the removed exports —
   rewired in Task C.
 
-### C. Rewire UI
+### C. Rewire UI — DONE
 
-- [ ] `lib/selectionSession.ts`: add name storage key alongside `SELECTION_NIM_STORAGE_KEY`.
-- [ ] `components/SelectionCheck.tsx`: add Full Name field, loading state, async lookup; store
+- [x] `lib/selectionSession.ts`: add name storage key alongside `SELECTION_NIM_STORAGE_KEY`.
+- [x] `components/SelectionCheck.tsx`: add Full Name field, loading state, async lookup; store
   NIM+Name in sessionStorage only on success; generic error otherwise.
-- [ ] `app/selection-result/SelectionResultView.tsx`: drop dataset/WA imports; re-fetch + decrypt
+- [x] `app/selection-result/SelectionResultView.tsx`: drop dataset/WA imports; re-fetch + decrypt
   from sessionStorage credentials; render loading / no-params / not-found / passed (link from
   decrypted `wa`) / failed.
+- [x] Verify: `tsc --noEmit` exit 0, `eslint .` clean, `next build` (static export) succeeds;
+  `out/_next` chunks contain no selection NIMs/names/WA link (only hit for "Clarissa Tompunu"
+  is a pre-existing unrelated achievements dataset); `out/selection-data.json` (24KB) served
+  statically with zero plaintext.
 
 ### D. Publish + verify
 
