@@ -11,7 +11,7 @@ import {
   SELECTION_GENERIC_ERROR,
   type SelectionResult,
 } from '@/lib/selectionCrypto'
-import { SELECTION_NAME_STORAGE_KEY, SELECTION_NIM_STORAGE_KEY } from '@/lib/selectionSession'
+import { SELECTION_NIM_STORAGE_KEY } from '@/lib/selectionSession'
 
 function JoinGroupButton({ link }: { link: string }) {
   const className = "inline-flex items-center gap-3 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-base sm:text-lg pl-2 pr-6 py-2 shadow-card transition-colors duration-300"
@@ -61,23 +61,21 @@ export default function SelectionResultView() {
     root.style.scrollBehavior = previousScrollBehavior
   }, [])
 
-  // Read the credentials from sessionStorage instead of the URL, so a
+  // Read the NIM from sessionStorage instead of the URL, so a
   // shared/bookmarked /selection-result link can't leak someone else's
   // selection result. sessionStorage doesn't exist during the static build,
   // so this can only run post-mount. The record is decrypted locally from
-  // the static-encrypted blob — unknown NIM and wrong name both land on
-  // 'not-found' with the same generic message (no oracle).
+  // the static-encrypted blob — unknown NIMs land on 'not-found'.
   useEffect(() => {
     let cancelled = false
     const nim = sessionStorage.getItem(SELECTION_NIM_STORAGE_KEY)?.trim() ?? ''
-    const name = sessionStorage.getItem(SELECTION_NAME_STORAGE_KEY)?.trim() ?? ''
-    if (!nim || !name) {
+    if (!nim) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setView({ status: 'no-params' })
       return
     }
     setView({ status: 'loading' })
-    lookupSelectionResult(nim, name).then(
+    lookupSelectionResult(nim).then(
       (result) => {
         if (!cancelled) setView({ status: 'found', result })
       },
@@ -110,7 +108,7 @@ export default function SelectionResultView() {
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   {view.status === 'not-found'
                     ? SELECTION_GENERIC_ERROR
-                    : 'No search parameters provided. Please enter your NIM and full name from the home page and try again.'}
+                    : 'No search parameters provided. Please enter your NIM from the home page and try again.'}
                 </p>
               </>
             ) : result && result.passed ? (

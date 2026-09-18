@@ -4,13 +4,17 @@
 // by client code after this change). Output: public/selection-data.json which
 // contains ONLY { sha256(nim) -> { salt, iv, data } } with AES-GCM ciphertext.
 //
-// Key derivation (MUST match lib/selectionCrypto.ts exactly):
+// Key derivation (MUST match lib/selectionCrypto.ts exactly). NIM-only:
 //   nimNorm  = nim.trim(), digits only
-//   nameNorm = name.trim().toLowerCase(), inner whitespace collapsed to 1 space
-//   password = `${nimNorm}|${nameNorm}` (UTF-8)
+//   password = nimNorm (UTF-8)
 //   key = PBKDF2-SHA256(password, salt[16B], 100_000 iterations, 256-bit)
 //   plaintext = JSON.stringify({ v:1, nim, name, passed, courses?, wa? })
 //   ciphertext = AES-GCM(key, iv[12B], plaintext)
+//
+// NOTE: NIM-only means anyone can brute-force the sequential NIM space
+// offline (one blob download + PBKDF2 per guess). This stops bulk
+// `curl | grep` dumps, not determined scraping. Bump ITERATIONS to raise
+// the per-guess cost (at the price of slower legitimate lookups).
 //
 // Lookup id: id = SHA256-hex(nimNorm UTF-8).
 //
@@ -28,10 +32,6 @@ const ITERATIONS = 100_000
 
 function normalizeNim(nim) {
   return nim.trim().replace(/\D/g, '')
-}
-
-function normalizeName(name) {
-  return name.trim().toLowerCase().replace(/\s+/g, ' ')
 }
 
 function sha256Hex(text) {
@@ -74,9 +74,8 @@ function parseSource(text) {
 
 function encryptRecord({ nim, name, passed, courses, wa }) {
   const nimNorm = normalizeNim(nim)
-  const nameNorm = normalizeName(name)
-  if (!nimNorm || !nameNorm) throw new Error(`Bad record: ${nim} / ${name}`)
-  const password = `${nimNorm}|${nameNorm}`
+  if (!nimNorm || !name.trim()) throw new Error(`Bad record: ${nim} / ${name}`)
+  const password = nimNorm
   const salt = randomBytes(16)
   const iv = randomBytes(12)
   const key = pbkdf2Sync(password, salt, ITERATIONS, 32, 'sha256')

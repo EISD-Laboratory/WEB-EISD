@@ -2,23 +2,22 @@
 //
 // Public file `selection-data.json` (see scripts/build-selection-blobs.mjs)
 // contains ONLY { sha256(nim) -> { salt, iv, data } }. Names, courses and the
-// WhatsApp link exist solely as AES-GCM ciphertext and can only be decrypted
-// with the exact NIM + Full Name combination.
+// WhatsApp link exist solely as AES-GCM ciphertext, decryptable with the NIM.
 //
 // Normalization MUST match the build script exactly.
+//
+// NOTE: NIM-only lookup. The NIM space is sequential, so a determined
+// attacker can brute-force records offline (one blob download + PBKDF2 per
+// guess). This stops bulk `curl | grep` dumps, not targeted scraping.
 export type SelectionResult =
   | { nim: string; name: string; passed: true; courses: string[]; wa: string }
   | { nim: string; name: string; passed: false }
 
 export const SELECTION_GENERIC_ERROR =
-  'No selection result found for this NIM / Name combination. Please double-check both and try again.'
+  'No selection result found for this NIM. Please double-check your NIM and try again.'
 
 export function normalizeNim(nim: string): string {
   return nim.trim().replace(/\D/g, '')
-}
-
-export function normalizeName(name: string): string {
-  return name.trim().toLowerCase().replace(/\s+/g, ' ')
 }
 
 function hex(buffer: ArrayBuffer): string {
@@ -61,14 +60,8 @@ function loadBlobs(): Promise<BlobFile> {
   return cached
 }
 
-async function decryptEntry(
-  entry: BlobEntry,
-  iterations: number,
-  nimNorm: string,
-  nameNorm: string,
-): Promise<SelectionResult> {
-  const password = `${nimNorm}|${nameNorm}`
-  const baseKey = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, [
+async function decryptEntry(entry: BlobEntry, iterations: number, nimNorm: string): Promise<SelectionResult> {
+  const baseKey = await crypto.subtle.importKey('raw', new TextEncoder().encode(nimNorm), 'PBKDF2', false, [
     'deriveKey',
   ])
   const key = await crypto.subtle.deriveKey(
@@ -98,11 +91,10 @@ async function decryptEntry(
   throw new Error('bad payload')
 }
 
-/** Fetch the static blob, locate by hashed NIM, decrypt with NIM+Name. Throws generic error on any miss. */
-export async function lookupSelectionResult(nimInput: string, nameInput: string): Promise<SelectionResult> {
+/** Fetch the static blob, locate by hashed NIM, decrypt with the NIM. Throws generic error on any miss. */
+export async function lookupSelectionResult(nimInput: string): Promise<SelectionResult> {
   const nimNorm = normalizeNim(nimInput)
-  const nameNorm = normalizeName(nameInput)
-  if (!nimNorm || !nameNorm) throw new Error(SELECTION_GENERIC_ERROR)
+  if (!nimNorm) throw new Error(SELECTION_GENERIC_ERROR)
   let blobs: BlobFile
   try {
     blobs = await loadBlobs()
@@ -113,9 +105,8 @@ export async function lookupSelectionResult(nimInput: string, nameInput: string)
   const entry = blobs.records[id]
   if (!entry) throw new Error(SELECTION_GENERIC_ERROR)
   try {
-    return await decryptEntry(entry, blobs.iterations, nimNorm, nameNorm)
+    return await decryptEntry(entry, blobs.iterations, nimNorm)
   } catch {
-    // Missing id and wrong name produce the SAME message: no oracle.
     throw new Error(SELECTION_GENERIC_ERROR)
   }
 }
