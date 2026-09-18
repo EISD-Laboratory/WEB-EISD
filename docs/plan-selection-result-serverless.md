@@ -90,19 +90,25 @@ needed (lookup <100ms, Hobby 10s limit is plenty). Org repo works the same once 
   `git grep "chat.whatsapp.com/CcjFGCVoVXgBfG246BfkYp\|102022300015"` → no hit
   outside gitignored files.
 
-### B. API route (server-only lookup) — TODO
+### B. API route (server-only lookup) — DONE
 
-- [ ] Create `app/api/selection/route.ts` (`runtime='nodejs'`, `POST` only, `no-store`):
-  parse `{nim}`, `normalizeNim` digits-only (byte-identical to old client),
-  expiry check (`SELECTION_DEADLINE_ISO=2026-09-21T23:59:59+07:00`) → `410`,
-  in-memory IP LRU (5/min) → `429`,
+- [x] Created `app/api/selection/route.ts` (`runtime='nodejs'`, `POST` only, `no-store`):
+  parses `{nim}`, `normalizeNim` digits-only (byte-identical to old client),
+  expiry check (`SELECTION_DEADLINE_ISO`, default `2026-09-21T23:59:59+07:00`) → `410`,
+  in-memory IP LRU (5/min) → `429` (+ `Retry-After`),
   `Map` lookup → `200` single record or generic `404 SELECTION_GENERIC_ERROR`.
-- [ ] Load roster: `process.env.SELECTION_ROSTER_B64` (prod, gunzip+parse at cold start,
-  cache in module scope) with dev fallback to gitignored `roster.json` only when env missing.
-- [ ] Add `import 'server-only'`; ensure no `@/data/selection-result` import from client —
-  verify by `grep -r "selection-result" app components lib --include="*.tsx" --include="*.ts"`.
-- [ ] Verify: `curl POST localhost:3000/api/selection` empty body → `400`; bad NIM → generic `404`;
-  6th req/min → `429`; past deadline → `410`.
+  Non-POST → `405` automatically. Note: throttle runs before body parse so malformed
+  floods also burn quota (superset of plan order).
+- [x] Load roster via new `lib/selectionRoster.ts` (`import 'server-only'`):
+  `SELECTION_ROSTER_B64` (prod, gunzip+parse at cold start, cached in module scope)
+  with dev fallback to gitignored `roster.json` only when env missing.
+  Added `server-only` dependency. Env override wins for deadline.
+- [x] No `@/data/selection-result` / `selectionRoster` import from client — only
+  `lib/selectionRoster.ts` (comments) + `app/api/selection/route.ts` reference it.
+- [x] Verified on `next dev`: empty body → `400`; unknown NIM → generic `404`;
+  valid NIM → `200` single record (`{nim,name,passed,courses,wa}`, `no-store`);
+  `GET` → `405`; 6th POST/min/IP → `429`; past `SELECTION_DEADLINE_ISO` → `410`;
+  env-only mode (roster file removed) → `200`. `tsc --noEmit` 0, `eslint` clean.
 
 ### C. Rewire UI — TODO
 
