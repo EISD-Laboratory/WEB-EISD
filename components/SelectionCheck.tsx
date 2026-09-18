@@ -5,32 +5,44 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search, IdCard } from 'lucide-react'
 import SectionHeading from './SectionHeading'
-import { findSelectionResult } from '@/lib/selectionResults'
+import { lookupSelectionResult } from '@/lib/selectionCrypto'
 import { SELECTION_NIM_STORAGE_KEY } from '@/lib/selectionSession'
 
 export default function SelectionCheck() {
   const router = useRouter()
   const [nim, setNim] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (loading) return
 
-    const trimmed = nim.trim()
-    if (!trimmed) {
+    const trimmedNim = nim.trim()
+    if (!trimmedNim) {
       setError('NIM cannot be empty')
       return
     }
 
-    if (!findSelectionResult(trimmed)) {
-      setError(`No selection result found for NIM "${trimmed}"`)
-      return
-    }
-
     setError(null)
-    sessionStorage.setItem(SELECTION_NIM_STORAGE_KEY, trimmed)
-    router.push('/selection-result')
+    setLoading(true)
+    try {
+      // Decrypts the static-encrypted blob locally; throws a generic error
+      // for unknown NIMs.
+      await lookupSelectionResult(trimmedNim)
+      sessionStorage.setItem(SELECTION_NIM_STORAGE_KEY, trimmedNim)
+      router.push('/selection-result')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
+
+  const inputClass = (hasError: boolean) =>
+    `w-full pl-10 pr-4 py-3 rounded-xl border text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+      hasError ? 'border-red-300 focus:ring-red-200' : 'border-gray-200 focus:ring-primary/20'
+    }`
 
   return (
     <section id="selection-check" className="py-12 px-4 relative overflow-hidden scroll-mt-24">
@@ -65,15 +77,12 @@ export default function SelectionCheck() {
                     autoComplete="off"
                     placeholder="e.g. 1301223456"
                     value={nim}
+                    disabled={loading}
                     onChange={(e) => {
                       setNim(e.target.value.replace(/\D/g, ''))
                       if (error) setError(null)
                     }}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-colors ${
-                      error
-                        ? 'border-red-300 focus:ring-red-200'
-                        : 'border-gray-200 focus:ring-primary/20'
-                    }`}
+                    className={inputClass(!!error)}
                     aria-invalid={!!error}
                     aria-describedby={error ? 'nim-error' : undefined}
                   />
@@ -81,10 +90,11 @@ export default function SelectionCheck() {
 
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-primary-dark transition-colors duration-300 shrink-0"
+                  disabled={loading}
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-primary-dark transition-colors duration-300 shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Search strokeWidth={1.8} className="w-4 h-4" />
-                  Search
+                  {loading ? 'Searching...' : 'Search'}
                 </button>
               </div>
 

@@ -6,7 +6,11 @@ import toast from 'react-hot-toast'
 import { SearchX, ArrowLeft, MessageCircle } from 'lucide-react'
 import FadeIn from '@/components/FadeIn'
 import Envelope from '@/components/Envelope'
-import { findSelectionResult, allPassedWhatsappLink } from '@/lib/selectionResults'
+import {
+  lookupSelectionResult,
+  SELECTION_GENERIC_ERROR,
+  type SelectionResult,
+} from '@/lib/selectionCrypto'
 import { SELECTION_NIM_STORAGE_KEY } from '@/lib/selectionSession'
 
 function JoinGroupButton({ link }: { link: string }) {
@@ -17,7 +21,6 @@ function JoinGroupButton({ link }: { link: string }) {
     </span>
   )
 
-  // No real invite link wired up yet — show a "Coming Soon" toast instead of a dead link.
   if (!link || link === '#') {
     return (
       <button type="button" onClick={() => toast('Coming Soon')} className={className}>
@@ -35,9 +38,15 @@ function JoinGroupButton({ link }: { link: string }) {
   )
 }
 
+type ViewState =
+  | { status: 'checking' }
+  | { status: 'no-params' }
+  | { status: 'loading' }
+  | { status: 'not-found' }
+  | { status: 'found'; result: SelectionResult }
+
 export default function SelectionResultView() {
-  const [checkedStorage, setCheckedStorage] = useState(false)
-  const [nim, setNim] = useState('')
+  const [view, setView] = useState<ViewState>({ status: 'checking' })
 
   // `html { scroll-behavior: smooth }` (globals.css) is meant for the Hero's
   // in-page jump to #selection-check, but it also hijacks Next's router
@@ -52,40 +61,57 @@ export default function SelectionResultView() {
     root.style.scrollBehavior = previousScrollBehavior
   }, [])
 
-  // Read the NIM from sessionStorage instead of the URL, so a shared/bookmarked
-  // /selection-result link can't leak someone else's selection result.
-  // sessionStorage doesn't exist during the static build, so this can only run post-mount.
+  // Read the NIM from sessionStorage instead of the URL, so a
+  // shared/bookmarked /selection-result link can't leak someone else's
+  // selection result. sessionStorage doesn't exist during the static build,
+  // so this can only run post-mount. The record is decrypted locally from
+  // the static-encrypted blob — unknown NIMs land on 'not-found'.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setNim(sessionStorage.getItem(SELECTION_NIM_STORAGE_KEY)?.trim() ?? '')
-    setCheckedStorage(true)
+    let cancelled = false
+    const nim = sessionStorage.getItem(SELECTION_NIM_STORAGE_KEY)?.trim() ?? ''
+    if (!nim) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setView({ status: 'no-params' })
+      return
+    }
+    setView({ status: 'loading' })
+    lookupSelectionResult(nim).then(
+      (result) => {
+        if (!cancelled) setView({ status: 'found', result })
+      },
+      () => {
+        if (!cancelled) setView({ status: 'not-found' })
+      },
+    )
+    return () => {
+      cancelled = true
+    }
   }, [])
 
-  const searched = checkedStorage && nim !== ''
-  const result = searched ? findSelectionResult(nim) : undefined
+  const result = view.status === 'found' ? view.result : undefined
 
   return (
     <section className="pt-16 px-4">
       <div className="max-w-3xl w-full mx-auto">
         <FadeIn direction="up" delay={0.1}>
           <div className="card-surface rounded-3xl p-6 sm:p-10 text-center">
-            {!checkedStorage ? (
+            {view.status === 'checking' || view.status === 'loading' ? (
               <div className="py-10 flex items-center justify-center">
                 <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
               </div>
-            ) : !searched || !result ? (
+            ) : view.status === 'no-params' || view.status === 'not-found' ? (
               <>
                 <div className="w-16 h-16 rounded-2xl bg-gray-100 border border-gray-200 text-gray-500 flex items-center justify-center mx-auto mb-5">
                   <SearchX strokeWidth={1.8} className="w-8 h-8" />
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">NIM Not Found</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Result Not Found</h1>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                  {searched
-                    ? `We couldn't find a selection result for NIM "${nim}". Please double-check your NIM and try again.`
+                  {view.status === 'not-found'
+                    ? SELECTION_GENERIC_ERROR
                     : 'No search parameters provided. Please enter your NIM from the home page and try again.'}
                 </p>
               </>
-            ) : result.passed ? (
+            ) : result && result.passed ? (
               <>
                 <Envelope status="Passed" />
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Welcome On Board!</h1>
@@ -96,7 +122,7 @@ export default function SelectionResultView() {
                 <p className="mt-2 text-base sm:text-lg text-gray-600 leading-relaxed">
                   We are pleased to inform you that you have been selected as a Lab Practicum
                   Assistant and Lab Assistant for{' '}
-                  {result.courses.map((course, i) => (
+                  {result.courses.map((course: string, i: number) => (
                     <span key={course}>
                       {i > 0 && (i === result.courses.length - 1 ? ' and ' : ', ')}
                       <span className="font-semibold text-primary">{course}</span>
@@ -106,10 +132,10 @@ export default function SelectionResultView() {
                 </p>
 
                 <div className="mt-6 flex justify-center">
-                  <JoinGroupButton link={allPassedWhatsappLink} />
+                  <JoinGroupButton link={result.wa} />
                 </div>
               </>
-            ) : (
+            ) : result ? (
               <>
                 <Envelope status="Failed" />
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Thank You for Your Participation</h1>
@@ -122,7 +148,7 @@ export default function SelectionResultView() {
                   be another opportunity next time.
                 </p>
               </>
-            )}
+            ) : null}
 
             <Link
               href="/"
