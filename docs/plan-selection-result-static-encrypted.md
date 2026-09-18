@@ -72,13 +72,16 @@ inside passed payloads; no `allPassedWhatsappLink` client export remains.
   Round-trip verified: correct NIM+Name decrypts (incl. case/space-insensitive and the apostrophe
   record `102022400243`); wrong name rejected via GCM auth tag.
 
-### B. Client lookup lib (no plaintext imports)
+### B. Client lookup lib (no plaintext imports) — DONE
 
-- [ ] Create `lib/selectionCrypto.ts` (WebCrypto): `normalizeNim/normalizeName` (byte-identical to
+- [x] Create `lib/selectionCrypto.ts` (WebCrypto): `normalizeNim/normalizeName` (byte-identical to
   generator), `sha256Hex`, `lookupSelectionResult(nim, name)` with cached fetch + generic error
-  `SELECTION_GENERIC_ERROR` for all failure modes.
-- [ ] Rewrite `lib/selectionResults.ts` to types-only (delete `PASSED/NOT_PASSED` imports and
-  `findSelectionResult`); enforce "no client imports `@/data/selection-result`".
+  `SELECTION_GENERIC_ERROR` for all failure modes. `tsc --noEmit` clean for this file.
+- [x] Rewrite `lib/selectionResults.ts` to types-only (delete `PASSED/NOT_PASSED` imports and
+  `findSelectionResult`); enforce "no client imports `@/data/selection-result`" — verified by grep:
+  only the Node build script (reads source as text, never bundled) and comments reference it.
+  Note: `SelectionCheck.tsx` / `SelectionResultView.tsx` still import the removed exports —
+  rewired in Task C.
 
 ### C. Rewire UI
 
