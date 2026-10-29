@@ -56,7 +56,7 @@ export const navItems = [
   { label: "Structure", href: "/structure" },
   { label: "Achievements", href: "/achievements" },
   { label: "Articles", href: "/articles" },
-  { label: 'Study Group', href: 'https://drive.google.com/drive/folders/1XmAx0HoH5DLiZ4gXSzb3-GHw-OdC8Uit?usp=sharing' }
+  { label: 'Study Group', href: 'https://eisd-studygroup.site/' }
 ]
 
 export const announcementConfig = {
