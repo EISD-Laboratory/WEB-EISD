@@ -17,7 +17,7 @@ export default function Navbar() {
       {/* data-theme pins the glass light: the text here is dark, and glisse otherwise follows the OS theme. */}
       <Glass data-theme="light" className={`max-w-6xl mx-auto rounded-[2rem] pointer-events-auto ${mobileOpen ? '[--lg-blur:16px] [--lg-glass:rgb(255_255_255/0.85)]' : '[--lg-blur:6px] [--lg-glass:rgb(255_255_255/0.72)]'}`}>
         <div className="px-4 sm:px-6 flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2.5">
+          <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
             <div className="w-8 h-8 relative">
               <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
             </div>
@@ -75,7 +75,7 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <div className="pt-2">
-                  <Link href="/contact" className="block text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
+                  <Link href="/contact" onClick={() => setMobileOpen(false)} className="block text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
                     Contact
                   </Link>
                 </div>
