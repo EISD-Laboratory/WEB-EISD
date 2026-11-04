@@ -105,9 +105,9 @@ const events: Event[] = [
     category: 'Competition',
     date: 'September 2026',
     location: 'Online',
-    description: 'A technology innovation competition for students across Indonesia.',
+    description: 'A national UI/UX and essay competition on inclusive technology for students across Indonesia.',
     image: '/images/events/competition/eisd_compe_2026/eisd-compe-2026-cover.webp',
-    status: 'upcoming' as const,
+    status: 'completed' as const,
     gradient: 'from-yellow-500 to-orange-500',
   },
   {

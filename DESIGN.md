@@ -64,7 +64,8 @@ Tailwind config - see CLAUDE.md "Known inconsistency". Do not copy that pattern 
   horizontal gutter, content wrapped in `max-w-5xl` / `max-w-6xl` / `max-w-7xl mx-auto`
   depending on how wide the section's grid needs to be.
 - Standard breakpoints used throughout: `sm:` (640px), `md:` (768px, the main mobile/desktop
-  split point for nav and grids), `lg:` (1024px), `xl:` (rare, only in `Hero.tsx` heading sizes).
+  split point for nav and grids), `lg:` (1024px), `xl:` (rare, only in `Hero.tsx` heading sizes),
+  `2xl:` (1536px, only in `Hero.tsx`, where the photo switches from background to side panel).
 
 ## Custom utility classes (`app/globals.css`)
 
@@ -152,14 +153,26 @@ visible `:focus-visible` outline in `primary` - do not override these per-compon
   (Events/Structure and Articles/Contact/Achievements respectively) so hero text sits the same
   distance below the navbar and follows the announcement bar. Use one of them for any new page
   rather than a fixed `pt-*`. Full-bleed tops add the header to their own height instead:
-  `about/page.tsx` uses `h-[calc(280px+var(--header-height))]` with `hero-offset` on the overlay,
-  and `events/[id]/page.tsx` uses `h-[calc(16rem+var(--header-height))]`. Anything sticky uses
+  `about/page.tsx` uses `h-[calc(max(280px,min(51vw,500px))+var(--header-height))]` with
+  `hero-offset` on the overlay, and `events/[id]/page.tsx` uses
+  `h-[calc(16rem+var(--header-height))]`. Anything sticky uses
   `top-[calc(var(--header-height)+1rem)]`.
 - **Photo under the navbar**: a full-bleed image at the top of a page needs a white fade behind
   the glass (`bg-gradient-to-b from-white via-white/90 to-transparent`, as on the event banner),
-  otherwise the glass refracts the photo and looks different from every other page. Text over a
-  photo needs a strong enough wash to stay legible on mobile (see the `via-70%` gradient in
-  `about/page.tsx`).
+  otherwise the glass refracts the photo and looks different from every other page. On Home and
+  About the fade is `h-[calc(var(--header-height)+2rem)]`, and the photo sits in a wrapper starting
+  at `top-[calc(var(--header-height)/2)]` so the navbar doesn't cover faces. About fades to
+  `#FAFBFF` instead of white to match the page background. Text over a photo stays legible by
+  lowering the photo's own opacity (`opacity-[0.15]` on About, `opacity-[0.07]` on the Home
+  background), not with a heavier wash.
+- **Home hero photo**: from `2xl` up, the photo is a full panel beside a `w-[30%]` text column.
+  Below `2xl` it becomes a faint full-section background behind the text, because a side panel
+  crops the group photo at laptop widths. This was the user's choice; a bordered card, a contained
+  photo and a single shared container were all tried and rejected.
+- **About hero photo**: the photo wrapper is capped at `max-w-[1180px]` and centered, so the hero
+  height can fit every row of the group photo. Above that width, side fades (`w-16`, shown from
+  `min-[1181px]`) hide the photo's left and right edges. If the cap or hero height changes, check
+  that the front row isn't cut off at the bottom.
 - **Event poster in a card**: posters are portrait, about 4:5. On `events/page.tsx` the poster
   column holds an `aspect-[4/5]` spacer with the `fill` image over it, so it sets the card height
   and leaves no white gap. The grid only goes two-column at `lg`; at tablet widths two columns
@@ -216,10 +229,13 @@ visible `:focus-visible` outline in `primary` - do not override these per-compon
   as `.webp` without resizing (seen with `members/core/*.webp`, once 2667x2667 PNG bytes mislabeled
   with a `.webp` extension, 5-7MB each) gets sent to the browser at full resolution and just
   downscaled with CSS - it'll look sharp but costs megabytes for a card rendered at ~100px.
-  Established source-size conventions in this repo: hero/banner photos (`Hero.tsx`, `about`)
-  max ~1600px on the long edge; member avatar photos (`PersonCard`, `structure/page.tsx`) max
+  Established source-size conventions in this repo: hero/banner photos max ~2000px on the long
+  edge (`photo-landing.webp` and `photo-about.webp` are 2000px wide, about 200-360KB, since the
+  Home panel gets large on wide screens); member avatar photos (`PersonCard`, `structure/page.tsx`) max
   ~1120px (most of `public/images/members/**` already follows this; a few at 400px are fine too
   since display size is a ~100-150px card).
+- Swapping a photo never means changing how it is displayed. Keep the existing layout, and ask
+  before any structural change.
 - Event detail banners are the same portrait posters shown in a wide, short frame with
   `object-cover object-top`, so only the top of each poster shows, down to about 22% at 1920px.
   This is an accepted trade-off: a blurred backdrop with the whole poster was considered and
