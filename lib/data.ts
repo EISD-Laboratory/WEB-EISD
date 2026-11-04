@@ -71,11 +71,11 @@ export const announcementConfig = {
 // `-v2`) when swapping image/link for a new promo, so it reappears for people who
 // already dismissed the old one.
 export const welcomePopupConfig = {
-  enabled: true,
-  image: '/images/welcome-popup/selection-result.webp',
+  enabled: false,
+  image: '/images/welcome-popup/oprec.webp',
   imageAlt: 'EISD Laboratory welcome banner',
-  ctaLabel: 'Check Selection Result',
-  ctaHref: '/#selection-check',
+  ctaLabel: 'Learn More',
+  ctaHref: '/',
   storageKey: 'eisd-welcome-popup-dismissed',
   activeUntil: '2026-09-21',
 };
