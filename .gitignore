@@ -38,7 +38,6 @@ next-env.d.ts
 .cursor
 
 CLAUDE.md
-DESIGN.md
 
 .claude
 /test-results

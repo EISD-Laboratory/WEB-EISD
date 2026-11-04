@@ -56,12 +56,6 @@
       0 10px 30px rgba(73, 76, 160, 0.15);
   }
   
-  /* Navbar Glass Effect */
-  .navbar-glass {
-    @apply bg-white/60 backdrop-blur-md border border-white/40;
-    box-shadow: 0 12px 40px rgba(17, 24, 39, 0.10);
-  }
-
   /* Smooth Card Glow on Hover (no jitter) */
   .card-glow-smooth {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -419,25 +413,24 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   --announcement-bar-height: 0px;
+  --header-height: calc(76px + var(--announcement-bar-height));
 }
 
 body {
   @apply text-gray-900;
   background: linear-gradient(135deg, #FAFBFF 0%, #FFFFFF 50%, #FFFAFC 100%);
   overflow-x: hidden;
-  padding-top: calc(64px + var(--announcement-bar-height));
-  transition: padding-top 0.3s ease;
 }
 
 /* Hero section offset for fixed header (navbar + announcement bar) */
 .hero-offset {
-  padding-top: calc(32px + var(--announcement-bar-height));
+  padding-top: calc(32px + var(--header-height));
   transition: padding-top 0.3s ease;
 }
 
 /* Reduced hero offset for pages that need content higher */
 .hero-offset-sm {
-  padding-top: calc(32px + var(--announcement-bar-height));
+  padding-top: calc(32px + var(--header-height));
   transition: padding-top 0.3s ease;
 }
 

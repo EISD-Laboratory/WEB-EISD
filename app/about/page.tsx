@@ -45,13 +45,13 @@ export default function About() {
       {/* Hero Section */}
       <section className="relative">
         {/* Full-width photo background */}
-        <div className="relative w-full h-[280px] md:h-[360px] overflow-hidden" style={{ marginBottom: '-1px' }}>
-          <Image src="/images/photo-landing.webp" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 translate-x-8" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/70 to-transparent" />
+        <div className="relative w-full h-[calc(280px+var(--header-height))] md:h-[calc(360px+var(--header-height))] overflow-hidden" style={{ marginBottom: '-1px' }}>
+          <Image src="/images/photo-landing.webp" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 sm:translate-x-8" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/85 via-70% to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFF] via-transparent to-transparent" />
 
           {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-start px-4 pt-8 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-start px-4 hero-offset z-10">
             <FadeIn direction="up" delay={0.2}>
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-5 shimmer-enhanced">

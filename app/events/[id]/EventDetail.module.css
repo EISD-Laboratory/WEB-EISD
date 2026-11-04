@@ -1,22 +1,20 @@
-@keyframes infiniteScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.gallery {
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
 }
 
-.galleryScroll {
-  animation: infiniteScroll 30s linear infinite;
+.gallery::-webkit-scrollbar {
+  display: none;
 }
 
-.galleryScroll:hover {
-  animation-play-state: paused;
+.gallery:active {
+  cursor: grabbing;
 }
 
 .galleryItem {
-  width: 400px;
+  width: min(400px, 80vw);
   height: 200px;
   flex-shrink: 0;
 }

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Glass } from 'glisse'
 import { navItems } from '@/lib/data'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
@@ -12,74 +13,77 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <nav className="w-full navbar-glass">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 relative">
-            <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
-          </div>
-          <span className="font-bold text-sm hidden sm:inline text-gray-900">
-            EISD Laboratory
-          </span>
-        </Link>
+    <nav className="w-full px-3 sm:px-4 pt-3 pointer-events-none">
+      {/* data-theme pins the glass light: the text here is dark, and glisse otherwise follows the OS theme. */}
+      <Glass data-theme="light" className={`max-w-6xl mx-auto rounded-[2rem] pointer-events-auto ${mobileOpen ? '[--lg-blur:16px] [--lg-glass:rgb(255_255_255/0.85)]' : '[--lg-blur:6px] [--lg-glass:rgb(255_255_255/0.72)]'}`}>
+        <div className="px-4 sm:px-6 flex items-center justify-between h-16">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 relative">
+              <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
+            </div>
+            <span className="font-bold text-sm hidden sm:inline text-gray-900">
+              EISD Laboratory
+            </span>
+          </Link>
 
-        <div className="hidden lg:flex items-center gap-7">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith('http') ? '_blank' : '_self'}
-                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className={`relative text-sm font-medium transition-all duration-300 pb-1 ${isActive ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
-              >
-                {item.label}
-                <span className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300 ${isActive ? 'w-full' : 'w-0'}`} />
-              </Link>
-            )
-          })}
+          <div className="hidden lg:flex items-center gap-7">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className={`relative text-sm font-medium transition-all duration-300 pb-1 ${isActive ? 'text-primary' : 'text-gray-800 hover:text-primary'}`}
+                >
+                  {item.label}
+                  <span className={`absolute left-0 bottom-0 h-0.5 bg-primary transition-all duration-300 ${isActive ? 'w-full' : 'w-0'}`} />
+                </Link>
+              )
+            })}
+          </div>
+
+          <Link href="/contact" className="hidden lg:inline-flex bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
+            Contact
+          </Link>
+
+          <button
+            className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100/50 transition-colors"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full" animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+            <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} />
+            <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+          </button>
         </div>
 
-        <Link href="/contact" className="hidden lg:inline-flex bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors duration-200">
-          Contact
-        </Link>
-
-        <button
-          className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100/50 transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full" animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
-          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} />
-          <motion.span className="block w-5 h-0.5 bg-gray-700 rounded-full mt-1" animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden border-t border-white/40 overflow-hidden"
-          >
-            <div className="px-4 py-3 space-y-1">
-              {navItems.map((item) => (
-                <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 px-3 py-2.5 rounded-lg transition-all duration-200">
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-2">
-                <Link href="/contact" className="block text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
-                  Contact
-                </Link>
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden border-t border-white/40 overflow-hidden"
+            >
+              <div className="px-4 py-3 space-y-1">
+                {navItems.map((item) => (
+                  <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 px-3 py-2.5 rounded-lg transition-all duration-200">
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="pt-2">
+                  <Link href="/contact" className="block text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
+                    Contact
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Glass>
     </nav>
   )
 }
