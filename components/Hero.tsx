@@ -117,8 +117,7 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="hidden 2xl:block flex-1 relative"
       >
-        {/* Pushed down so the navbar doesn't cover faces; the top fade hides the photo's upper edge */}
-        <div className="absolute inset-x-0 bottom-0 top-[calc(var(--header-height)/2)]">
+        <div className="absolute inset-0">
           <Image
             src="/images/photo-landing.webp"
             alt="EISD Laboratory Team"
@@ -127,7 +126,6 @@ export default function Hero() {
             priority
           />
         </div>
-        <div className="absolute inset-x-0 top-0 h-[calc(var(--header-height)+2rem)] bg-gradient-to-b from-white via-white/90 to-transparent z-10" />
         <div className="absolute inset-y-0 -left-1 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
 
         <div className={`absolute right-6 z-20 transition-all duration-300 ${announcementVisible ? 'bottom-8' : 'xl:bottom-20 bottom-16'}`}>
@@ -138,7 +136,7 @@ export default function Hero() {
       </motion.div>
 
       <div className="2xl:hidden absolute inset-0 z-0">
-        <div className="absolute inset-x-0 bottom-0 top-[calc(var(--header-height)/2)]">
+        <div className="absolute inset-0">
           <Image
             src="/images/photo-landing.webp"
             alt="EISD Laboratory Team"
@@ -147,7 +145,6 @@ export default function Hero() {
             priority
           />
         </div>
-        <div className="absolute inset-x-0 top-0 h-[calc(var(--header-height)+2rem)] bg-gradient-to-b from-white via-white/90 to-transparent z-10" />
       </div>
     </section>
   )

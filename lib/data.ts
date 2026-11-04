@@ -63,7 +63,7 @@ export const announcementConfig = {
   message: 'Join us and level up your skills!',
   highlightText: '✦ Study Group EISD',
   ctaLabel: 'Join Now →',
-  ctaHref: 'https://web-sg.vercel.app/',
+  ctaHref: 'https://eisd-studygroup.site/',
   storageKey: 'eisd-announcement-dismissed',
 };
 

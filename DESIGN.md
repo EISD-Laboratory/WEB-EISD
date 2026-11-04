@@ -159,10 +159,12 @@ visible `:focus-visible` outline in `primary` - do not override these per-compon
   `top-[calc(var(--header-height)+1rem)]`.
 - **Photo under the navbar**: a full-bleed image at the top of a page needs a white fade behind
   the glass (`bg-gradient-to-b from-white via-white/90 to-transparent`, as on the event banner),
-  otherwise the glass refracts the photo and looks different from every other page. On Home and
-  About the fade is `h-[calc(var(--header-height)+2rem)]`, and the photo sits in a wrapper starting
-  at `top-[calc(var(--header-height)/2)]` so the navbar doesn't cover faces. About fades to
-  `#FAFBFF` instead of white to match the page background. Text over a photo stays legible by
+  otherwise the glass refracts the photo and looks different from every other page. On About the
+  fade is `h-[calc(var(--header-height)+2rem)]`, and the photo sits in a wrapper starting at
+  `top-[calc(var(--header-height)/2)]` so the navbar doesn't cover faces. About fades to `#FAFBFF`
+  instead of white to match the page background. Home is the exception: the user asked for no gap
+  above the photo, so it starts at `y=0` with no top fade, and the glass sits directly on the photo.
+  Heads still clear the navbar because the photo has wall above them. Text over a photo stays legible by
   lowering the photo's own opacity (`opacity-[0.15]` on About, `opacity-[0.07]` on the Home
   background), not with a heavier wash.
 - **Home hero photo**: from `2xl` up, the photo is a full panel beside a `w-[30%]` text column.

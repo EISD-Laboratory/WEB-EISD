@@ -17,13 +17,10 @@ export default function Navbar() {
       {/* data-theme pins the glass light: the text here is dark, and glisse otherwise follows the OS theme. */}
       <Glass data-theme="light" className={`max-w-6xl mx-auto rounded-[2rem] pointer-events-auto ${mobileOpen ? '[--lg-blur:16px] [--lg-glass:rgb(255_255_255/0.85)]' : '[--lg-blur:6px] [--lg-glass:rgb(255_255_255/0.72)]'}`}>
         <div className="px-4 sm:px-6 flex items-center justify-between h-16">
-          <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
+          <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center">
             <div className="w-8 h-8 relative">
               <Image src="/images/logo.png" alt="EISD Logo" fill className="object-contain" />
             </div>
-            <span className="font-bold text-sm hidden sm:inline text-gray-900">
-              EISD Laboratory
-            </span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-7">
