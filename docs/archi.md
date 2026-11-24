@@ -1,11 +1,12 @@
 # Arsitektur WEB-EISD Fullstack (archi.md)
 
-> **Status:** Draft untuk review tim · **Versi:** 0.1 · **Tanggal:** 24 November 2026
+> **Status:** Draft untuk review tim · **Versi:** 0.2 · **Tanggal:** 24 November 2026
+> **Perubahan 0.2:** hasil review PR #20 — akun admin per orang, `assistantCode` unik per achievement, K5–K7 diputuskan, tambahan §14.1 availability halaman publik (snapshot JSON di R2).
 > **Penulis:** Faris · **Repo:** `EISD-Laboratory/WEB-EISD`
 >
 > Dokumen ini adalah acuan migrasi website EISD dari situs statis + CMS terpisah (`cms-eisd`) menjadi **satu aplikasi Next.js fullstack** dengan database **Neon Postgres** dan object storage + CDN **Cloudflare R2**. Dokumen ini juga menjadi spesifikasi untuk *challenge* rebuild backend yang dipindahkan dari `cms-eisd` ke repo ini.
 >
-> Bagian bertanda **⚠️ Keputusan terbuka** belum disepakati tim; isinya adalah rekomendasi penulis.
+> Keputusan yang masih terbuka (K1, K2) ada di §18.1; isinya adalah rekomendasi penulis.
 
 ---
 
@@ -87,6 +88,12 @@ Tujuan utama: admin bisa mengelola **Events, Articles, Achievements** tanpa meny
 | D8 | Admin = akses penuh (satu role) | Tim |
 | D9 | Budget **nol** — semua layanan free tier | Tim |
 | D10 | Dokumen arsitektur diajukan sebagai PR ke WEB-EISD | Tim |
+| D11 | **Satu akun admin per orang** (semua berakses penuh) | Review PR #20 |
+| D12 | `assistantCode` unik **per achievement**, bukan lintas semua achievement | Review PR #20 |
+| D13 | Artikel dikurasi manual lewat URL; RSS hanya untuk impor awal | Review PR #20 |
+| D14 | Format `content` event mengikuti editor yang sudah ada di `EventForm` cms-eisd | Review PR #20 |
+| D15 | Reviewer wajib untuk PR yang menyentuh `lib/server/*` dan `app/admin/*`: GitHub `mslmalff` — diterapkan lewat `.github/CODEOWNERS` agar review diminta otomatis | Review PR #20 |
+| D16 | Halaman publik punya fallback snapshot JSON di R2 bila Neon gagal (§14.1) | Review PR #20 |
 
 ---
 
@@ -104,7 +111,8 @@ flowchart LR
   AD -->|PUT file langsung| R2
   V -->|gambar| CDN[cdn.eisd.site<br/>Cloudflare CDN]
   CDN --> R2
-  GHA[GitHub Actions] -->|pg_dump terenkripsi| BK[(R2 bucket<br/>eisd-backups)]
+  GHA[GitHub Actions] -->|pg_dump terenkripsi + snapshot harian| BK[(R2 bucket privat<br/>eisd-private)]
+  APP -->|tulis & baca snapshot publik| BK
   GHA -->|hapus file yatim| R2
 ```
 
@@ -156,6 +164,8 @@ WEB-EISD/
 │  │  ├─ session.ts             ← requireAdmin()
 │  │  ├─ r2.ts                  ← S3 client ke R2 + presign
 │  │  ├─ medium.ts              ← fetch metadata Open Graph
+│  │  ├─ snapshot.ts            ← tulis/baca snapshot publik (§14.1)
+│  │  ├─ public-data.ts         ← dipakai halaman publik: cache → fallback snapshot
 │  │  └─ services/{events,articles,achievements,dashboard}.ts
 │  ├─ validation/               ← skema Zod (dipakai form & server)
 │  └─ shared/event-status.ts    ← hitung Incoming/On Going/Finished
@@ -166,9 +176,11 @@ WEB-EISD/
 ├─ scripts/
 │  ├─ create-admin.ts
 │  ├─ upload-legacy-images.ts   ← pindahkan public/images/events → R2
-│  └─ cleanup-orphans.ts
+│  ├─ cleanup-orphans.ts
+│  └─ rebuild-snapshot.ts
 ├─ proxy.ts                     ← (Next 16 pengganti middleware.ts)
-├─ .github/workflows/{ci,backup,cleanup}.yml
+├─ .github/CODEOWNERS            ← reviewer wajib lib/server & app/admin (D15)
+├─ .github/workflows/{ci,backup,cleanup,snapshot}.yml
 └─ docs/archi.md                ← dokumen ini
 ```
 
@@ -248,9 +260,10 @@ model AchievementMember {
   achievementId String
   achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
   name          String
-  assistantCode String      @unique   // ⚠️ lihat §18 K3
+  assistantCode String                // 4 huruf kapital
 
-  @@index([achievementId])
+  @@unique([achievementId, assistantCode])   // + D12: unik per achievement
+  @@index([assistantCode])                   // + cari semua prestasi satu anggota
 }
 
 // + Tabel Better Auth (user, session, account, verification) dibuat oleh
@@ -268,7 +281,7 @@ model AchievementMember {
   - **Status tidak disimpan**, selalu dihitung: `hari ini < start` → *Incoming*; `start ≤ hari ini ≤ end` → *On Going*; `hari ini > end` → *Finished* (zona waktu `Asia/Jakarta`).
   - `coverImage` wajib 16:9, `galleryImages` maks 4.
 - **MediumArticle**: dibuat dari URL saja, metadata (judul, deskripsi, cover, tanggal) di-*snapshot* sekali saat simpan. Draft → Publish seperti event.
-- **Achievement**: tanpa Draft (langsung publik). Minimal 1 anggota; kode 4 huruf kapital; `Other` wajib `customCategory` 1–100 karakter; `competitionYearMonth` format `YYYY-MM`; urutan `competitionYearMonth desc, updatedAt desc`.
+- **Achievement**: tanpa Draft (langsung publik). Minimal 1 anggota; kode 4 huruf kapital, unik di dalam satu achievement (anggota yang sama boleh muncul di achievement lain, D12; duplikat dalam satu achievement → 409); `Other` wajib `customCategory` 1–100 karakter; `competitionYearMonth` format `YYYY-MM`; urutan `competitionYearMonth desc, updatedAt desc`.
 
 ### 6.3 Pemetaan data lama → baru
 
@@ -326,7 +339,9 @@ Form admin memanggil Server Actions di `app/admin/(panel)/**/actions.ts`. Pola w
 ```ts
 'use server'
 import { updateTag } from 'next/cache'
+import { after } from 'next/server'
 import { requireAdmin } from '@/lib/server/session'
+import { rebuildPublicSnapshot } from '@/lib/server/snapshot'
 import * as events from '@/lib/server/services/events'
 
 export async function publishEventAction(id: string) {
@@ -335,6 +350,7 @@ export async function publishEventAction(id: string) {
   updateTag('events')                  // 2. invalidasi cache publik
   updateTag(`event:${ev.slug}`)
   updateTag('dashboard')
+  after(() => rebuildPublicSnapshot())   // 3. perbarui snapshot fallback (§14.1)
   return { ok: true }
 }
 ```
@@ -437,17 +453,14 @@ Akun admin dibuat lewat skrip: `npm run admin:create -- --email … --name …` 
 2. **`app/admin/(panel)/layout.tsx`** — validasi sesi sungguhan (`auth.api.getSession`) sebelum merender panel.
 3. **Setiap Server Action & Route Handler admin** — memanggil `requireAdmin()`. Ini garis pertahanan yang sebenarnya, karena Server Action bisa dipanggil langsung tanpa lewat halaman.
 
-### 9.3 ⚠️ Keputusan terbuka: akun bersama vs per orang
+### 9.3 Akun admin: satu akun per orang (D11)
 
-Semua admin berakses penuh (D8). Yang belum diputuskan: satu akun dipakai bersama, atau satu akun per orang.
+Semua admin berakses penuh (D8), tetapi **setiap orang punya akun sendiri**:
 
-**Rekomendasi: satu akun per orang** (biaya sama, Rp0):
-
-- Bisa dicabut per orang saat pergantian kepengurusan tanpa membagikan ulang password.
-- Tercatat siapa yang membuat/mengubah konten (fondasi audit log V3).
-- Satu akun bocor tidak mengenai semua orang.
-
-Arsitektur di atas mendukung keduanya. Bila tim memilih akun bersama: simpan kredensial di password manager (mis. Bitwarden) dan ganti setiap pergantian kepengurusan.
+- Akun dibuat dengan `npm run admin:create` dan dinonaktifkan/dihapus saat orangnya tidak lagi menjadi pengurus — tanpa perlu membagikan ulang password ke yang lain.
+- Setiap mutasi bisa dicatat pelakunya (fondasi audit log V3). Untuk V1 cukup kolom `createdById`/`updatedById` opsional pada entitas, atau ditunda ke V3.
+- Satu akun bocor tidak mengenai semua admin; sesi akun itu bisa dicabut sendiri.
+- Daftar admin aktif ditinjau setiap pergantian kepengurusan.
 
 ---
 
@@ -459,7 +472,8 @@ Arsitektur di atas mendukung keduanya. Bila tim memilih akun bersama: simpan kre
 |---|---|---|
 | `eisd-media` | Gambar produksi | Publik lewat custom domain `cdn.eisd.site` |
 | `eisd-media-dev` | Gambar dev/preview | Publik lewat `r2.dev` (khusus non-produksi) |
-| `eisd-backups` | Dump database terenkripsi | **Privat** |
+| `eisd-private` | `backups/` dump database terenkripsi · `snapshots/public.json` fallback publik (§14.1) | **Privat** (hanya lewat S3 API) |
+| `eisd-private-dev` | Snapshot untuk dev/preview | **Privat** |
 
 Pola key: `events/<eventId>/<uuid>.webp`, `achievements/<achievementId>/<uuid>.webp`.
 
@@ -516,7 +530,7 @@ sequenceDiagram
 | Rahasia | Hanya di env Vercel/GitHub Secrets; file di `lib/server/*` memakai `import 'server-only'` |
 | Header | CSP diperbarui: `img-src` + `cdn.eisd.site`, `connect-src` + endpoint R2 (untuk PUT); header `Access-Control-Allow-Origin` global di `vercel.json` dihapus |
 | Indexing | `/admin` di-*disallow* di `robots.ts` dan diberi `noindex` |
-| Backup | Dump dienkripsi sebelum diunggah ke bucket privat (repo ini publik, jadi dump **tidak boleh** jadi artifact GitHub) |
+| Backup & snapshot | Dump dienkripsi sebelum diunggah ke bucket privat (repo ini publik, jadi dump **tidak boleh** jadi artifact GitHub); snapshot hanya berisi data published |
 
 ---
 
@@ -544,8 +558,9 @@ Region: Neon **AWS Singapore**, Vercel Functions **`sin1`**, supaya latensi quer
 | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` | Token API R2 (hanya izin Object Read & Write ke bucket terkait) |
 | `R2_BUCKET` | `eisd-media` atau `eisd-media-dev` |
 | `R2_PUBLIC_URL` | `https://cdn.eisd.site` atau URL `r2.dev` bucket dev |
+| `R2_PRIVATE_BUCKET` | `eisd-private` (produksi) atau `eisd-private-dev`; tempat snapshot publik |
 
-GitHub Secrets tambahan untuk workflow: `PROD_DIRECT_URL`, `R2_BACKUP_*`, `BACKUP_PASSPHRASE`.
+GitHub Secrets tambahan untuk workflow: `PROD_DIRECT_URL`, `PROD_DATABASE_URL` (untuk `rebuild-snapshot.ts`), kredensial R2 dengan akses ke `eisd-private`, `BACKUP_PASSPHRASE`.
 
 Lokasi pengaturan `DIRECT_URL` mengikuti versi Prisma yang dipakai (di `schema.prisma` untuk Prisma 6, di `prisma.config.ts` untuk versi yang lebih baru) — ikuti panduan resmi Neon + Prisma saat implementasi.
 
@@ -556,14 +571,56 @@ Lokasi pengaturan `DIRECT_URL` mengikuti versi Prisma yang dipakai (di `schema.p
 | Workflow | Jadwal | Isi |
 |---|---|---|
 | `ci.yml` | Setiap PR | `npm ci`, lint, typecheck, `prisma validate`, unit test service, `next build` |
-| `backup.yml` | Mingguan (+ manual) | `pg_dump` dari `PROD_DIRECT_URL` → kompres → enkripsi (`age`/`gpg` dengan `BACKUP_PASSPHRASE`) → unggah ke `eisd-backups`; simpan 8 backup terakhir |
+| `backup.yml` | Mingguan (+ manual) | `pg_dump` dari `PROD_DIRECT_URL` → kompres → enkripsi (`age`/`gpg` dengan `BACKUP_PASSPHRASE`) → unggah ke `eisd-private/backups/`; simpan 8 backup terakhir |
 | `cleanup.yml` | Mingguan | `scripts/cleanup-orphans.ts` (§10.3) |
+| `snapshot.yml` | Harian (+ manual) | `scripts/rebuild-snapshot.ts` — rekonsiliasi snapshot publik (§14.1) |
 
 Selain itu, Neon free menyediakan pemulihan ke titik waktu dalam 6 jam terakhir untuk kesalahan yang baru terjadi.
 
 Prosedur restore singkat ditulis di `docs/runbook.md` (dibuat di Fase 7).
 
-Uji minimal (Vitest) untuk service: pembuatan slug & sufiks, perhitungan status event (termasuk batas hari dan zona waktu), validasi achievement (kode duplikat, `Other`, format `YYYY-MM`), dan filter draft pada fungsi publik.
+Uji minimal (Vitest) untuk service: pembuatan slug & sufiks, perhitungan status event (termasuk batas hari dan zona waktu), validasi achievement (kode duplikat, `Other`, format `YYYY-MM`), filter draft pada fungsi publik, dan jalur fallback snapshot (§14.1).
+
+### 14.1 Availability halaman publik (D16, dikerjakan di Fase 7)
+
+Tujuan: halaman publik **tetap tampil** walaupun Neon tidak bisa diakses — misalnya gangguan layanan, kuota compute bulanan free tier habis, atau koneksi gagal tepat saat cache kosong (setelah deploy baru atau entri cache kedaluwarsa).
+
+| Lapis | Fungsi | Diperbarui |
+|---|---|---|
+| Cache tag (`'use cache'`) | Kecepatan | `updateTag()` saat mutasi (§8.2) |
+| Snapshot JSON di R2 (`snapshots/public.json`) | Fallback bila Neon gagal | Ditulis ulang setelah Publish/Edit/Delete; rekonsiliasi harian via GitHub Actions (`snapshot.yml`) |
+| `pg_dump` terenkripsi | Disaster recovery | Mingguan (`backup.yml`) |
+
+**Aturan:**
+
+1. **Isi snapshot hanya data published** (events, articles, achievements) — bentuknya sama dengan keluaran fungsi service publik. Draft dan data akun tidak pernah masuk.
+2. **Snapshot ditulis ulang utuh, bukan di-*patch*.** Setelah mutasi publik, `rebuildPublicSnapshot()` membaca ulang semua data published dari database lalu menimpa file. Dengan begitu dua mutasi yang hampir bersamaan tidak membuat snapshot melenceng; file terakhir selalu mencerminkan isi database saat itu.
+3. **Penulisan snapshot tidak boleh menggagalkan mutasi.** Dijalankan setelah respons dikirim (`after()` dari `next/server`); bila gagal, cukup dicatat di log — rekonsiliasi harian akan memperbaikinya.
+4. **Fallback berada di luar fungsi `'use cache'`**, supaya data snapshot tidak ikut ter-cache:
+
+   ```ts
+   // lib/server/public-data.ts
+   export async function getPublishedEvents() {
+     try {
+       return await listPublishedEvents()        // fungsi 'use cache' (§8.2)
+     } catch (err) {
+       console.error('[fallback] Neon gagal, memakai snapshot', err)
+       return (await readSnapshot()).events
+     }
+   }
+   ```
+
+   Halaman publik memanggil `lib/server/public-data.ts`, bukan service ber-cache secara langsung. Hal yang sama berlaku untuk detail event per slug, artikel, dan achievement.
+
+   Catatan implementasi: dengan Cache Components, pembacaan data yang tidak di-cache (jalur fallback) harus berada di dalam boundary `<Suspense>` atau diperlakukan sebagai bagian dinamis halaman. Pola persisnya diverifikasi saat Fase 7, termasuk perilaku build ketika Neon tidak bisa diakses.
+5. **Snapshot disimpan di bucket privat** `eisd-private` dan dibaca server lewat S3 API dengan kredensial, bukan lewat `cdn.eisd.site`. Alasannya: respons CDN bisa ter-cache dan basi tepat ketika snapshot dibutuhkan. `readSnapshot()` memvalidasi isinya dengan Zod (`version`, `generatedAt`, `events`, `articles`, `achievements`) dan menyimpannya di memori instance beberapa menit agar R2 tidak dipanggil di setiap request selama gangguan.
+6. **Backup `pg_dump` bukan sumber konten publik**; ia hanya untuk pemulihan database.
+7. **Bila snapshot juga tidak bisa dibaca**, tampilkan halaman error yang ramah (bukan stack trace).
+8. **Panel admin tidak memakai fallback.** Saat Neon gagal, admin melihat pesan error yang jelas dan mutasi ditolak — admin tidak boleh mengedit data dari snapshot.
+
+Gambar tetap aman selama gangguan Neon karena disajikan langsung dari R2/CDN, dan status event tetap benar karena dihitung di browser (§8.3).
+
+**Cara menguji (preview):** ganti `DATABASE_URL` di environment preview dengan URL yang salah, deploy ulang, lalu pastikan semua halaman publik tetap tampil dari snapshot dan `/admin` menampilkan pesan error.
 
 ---
 
@@ -592,7 +649,7 @@ Setiap fase = satu atau beberapa PR ke branch `nonprod`, diuji di preview, lalu 
 | **4. Articles** | Fetch OG + SSRF guard, port `Articles`/`ArticleForm` | DoD #4, #5 |
 | **5. Achievements** | Service + validasi, port `Achievements`/`AchievementForm` | DoD #7 |
 | **6. Cutover publik** | Halaman publik membaca database + tag cache, redirect `/events/<angka>`, CSP baru, `robots.ts`/`sitemap.ts` | Konten publik tampil dari database; Publish → tayang dalam hitungan detik |
-| **7. Hardening** | Workflow backup & cleanup, `runbook.md`, arsipkan `cms-eisd` (read-only + tautan ke repo ini) | Backup pertama berhasil dan sudah diuji restore |
+| **7. Hardening** | Availability §14.1 (snapshot + `public-data.ts` + `snapshot.yml`), workflow backup & cleanup, `runbook.md`, `CODEOWNERS`, arsipkan `cms-eisd` (read-only + tautan ke repo ini) | Backup pertama berhasil dan sudah diuji restore; uji fallback §14.1 lolos di preview |
 
 Fase 0 bisa dikerjakan paralel dengan Fase 1. Dashboard (DoD #1) dikerjakan bertahap seiring Fase 3–5.
 
@@ -626,17 +683,19 @@ Perbedaan dari challenge lama: login bukan lagi mock (auth termasuk yang dibangu
 |---|---|---|
 | K1 | Siapa yang mengaktifkan R2? Aktivasi bisa meminta metode pembayaran (kartu/PayPal) walau pemakaian tetap gratis | Satu pengurus/dosen pembina dengan metode pembayaran mengaktifkan, lalu membuat token API terbatas untuk tim |
 | K2 | DNS `eisd.site` dipindah ke Cloudflare (gratis) agar bisa memakai `cdn.eisd.site`? | Ya. Bila tidak memungkinkan, alternatif: `r2.dev` (dibatasi lajunya, tidak disarankan untuk produksi) |
-| K3 | Spesifikasi lama mewajibkan `assistantCode` **unik lintas semua achievement**. Akibatnya anggota yang berprestasi dua kali tidak bisa dicatat | Ubah menjadi unik per achievement: `@@unique([achievementId, assistantCode])` |
-| K4 | Akun admin bersama atau per orang (§9.3) | Per orang |
-| K5 | Artikel: kurasi manual (URL) saja, atau tetap ada impor otomatis RSS? | Kurasi manual sesuai CMS; RSS hanya untuk impor awal |
-| K6 | Format `content` event: HTML tersanitasi atau Markdown? | Ikuti editor yang sudah ada di `EventForm` cms-eisd |
-| K7 | Siapa reviewer wajib untuk PR yang menyentuh `lib/server/*` dan `app/admin/*` | Minimal 1 reviewer selain penulis PR |
+| ~~K3~~ | `assistantCode` unik lintas semua achievement? | **Diputuskan → D12** (unik per achievement) |
+| ~~K4~~ | Akun admin bersama atau per orang? | **Diputuskan → D11** (per orang) |
+| ~~K5~~ | Artikel: kurasi manual atau impor otomatis RSS? | **Diputuskan → D13** |
+| ~~K6~~ | Format `content` event? | **Diputuskan → D14** |
+| ~~K7~~ | Reviewer wajib `lib/server/*` & `app/admin/*`? | **Diputuskan → D15** |
 
 ### 18.2 Risiko
 
 | Risiko | Dampak | Mitigasi |
 |---|---|---|
 | Cold start Neon setelah idle | Request pertama ±ratusan ms lebih lambat | Cache halaman publik; admin jarang terdampak |
+| Neon tidak bisa diakses (gangguan / kuota compute bulanan habis) | Halaman publik gagal saat cache kosong; admin tidak bisa mengedit | Fallback snapshot §14.1 untuk publik; admin menampilkan error yang jelas |
+| Snapshot basi | Fallback menampilkan konten lama | Ditulis ulang setiap mutasi + rekonsiliasi harian; `generatedAt` dicatat di log |
 | Kuota free tier berubah | Layanan terbatas/berbayar | Cek §15 tiap semester; kode memakai Postgres & S3 API standar sehingga mudah pindah penyedia |
 | Upgrade React 19 / Tailwind 4 merusak tampilan | Regresi visual | Fase 0 terpisah, dibandingkan tangkapan layar sebelum/sesudah |
 | Lupa `requireAdmin()` di aksi baru | Celah tulis publik | Lint/review checklist; helper `adminAction()` yang membungkus cek sesi |
@@ -653,6 +712,8 @@ Perbedaan dari challenge lama: login bukan lagi mock (auth termasuk yang dibangu
 - [ ] Tag cache yang relevan diinvalidasi
 - [ ] Fungsi publik tidak mengembalikan draft
 - [ ] Gambar lama dihapus dari R2 bila diganti/dihapus
+- [ ] Mutasi data publik memicu `rebuildPublicSnapshot()` (§14.1)
+- [ ] Halaman publik membaca lewat `public-data.ts`, bukan service ber-cache langsung
 - [ ] Unit test untuk aturan bisnis baru
 
 ### 19.2 Referensi internal
