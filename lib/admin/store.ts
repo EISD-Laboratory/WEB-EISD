@@ -18,3 +18,15 @@ export const db: {
   articles: [...MOCK_ARTICLES],
   achievements: [...MOCK_ACHIEVEMENTS],
 }
+
+export function setStoreEvents(next: MockEvent[]) {
+  db.events = next
+}
+
+export function setStoreArticles(next: MockArticle[]) {
+  db.articles = next
+}
+
+export function setStoreAchievements(next: Achievement[]) {
+  db.achievements = next
+}

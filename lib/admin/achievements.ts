@@ -1,4 +1,4 @@
-import { db } from './store'
+import { db, setStoreAchievements } from './store'
 
 export type AchievementCategory =
   | 'Essay'
@@ -122,7 +122,7 @@ export async function createAchievement(input: CreateAchievementInput): Promise<
     createdAt: now,
     updatedAt: now,
   }
-  db.achievements = [entry, ...db.achievements]
+  setStoreAchievements([entry, ...db.achievements])
   return entry
 }
 
@@ -139,10 +139,10 @@ export async function updateAchievement(
       input.customCategory !== undefined ? (input.customCategory ?? null) : current.customCategory,
     updatedAt: new Date().toISOString(),
   }
-  db.achievements = db.achievements.map((a) => (a.id === id ? next : a))
+  setStoreAchievements(db.achievements.map((a) => (a.id === id ? next : a)))
   return next
 }
 
 export async function deleteAchievement(id: string): Promise<void> {
-  db.achievements = db.achievements.filter((a) => a.id !== id)
+  setStoreAchievements(db.achievements.filter((a) => a.id !== id))
 }

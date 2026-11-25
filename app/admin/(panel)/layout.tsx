@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Toaster } from 'sonner'
 import { AuthProvider } from '@/lib/admin/auth-context'
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute'
@@ -13,13 +14,22 @@ export default function AdminPanelLayout({
 }) {
   return (
     <AuthProvider>
-      <ProtectedRoute>
-        <div className="flex min-h-screen bg-white text-foreground">
-          <AppSidebar />
-          {children}
-          <Toaster position="bottom-right" />
-        </div>
-      </ProtectedRoute>
+      {/* usePathname inside ProtectedRoute needs a Suspense boundary to prerender. */}
+      <Suspense
+        fallback={
+          <div className="grid min-h-screen place-items-center bg-background">
+            <p className="text-sm text-muted-foreground">Loading…</p>
+          </div>
+        }
+      >
+        <ProtectedRoute>
+          <div className="flex min-h-screen bg-white text-foreground">
+            <AppSidebar />
+            {children}
+            <Toaster position="bottom-right" />
+          </div>
+        </ProtectedRoute>
+      </Suspense>
     </AuthProvider>
   )
 }

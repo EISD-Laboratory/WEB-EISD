@@ -1,0 +1,495 @@
+'use client'
+
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import Link from 'next/link'
+import { toast } from 'sonner'
+import {
+  Calendar,
+  Eye,
+  FileText,
+  MapPin,
+  Pencil,
+  Plus,
+  Search,
+  Trash2,
+} from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { IconTile } from '@/components/ui/icon-tile'
+import { StatNumber } from '@/components/admin/StatNumber'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
+import { FilterDropdown } from '@/components/admin/FilterDropdown'
+import { db, setStoreEvents } from '@/lib/admin/store'
+import {
+  fetchAdminEvents,
+  formatShort,
+  getEventStatus,
+  togglePublishState,
+  type AdminEvent,
+  type EventStatus,
+} from '@/lib/admin/events'
+
+type StatusFilter = 'All' | EventStatus
+type PublishFilter = 'All' | 'Published' | 'Draft'
+
+const STATUS_FILTERS: StatusFilter[] = ['All', 'Incoming', 'On Going', 'Finished']
+const PUBLISH_FILTERS: PublishFilter[] = ['All', 'Published', 'Draft']
+
+const PAGE_SIZE = 5
+
+function ComputedBadge({ status }: { status: EventStatus }) {
+  if (status === 'Incoming') return <Badge variant="info-light">Incoming</Badge>
+  if (status === 'On Going') return <Badge variant="warning-light">On Going</Badge>
+  return <Badge variant="success-light">Finished</Badge>
+}
+
+function PublishBadge({ published }: { published: boolean }) {
+  return published ? (
+    <Badge variant="success-light">Published</Badge>
+  ) : (
+    <Badge variant="warning-light">Draft</Badge>
+  )
+}
+
+export default function AdminEventsPage() {
+  const [events, setEvents] = useState<AdminEvent[]>([])
+  const [loading, setLoading] = useState(true)
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('All')
+  const [publishFilter, setPublishFilter] = useState<PublishFilter>('All')
+  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(0)
+  // Mount-time clock for status/sort bucketing (CMS recomputed per keystroke;
+  // day-boundary precision is more than enough for an admin list).
+  const [nowTs] = useState(() => Date.now())
+  // 11.7 prototype: deletion is confirmed then applied in memory only.
+  const [pendingDelete, setPendingDelete] = useState<AdminEvent | null>(null)
+
+  useEffect(() => {
+    let live = true
+    ;(async () => {
+      const data = await fetchAdminEvents()
+      if (live) {
+        setEvents(data)
+        setLoading(false)
+      }
+    })()
+    return () => {
+      live = false
+    }
+  }, [])
+
+  // Dashboard-style stat cards: totals split by computed status.
+  const stats = useMemo(() => {
+    let live = 0
+    for (const e of events) if (e.publishedAt !== null) live += 1
+    return [
+      { label: 'Total events', value: events.length, icon: Calendar, tileClassName: 'bg-amber-500 text-white' },
+      { label: 'Live', value: live, icon: Eye, tileClassName: 'bg-emerald-500 text-white' },
+      { label: 'Drafts', value: events.length - live, icon: FileText, tileClassName: 'bg-cyan-600 text-white' },
+    ]
+  }, [events])
+
+  // FLIP reorder animation: row elements by id. Positions are compared on
+  // every visible-order change (toggle, filter, search, page), so moved rows
+  // always glide instead of jumping.
+  const rowRefs = useRef(new Map<string, HTMLTableRowElement>())
+  const prevRects = useRef(new Map<string, DOMRect>())
+
+  // 11.6 prototype: optimistic in-memory flip. No backend call yet —
+  // POST `:id/publish` / `:id/unpublish` lands with the real API.
+  const togglePublish = (id: string) => {
+    setEvents((prev) => prev.map((e) => (e.id === id ? togglePublishState(e) : e)))
+    // Keep the shared fixture store in sync so the dashboard stays consistent.
+    setStoreEvents(db.events.map((e) => (e.id === id ? togglePublishState(e) : e)))
+  }
+
+  // 11.7 prototype: confirmed deletion, in memory only (DELETE /api/events/:id
+  // lands with the real API, including R2 image cleanup per task 6.3).
+  const confirmDelete = () => {
+    if (!pendingDelete) return
+    const title = pendingDelete.title
+    setEvents((prev) => prev.filter((e) => e.id !== pendingDelete.id))
+    setStoreEvents(db.events.filter((e) => e.id !== pendingDelete.id))
+    setPendingDelete(null)
+    toast.success(`“${title}” was deleted.`)
+  }
+
+  useEffect(() => {
+    if (!pendingDelete) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPendingDelete(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [pendingDelete])
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return events
+      .filter((e) => (statusFilter === 'All' ? true : getEventStatus(e) === statusFilter))
+      .filter((e) => {
+        if (publishFilter === 'Published') return e.publishedAt !== null
+        if (publishFilter === 'Draft') return e.publishedAt === null
+        return true
+      })
+      .filter((e) =>
+        q ? `${e.title} ${e.slug} ${e.location}`.toLowerCase().includes(q) : true,
+      )
+      .sort((a, b) => {
+        // Drafts first, then live.
+        const draftDelta =
+          (a.publishedAt === null ? 0 : 1) - (b.publishedAt === null ? 0 : 1)
+        if (draftDelta !== 0) return draftDelta
+        // Past events (already ended) sink to the last.
+        const pastDelta =
+          (+new Date(a.endDate) < nowTs ? 1 : 0) - (+new Date(b.endDate) < nowTs ? 1 : 0)
+        if (pastDelta !== 0) return pastDelta
+        if (+new Date(a.endDate) < nowTs) {
+          // Both past: recently ended first.
+          return +new Date(b.endDate) - +new Date(a.endDate)
+        }
+        // Upcoming/ongoing: nearest start first.
+        return (
+          +new Date(a.startDate) - +new Date(b.startDate) ||
+          +new Date(b.updatedAt) - +new Date(a.updatedAt)
+        )
+      })
+  }, [events, statusFilter, publishFilter, query, nowTs])
+
+  // `safePage` clamps the stored page into range, so no reset effect is
+  // needed when the visible set changes.
+  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const safePage = Math.min(page, pages - 1)
+  const items = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE)
+  const onPage = (p: number) => setPage(Math.min(Math.max(0, p), pages - 1))
+  const stopNav = (e: React.MouseEvent, p: number) => {
+    e.preventDefault()
+    onPage(p)
+  }
+
+  // Numbered links: all pages when few, windowed with ellipsis when many.
+  const pageSlots: (number | 'gap')[] =
+    pages <= 5
+      ? Array.from({ length: pages }, (_, i) => i)
+      : [0, safePage - 1, safePage, safePage + 1, pages - 1]
+          .filter((n, i, a) => n >= 0 && n < pages && a.indexOf(n) === i)
+          .sort((a, b) => (a as number) - (b as number))
+          .flatMap((n, i, a) => (i > 0 && (n as number) - (a[i - 1] as number) > 1 ? (['gap', n] as (number | 'gap')[]) : [n]))
+
+  // FLIP playback: after the visible order changes (toggle, filter,
+  // search), glide each surviving row from its previous position to its new
+  // one. Page changes are excluded — remounted rows already cascade in via
+  // CSS, so animating them again would double up. Transform-only (GPU),
+  // WAAPI so a second change mid-flight retargets instead of restarting.
+  const prevPage = useRef(safePage)
+  useLayoutEffect(() => {
+    const next = new Map<string, DOMRect>()
+    rowRefs.current.forEach((el, id) => next.set(id, el.getBoundingClientRect()))
+    const prev = prevRects.current
+    prevRects.current = next
+    if (prevPage.current !== safePage) {
+      prevPage.current = safePage
+      return
+    }
+    if (prev.size === 0) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    rowRefs.current.forEach((el, id) => {
+      const f = prev.get(id)
+      if (!f) return
+      const dy = f.top - el.getBoundingClientRect().top
+      if (dy === 0) return
+      el.animate([{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0)' }], {
+        duration: 260,
+        easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      })
+    })
+  }, [filtered, safePage])
+
+  return (
+    <>
+      <main className="flex min-w-0 flex-1 flex-col gap-6 p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-2xl font-semibold">Events</h1>
+            <p className="text-sm text-muted-foreground">Schedules and publish states</p>
+          </div>
+          <Link href="/admin/events/new">
+            <Button className="text-white">
+              <Plus className="size-4" /> New event
+            </Button>
+          </Link>
+        </div>
+
+        {/* Stat cards in #F7F9FF wrapper — same entrance as the dashboard:
+            wrapper lands first, cards cascade after with a 50ms stagger. */}
+        <section className="section-enter rounded-xl border border-[#E6EAF2] bg-[#F7F9FF] p-1">
+          <div className="grid grid-cols-3 gap-1">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                style={{ animationDelay: `${(i + 1) * 50}ms` }}
+                className="section-enter flex items-stretch justify-between gap-4 rounded-lg border border-[#EBEBEB] bg-white p-5"
+              >
+                <div className="flex min-w-0 flex-col gap-1">
+                  <p className="text-sm text-muted-foreground">{s.label}</p>
+                  <StatNumber value={s.value} />
+                </div>
+                <div className="flex shrink-0 flex-col items-end justify-start">
+                  <IconTile size="sm" variant="solid" className={s.tileClassName}>
+                    <s.icon className="size-4" />
+                  </IconTile>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          style={{ animationDelay: '100ms' }}
+          className="section-enter rounded-xl border border-[#E6EAF2] bg-[#F7F9FF] p-1"
+        >
+          <div className="flex flex-col gap-4 rounded-lg border border-[#EBEBEB] bg-white p-5">
+            <div className="flex flex-wrap items-center gap-x-1 gap-y-2 rounded-lg bg-white py-2">
+              <div className="relative mr-auto w-full max-w-64">
+                <Search className="pointer-events-none absolute top-1/2 left-2.5 size-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search title, slug, location…"
+                  aria-label="Search events"
+                  className="pl-8"
+                />
+              </div>
+              <span className="hidden h-5 w-px bg-border sm:block" />
+              <FilterDropdown
+                label="Status"
+                value={statusFilter}
+                options={STATUS_FILTERS}
+                onPick={setStatusFilter}
+              />
+              <span className="hidden h-5 w-px bg-border sm:block" />
+              <FilterDropdown
+                label="Publish"
+                value={publishFilter}
+                options={PUBLISH_FILTERS}
+                onPick={setPublishFilter}
+                align="right"
+              />
+            </div>
+
+            {loading ? (
+              <p className="py-8 text-center text-sm text-muted-foreground">Loading events…</p>
+            ) : filtered.length === 0 ? (
+              <div className="py-4">
+                <Alert>
+                  <AlertTitle>No events match</AlertTitle>
+                  <AlertDescription>
+                    {events.length === 0
+                      ? 'Create your first event to see it here.'
+                      : 'Try clearing the search or choosing a different filter.'}
+                  </AlertDescription>
+                </Alert>
+              </div>
+            ) : (
+              <>
+              <div className="overflow-x-auto overflow-y-clip">
+                <table className="w-full min-w-[720px] text-sm">
+                  <thead>
+                    <tr className="text-left text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+                      <th className="pb-2 font-medium">Event</th>
+                      <th className="pb-2 font-medium">Schedule</th>
+                      <th className="pb-2 font-medium">Status</th>
+                      <th className="pb-2 text-right font-medium">Publish</th>
+                      <th className="w-44 pb-2" />
+                    </tr>
+                  </thead>
+                  <tbody key={safePage}>
+                    {items.map((e, i) => {
+                      const status = getEventStatus(e)
+                      return (
+                        <tr
+                          key={e.id}
+                          ref={(el) => {
+                            if (el) rowRefs.current.set(e.id, el)
+                            else rowRefs.current.delete(e.id)
+                          }}
+                          style={{ animationDelay: `${i * 40}ms` }}
+                          className="page-row-enter border-t border-border align-middle even:bg-[#F7F9FF]"
+                        >
+                          <td className="max-w-72 py-3 pr-3 pl-2">
+                            <div className="flex min-w-0 flex-col">
+                              <span className="block truncate font-medium">{e.title}</span>
+                              <span className="flex items-center gap-1 truncate text-xs text-muted-foreground">
+                                <MapPin className="size-3 shrink-0" />
+                                {e.location}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-3 pr-3 text-xs whitespace-nowrap text-muted-foreground tabular-nums">
+                            {formatShort(e.startDate)} → {formatShort(e.endDate)}
+                          </td>
+                          <td className="py-3 pr-3">
+                            <ComputedBadge status={status} />
+                          </td>
+                          <td className="py-3 pr-2 text-right">
+                            <PublishBadge published={e.publishedAt !== null} />
+                          </td>
+                          <td className="py-3 pr-2 text-right">
+                            <span className="inline-flex items-center gap-3">
+                              <button
+                                type="button"
+                                role="switch"
+                                aria-checked={e.publishedAt !== null}
+                                onClick={() => togglePublish(e.id)}
+                                title={
+                                  e.publishedAt !== null
+                                    ? `Unpublish “${e.title}” (back to Draft)`
+                                    : `Publish “${e.title}” (goes live)`
+                                }
+                                aria-label={
+                                  e.publishedAt !== null
+                                    ? `Unpublish ${e.title}`
+                                    : `Publish ${e.title}`
+                                }
+                                className="flex items-center gap-2"
+                              >
+                                <span
+                                  className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${
+                                    e.publishedAt !== null ? 'bg-success' : 'bg-border'
+                                  }`}
+                                >
+                                  <span
+                                    className={`absolute top-0.5 left-0.5 size-4 rounded-full bg-white shadow transition-transform ${
+                                      e.publishedAt !== null ? 'translate-x-4' : ''
+                                    }`}
+                                  />
+                                </span>
+                                <span
+                                  className={`text-xs font-medium ${
+                                    e.publishedAt !== null
+                                      ? 'text-success-foreground'
+                                      : 'text-muted-foreground'
+                                  }`}
+                                >
+                                  {e.publishedAt !== null ? 'Live' : 'Draft'}
+                                </span>
+                              </button>
+                              <Link
+                                href={`/admin/events/${e.id}/edit`}
+                                title={`Edit “${e.title}”`}
+                                aria-label={`Edit ${e.title}`}
+                                className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground hover:bg-secondary/10 hover:text-secondary"
+                              >
+                                <Pencil className="size-3.5" />
+                              </Link>
+                              <button
+                                type="button"
+                                onClick={() => setPendingDelete(e)}
+                                title={`Delete “${e.title}” permanently`}
+                                aria-label={`Delete ${e.title}`}
+                                className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                              >
+                                <Trash2 className="size-3.5" />
+                              </button>
+                            </span>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              {/* c-pagination-3 composition: Previous | numbers | Next, space-between, purple active */}
+              <div className="border-t border-border pt-3">
+                <Pagination className="w-full justify-end">
+                  <PaginationContent className="justify-end gap-2">
+                    <PaginationItem>
+                      <PaginationPrevious
+                        href="#"
+                        onClick={(e) => stopNav(e, safePage - 1)}
+                        aria-disabled={safePage === 0}
+                        className={safePage === 0 ? 'pointer-events-none opacity-40' : ''}
+                      />
+                    </PaginationItem>
+                    <PaginationItem className="flex items-center gap-1">
+                      {pageSlots.map((slot, i) =>
+                        slot === 'gap' ? (
+                          <PaginationEllipsis key={`gap-${i}`} />
+                        ) : (
+                          <PaginationLink
+                            key={slot}
+                            href="#"
+                            isActive={slot === safePage}
+                            onClick={(e) => stopNav(e, slot)}
+                            className={
+                              slot === safePage
+                                ? 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary hover:text-secondary-foreground'
+                                : 'hover:border-border hover:border!'
+                            }
+                          >
+                            {slot + 1}
+                          </PaginationLink>
+                        ),
+                      )}
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext
+                        href="#"
+                        onClick={(e) => stopNav(e, safePage + 1)}
+                        aria-disabled={safePage === pages - 1}
+                        className={safePage === pages - 1 ? 'pointer-events-none opacity-40' : ''}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
+              </>
+            )}
+          </div>
+        </section>
+      </main>
+
+      {pendingDelete && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-foreground/40 p-4"
+          onClick={() => setPendingDelete(null)}
+        >
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-event-title"
+            aria-describedby="delete-event-desc"
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-md rounded-xl border border-border bg-background p-5 shadow-lg"
+          >
+            <h2 id="delete-event-title" className="text-base font-semibold">
+              Delete “{pendingDelete.title}”?
+            </h2>
+            <p id="delete-event-desc" className="mt-1.5 text-sm text-muted-foreground">
+              This will permanently remove the event{pendingDelete.publishedAt !== null ? ', including its public page,' : ''}{' '}
+              and its images. This can’t be undone.
+            </p>
+            <div className="mt-5 flex justify-end gap-2">
+              <Button variant="outline" autoFocus onClick={() => setPendingDelete(null)}>
+                Cancel
+              </Button>
+              <Button variant="destructive" onClick={confirmDelete}>
+                Delete event
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}

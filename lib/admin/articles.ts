@@ -1,4 +1,4 @@
-import { db } from './store'
+import { db, setStoreArticles } from './store'
 import type { MockArticle } from './mocks/articles.fixtures'
 
 export type AdminArticle = MockArticle
@@ -10,7 +10,7 @@ export async function fetchAdminArticles(): Promise<AdminArticle[]> {
 
 /** Deletes an article from the fixture store. */
 export async function deleteArticle(id: string): Promise<void> {
-  db.articles = db.articles.filter((a) => a.id !== id)
+  setStoreArticles(db.articles.filter((a) => a.id !== id))
 }
 
 /**
@@ -29,7 +29,7 @@ export function togglePublishState(a: AdminArticle, now = new Date()): AdminArti
 /** Toggles publish state on the fixture store entry. */
 export async function toggleArticlePublish(a: AdminArticle, now = new Date()): Promise<AdminArticle> {
   const next = togglePublishState(a, now)
-  db.articles = db.articles.map((x) => (x.id === a.id ? next : x))
+  setStoreArticles(db.articles.map((x) => (x.id === a.id ? next : x)))
   return next
 }
 
@@ -127,6 +127,6 @@ export async function createArticle(rawUrl: string): Promise<AdminArticle> {
     publishedAt: null,
     updatedAt: now,
   }
-  db.articles = [entry, ...db.articles]
+  setStoreArticles([entry, ...db.articles])
   return entry
 }
