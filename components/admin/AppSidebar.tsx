@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import {
   Calendar,
   FlaskConical,
@@ -9,61 +10,111 @@ import {
   LogOut,
   Newspaper,
   Trophy,
+  type LucideIcon,
 } from 'lucide-react'
 import { useAuth } from '@/lib/admin/auth-context'
+import { fetchDashboard } from '@/lib/admin/dashboard'
 
-const NAV = [
-  { label: 'Dashboard', to: '/admin', icon: LayoutDashboard },
-  { label: 'Events', to: '/admin/events', icon: Calendar },
-  { label: 'Articles', to: '/admin/articles', icon: Newspaper },
-  { label: 'Achievements', to: '/admin/achievements', icon: Trophy },
+interface NavEntry {
+  label: string
+  to: string
+  icon: LucideIcon
+  countKey?: 'events' | 'articles' | 'achievements'
+}
+
+const NAV_GROUPS: { label: string; items: NavEntry[] }[] = [
+  { label: 'Overview', items: [{ label: 'Dashboard', to: '/admin', icon: LayoutDashboard }] },
+  {
+    label: 'Manage',
+    items: [
+      { label: 'Events', to: '/admin/events', icon: Calendar, countKey: 'events' },
+      { label: 'Articles', to: '/admin/articles', icon: Newspaper, countKey: 'articles' },
+      { label: 'Achievements', to: '/admin/achievements', icon: Trophy, countKey: 'achievements' },
+    ],
+  },
 ]
 
-// Admin sidebar in brand purple: full-height flush panel, grouped menu with
-// active pill + accent bar, user card with sign-out at the bottom.
+// Admin sidebar: brand-indigo panel, grouped nav with section labels and live
+// counts; the active item gets a soft white wash plus a brand-green bar.
 export function AppSidebar() {
   const { signOut, user } = useAuth()
   const pathname = usePathname()
   const initial = (user?.username?.trim()?.charAt(0) ?? 'A').toUpperCase()
+  const [counts, setCounts] = useState<Record<'events' | 'articles' | 'achievements', number> | null>(null)
+
+  useEffect(() => {
+    let live = true
+    fetchDashboard()
+      .then((d) => {
+        if (!live) return
+        setCounts({
+          events: d.totalEvents,
+          articles: d.totalArticles,
+          achievements: d.totalAchievements,
+        })
+      })
+      .catch(() => {})
+    return () => {
+      live = false
+    }
+  }, [])
 
   return (
-    <aside className="flex h-full w-60 shrink-0 flex-col overflow-hidden bg-[#25254d] p-4 text-white">
-      <div className="flex items-center gap-2 px-1">
-        <span className="grid size-8 place-items-center rounded-lg bg-[#494CA0]/40 text-[#D3D6FB]">
+    <aside className="flex h-full w-[272px] shrink-0 flex-col overflow-hidden bg-secondary text-white">
+      <div className="flex items-center gap-2 px-4 pt-4">
+        <span className="grid size-8 place-items-center rounded-lg bg-white/15 text-white">
           <FlaskConical className="size-4" />
         </span>
         <p className="text-[15px] font-semibold tracking-tight">EISD CMS</p>
       </div>
 
-      <div className="mt-6 min-h-0 flex-1 overflow-y-auto">
-        <p className="px-2 text-[11px] font-medium tracking-wide text-white/40 uppercase">Main Menu</p>
-        <nav className="mt-2 flex flex-col gap-1">
-          {NAV.map((item) => {
-            // A section stays active on its nested routes (e.g. /admin/articles/new).
-            const active = pathname === item.to || pathname.startsWith(`${item.to}/`)
-            return (
-              <Link
-                key={item.label}
-                href={item.to}
-                className={`relative flex h-10 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors ${
-                  active
-                    ? 'bg-white/10 text-white'
-                    : 'text-[#B0B3DE] hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                <item.icon className="size-[18px] shrink-0" />
-                {item.label}
-                {active && (
-                  <span className="absolute top-1/2 right-0 h-6 w-1 -translate-y-1/2 rounded-l-full bg-[#8B90E8]" />
-                )}
-              </Link>
-            )
-          })}
-        </nav>
-      </div>
+      <nav className="min-h-0 flex-1 overflow-y-auto px-2 pt-5">
+        {NAV_GROUPS.map((group) => (
+          <div key={group.label} className="mb-4">
+            <p className="px-3 pb-1 text-[11px] font-medium tracking-wide text-white/60 uppercase">
+              {group.label}
+            </p>
+            <div className="flex flex-col gap-0.5">
+              {group.items.map((item) => {
+                // A section stays active on its nested routes (e.g.
+                // /admin/articles/new) — except Dashboard, which would
+                // otherwise match every /admin/* page by prefix.
+                const active =
+                  item.to === '/admin'
+                    ? pathname === '/admin'
+                    : pathname === item.to || pathname.startsWith(`${item.to}/`)
+                const count = item.countKey && counts ? counts[item.countKey] : null
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.to}
+                    aria-current={active ? 'page' : undefined}
+                    className={`relative flex h-10 items-center gap-3 rounded-lg px-3 text-sm transition-colors ${
+                      active
+                        ? 'bg-white/10 font-semibold text-white'
+                        : 'font-medium text-white/75 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    {active && (
+                      <span className="absolute top-1/2 left-0 h-6 w-1 -translate-y-1/2 rounded-r-full bg-[#00D97A]" />
+                    )}
+                    <item.icon className="size-[18px] shrink-0" />
+                    {item.label}
+                    {typeof count === 'number' && (
+                      <span className="ml-auto rounded-full bg-[#00D97A] px-2 py-0.5 text-[11px] font-medium text-white tabular-nums">
+                        {count}
+                      </span>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
 
-      <div className="mt-4 flex shrink-0 items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
-        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-[#494CA0]/40 text-sm font-bold text-[#D3D6FB]">
+      <div className="flex items-center gap-2.5 border-t border-white/15 p-3">
+        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-white/15 text-sm font-bold text-white">
           {initial}
         </span>
         <p className="min-w-0 flex-1 truncate text-sm font-medium text-white">
@@ -74,7 +125,7 @@ export function AppSidebar() {
           onClick={() => void signOut()}
           title="Log out"
           aria-label="Log out"
-          className="grid size-8 shrink-0 place-items-center rounded-lg text-[#B0B3DE] transition-colors hover:bg-white/10 hover:text-white"
+          className="grid size-8 shrink-0 place-items-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white"
         >
           <LogOut className="size-4" />
         </button>
