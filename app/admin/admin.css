@@ -1,0 +1,182 @@
+/* Admin-only theme (port-admin-ui 7.1).
+ *
+ * Color tokens live under `.admin` so public surfaces keep the Fase 0
+ * `brand-*` defaults untouched. Primary maps to brand green (admin CTAs)
+ * while secondary/ring/info stay brand indigo — see foundation/design-tokens.
+ * Inter everywhere (no Stack Sans). Entrance keyframes are CMS-namespaced
+ * and cannot collide with public utilities.
+ */
+
+.admin {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --color-background: #f0f0f0;
+  --color-foreground: #1a1a1a;
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1a1a;
+  --color-sidebar: #ffffff;
+  --color-primary: var(--color-brand-green);
+  --color-primary-foreground: #053322;
+  --color-secondary: var(--color-brand-indigo);
+  --color-secondary-foreground: #ffffff;
+  --color-muted: #e9e9e9;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #e4e4e7;
+  --color-accent-foreground: #1a1a1a;
+  --color-border: #e5e5e5;
+  --color-input: #e5e5e5;
+  --color-ring: var(--color-brand-indigo);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success: var(--color-brand-green);
+  --color-success-foreground: #053322;
+  --color-info: var(--color-brand-indigo);
+  --color-info-foreground: #2e3091;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #78350f;
+  --color-invert: var(--color-zinc-900);
+  --color-invert-foreground: var(--color-zinc-50);
+
+  --brand-accent: var(--color-brand-green);
+}
+
+/* Cursor affordance, admin-scoped (public keeps preflight default). */
+.admin button:not(:disabled),
+.admin [role="button"]:not(:disabled),
+.admin a,
+.admin label:has(> button, > input),
+.admin summary,
+.admin select,
+.admin option {
+  cursor: pointer;
+}
+
+/* Paginated table rows: staggered enter so page changes cascade instead of popping. */
+@keyframes row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-row-enter {
+  animation: row-enter 220ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Dashboard redirect entrance: sections rise in with a staggered cascade. */
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.section-enter {
+  animation: section-enter 300ms var(--ease-out) both;
+}
+
+/* Stat numbers: rolling digit feel while the count-up runs. */
+@keyframes stat-number-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-number-in {
+  animation: stat-number-in 300ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-row-enter,
+  .section-enter,
+  .stat-number-in {
+    animation: none;
+  }
+}
+
+/* Filter menu + dialog entrances. */
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.menu-enter {
+  animation: menu-enter 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dialog-enter {
+  animation: dialog-enter 200ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes overlay-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay-enter {
+  animation: overlay-enter 200ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-enter,
+  .dialog-enter,
+  .overlay-enter {
+    animation: none;
+  }
+}
+
+/* Sonner toasts (bottom-right, admin only): card surface, accent border. */
+.admin [data-sonner-toast][data-styled='true'] {
+  background: var(--color-card);
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  font-family: inherit;
+}
+.admin [data-sonner-toast][data-type='success'] [data-icon] {
+  color: var(--color-success);
+}
+.admin [data-sonner-toast][data-type='error'] [data-icon] {
+  color: var(--color-destructive);
+}
+.admin [data-sonner-toast][data-type='warning'] [data-icon] {
+  color: var(--color-warning);
+}
+.admin [data-sonner-toast][data-type='info'] [data-icon] {
+  color: var(--color-info);
+}

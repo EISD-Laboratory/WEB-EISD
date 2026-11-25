@@ -71,6 +71,7 @@ Tujuan utama: admin bisa mengelola **Events, Articles, Achievements** tanpa meny
 - Backend sengaja dihapus untuk *challenge*; semua halaman memakai fixture. Login masih mock.
 - Halaman admin yang sudah ada: `Login`, `Dashboard`, `Events` + `EventForm`, `Articles` + `ArticleForm`, `Achievements` + `AchievementForm`.
 - Kontrak fitur ada di `docs/CHALLENGE.md` dan `openspec/specs/` → **diadopsi oleh dokumen ini** (lihat §7 dan §17).
+- **Status port UI (selesai, fixture-only):** seluruh halaman frontend di atas sudah di-port ke repo ini (`app/admin/*`, `components/admin/*`, `components/ui/*`, `lib/admin/*` dengan data fixture) — lihat `openspec/specs/admin/*`. Yang belum pindah: backend (Neon/Prisma/services), auth asli, dan upload R2 (Fase 1–4).
 
 ---
 
