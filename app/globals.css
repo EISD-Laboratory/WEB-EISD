@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* The UI has no dark-mode design — `dark:` variants come from the Base UI
+ * registry components and must stay inert. By default Tailwind v4 binds
+ * `dark:` to the OS `prefers-color-scheme` media query, which lets those
+ * rules silently override the light design (same specificity, later in the
+ * cascade). Bind `dark:` to an explicit `.dark` class instead; nothing in
+ * the app renders `.dark`, so the light theme always wins. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Unified brand tokens (archi Fase 0): canonical brand-* names ... */
   --color-brand-indigo: #494ca0;
