@@ -1,0 +1,20 @@
+.gallery {
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery:active {
+  cursor: grabbing;
+}
+
+.galleryItem {
+  width: min(400px, 80vw);
+  height: 200px;
+  flex-shrink: 0;
+}

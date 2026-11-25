@@ -2,14 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-// 1. Import komponen global di sini
-import AnnouncementBar from '@/components/AnnouncementBar'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import ScrollProgressBar from '@/components/ScrollProgressBar'
-import BackToTop from '@/components/BackToTop'
-import WelcomePopup from '@/components/WelcomePopup'
-import { Toaster } from 'react-hot-toast'
+// 1. Site chrome lives in app/(public)/layout.tsx (Fase 0); root stays minimal
+// so app/admin (Fase 2) can mount its own shell.
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -32,9 +26,9 @@ export const metadata: Metadata = {
     siteName: 'Lab EISD',
     images: [
       {
-        url: '/images/og-image-whatsapp.png',
-        width: 1200,
-        height: 630,
+        url: '/images/og-image-whatsapp.jpg',
+        width: 2520,
+        height: 1074,
         alt: 'EISD Laboratory Team',
         type: 'image/jpeg',
       },
@@ -56,19 +50,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={inter.className}>
-        <ScrollProgressBar />
-
-        <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full">
-          <AnnouncementBar />
-          <Navbar />
-        </header>
-
         {children}
 
-        <Footer />
-        <BackToTop />
-        <Toaster position="top-center" />
-        <WelcomePopup />
         <SpeedInsights />
       </body>
     </html>

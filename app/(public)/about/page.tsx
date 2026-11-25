@@ -45,13 +45,18 @@ export default function About() {
       {/* Hero Section */}
       <section className="relative">
         {/* Full-width photo background */}
-        <div className="relative w-full h-[280px] md:h-[360px] overflow-hidden" style={{ marginBottom: '-1px' }}>
-          <Image src="/images/photo-landing.webp" alt="EISD Laboratory Team" fill className="object-cover object-[center_25%] scale-110 translate-x-8" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFF] via-transparent to-transparent" />
+        <div className="relative w-full h-[calc(max(280px,min(51vw,500px))+var(--header-height))] overflow-hidden" style={{ marginBottom: '-1px' }}>
+          {/* Pushed below the navbar, with width capped so the height above fits every row of the group photo */}
+          <div className="absolute bottom-0 top-[calc(var(--header-height)/2)] left-1/2 -translate-x-1/2 w-full max-w-[1180px]">
+            <Image src="/images/photo-about.webp" alt="EISD Laboratory Team" fill className="object-cover object-top opacity-[0.15]" />
+          </div>
+          <div className="hidden min-[1181px]:block absolute inset-y-0 left-[calc(50%-591px)] w-16 bg-gradient-to-r from-[#FAFBFF] via-[#FAFBFF]/80 to-transparent" />
+          <div className="hidden min-[1181px]:block absolute inset-y-0 right-[calc(50%-591px)] w-16 bg-gradient-to-l from-[#FAFBFF] via-[#FAFBFF]/80 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-[calc(var(--header-height)+2rem)] bg-gradient-to-b from-[#FAFBFF] via-[#FAFBFF]/90 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#FAFBFF] to-transparent" />
 
           {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-start px-4 pt-8 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-start px-4 hero-offset z-10">
             <FadeIn direction="up" delay={0.2}>
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 glass-card px-5 py-2 rounded-full shadow-soft mb-5 shimmer-enhanced">

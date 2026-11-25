@@ -105,9 +105,9 @@ const events: Event[] = [
     category: 'Competition',
     date: 'September 2026',
     location: 'Online',
-    description: 'A technology innovation competition for students across Indonesia.',
+    description: 'A national UI/UX and essay competition on inclusive technology for students across Indonesia.',
     image: '/images/events/competition/eisd_compe_2026/eisd-compe-2026-cover.webp',
-    status: 'upcoming' as const,
+    status: 'completed' as const,
     gradient: 'from-yellow-500 to-orange-500',
   },
   {
@@ -211,7 +211,7 @@ export default function EventsPage() {
       {/* Events Grid */}
       <section className="py-8 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {filteredEvents.map((event, index) => {
               const textColor = getCategoryTextColor(event.category)
               const isUpcoming = event.status === 'upcoming'
@@ -221,16 +221,15 @@ export default function EventsPage() {
                 }`}>
                   
                   <div className="w-full sm:w-[45%] relative flex items-center bg-gray-50 justify-center overflow-hidden">
-                    <div className="relative w-full aspect-[4/5]">
-                      <Image
-                        src={event.image}
-                        alt={event.title}
-                        fill
-                        className={`object-cover transition-transform duration-500 ${
-                          isUpcoming ? '' : 'group-hover:scale-105'
-                        }`}
-                      />
-                    </div>
+                    <div className="w-full aspect-[4/5]" />
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      className={`object-cover transition-transform duration-500 ${
+                        isUpcoming ? '' : 'group-hover:scale-105'
+                      }`}
+                    />
                   </div>
 
                   <div className={`absolute bottom-0 left-0 right-0 h-1 sm:h-full sm:w-1 sm:right-auto sm:left-[45%] sm:top-0 bg-gradient-to-r sm:bg-gradient-to-b ${event.gradient}`} />

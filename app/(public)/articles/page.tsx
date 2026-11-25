@@ -54,7 +54,7 @@ function FeaturedArticle({ article }: { article: Article }) {
         <FadeIn direction="up" delay={0.15}>
           <a href={article.link} target="_blank" rel="noopener noreferrer" className="group block">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-              <div className="relative h-56 md:h-72">
+              <div className="relative aspect-video md:aspect-auto md:h-72">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -91,7 +91,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
         rel="noopener noreferrer"
         className="group block bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full"
       >
-        <div className={`relative h-40 ${isLogo ? 'bg-gray-50' : ''}`}>
+        <div className={`relative aspect-video ${isLogo ? 'bg-gray-50' : ''}`}>
           <Image
             src={article.image}
             alt={article.title}

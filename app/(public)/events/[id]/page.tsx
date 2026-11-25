@@ -10,7 +10,7 @@ const Image = (props: any) => {
     return <NextImage {...props} />
 }
 import FadeIn from '@/components/FadeIn'
-import styles from './EventDetail.module.css'
+import EventGallery from './EventGallery'
 
 type EventStatus = 'upcoming' | 'completed'
 
@@ -188,20 +188,25 @@ const events: Event[] = [
         date: 'September 2026',
         location: 'Online',
         description: [
-            'EISD Competition 2026 is a technology innovation competition held for students across Indonesia. This competition aims to encourage students\' creativity and technology skills in developing innovative solutions that can have a positive impact on society.',
+            'EISD Competition 2026 is a national-level UI/UX and essay competition held by EISD Laboratory for students from universities across Indonesia. Carrying the theme "Empower Through Equality: Teknologi untuk Masa Depan yang Inklusif", the competition invites participants to explore how technology can help build a fairer and more inclusive future through three sub-themes: technology for gender equality, technology for reducing social inequality, and inclusive technology-based smart cities.',
+            'Held entirely online, the competition gave active students the chance to compete in teams of one to three people from the same institution across two categories: UI/UX Competition and Essay Competition. Participants first went through a preliminary round, with results announced on 7 September 2026, before moving on to the final round on 19 September 2026. Throughout the process, participants were challenged to turn their ideas about inclusive technology into original work that responds to real issues in society.',
+            'The competition reached its peak on 25 September 2026 with a webinar titled "Empower Through Equality: Teknologi untuk Masa Depan yang Inklusif". The session gave participants and committee members a space to learn together about technology\'s role in creating equal opportunities for everyone. The event then continued with the winner announcement for both categories, a moment to celebrate the hard work and creativity of every team that took part.',
+            'Through EISD Competition 2026, EISD Laboratory hopes students across Indonesia can keep developing their skills, connect with peers from different universities, and be motivated to create technology solutions that leave no one behind.',
         ].join('\n\n'),
         image: '/images/events/competition/eisd_compe_2026/eisd-compe-2026-cover.webp',
         heroBanner: '/images/events/competition/eisd_compe_2026/eisd-compe-2026-cover.webp',
         heroPosition: 'top',
-        status: 'upcoming' as const,
+        status: 'completed' as const,
         gradient: 'from-yellow-500 to-orange-500',
         gallery: [
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(1).webp',
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(2).webp',
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(3).webp',
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(4).webp',
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(5).webp',
-            '/images/events/competition/eisd_compe_2025/eisd-compe-2025(6).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(1).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(2).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(3).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(4).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(5).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(6).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(7).webp',
+            '/images/events/competition/eisd_compe_2026/eisd-compe-2026(8).webp',
         ],
     },
     {
@@ -294,8 +299,8 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
         <main className="min-h-screen">
 
             {/* Banner/Hero Image Section*/}
-            <section className="w-full pt-16 md:pt-16">
-                <div className="relative h-64 md:h-[400px] bg-gray-900 w-full overflow-hidden">
+            <section className="w-full">
+                <div className="relative h-[calc(16rem+var(--header-height))] md:h-[calc(400px+var(--header-height))] bg-gray-900 w-full overflow-hidden">
                     <Image
                         src={event.heroBanner ?? event.image}
                         alt={event.title}
@@ -309,6 +314,7 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
                         priority
                     />
                     <div className="absolute inset-0 bg-black/30 z-20" />
+                    <div className="absolute inset-x-0 top-0 h-[calc(var(--header-height)+2rem)] bg-gradient-to-b from-white via-white/90 to-transparent z-30" />
                     <div className="absolute inset-0 shadow-inner pointer-events-none z-30" />
                 </div>
             </section>
@@ -383,42 +389,9 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
                                 ))}
                             </div>
 
-                            {/* Bottom Gallery - Horizontal Scroll */}
+                            {/* Bottom Gallery - auto-scrolls, and can be dragged or swiped */}
                             {event.gallery && event.gallery.length > 0 && (
-                                <div className="relative w-full overflow-hidden">
-                                    <div className={`${styles.galleryScroll} flex gap-4 w-full`}>
-                                        {/* First set */}
-                                        {event.gallery.map((src, idx) => (
-                                            <div
-                                                key={`img-${idx}`}
-                                                className={`${styles.galleryItem} rounded-xl overflow-hidden relative flex-shrink-0`}
-                                            >
-                                                <Image
-                                                    src={src}
-                                                    alt={`${event.title} photo ${idx + 1}`}
-                                                    fill
-                                                    sizes="(max-width: 768px) 50vw, 33vw"
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                        ))}
-                                        {/* Duplicate set for seamless infinite scroll */}
-                                        {event.gallery.map((src, idx) => (
-                                            <div
-                                                key={`img-dup-${idx}`}
-                                                className={`${styles.galleryItem} rounded-xl overflow-hidden relative flex-shrink-0`}
-                                            >
-                                                <Image
-                                                    src={src}
-                                                    alt={`${event.title} photo ${idx + 1}`}
-                                                    fill
-                                                    sizes="(max-width: 768px) 50vw, 33vw"
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                                <EventGallery images={event.gallery} title={event.title} />
                             )}
                         </FadeIn>
                     </div>
@@ -426,7 +399,7 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
                     {/* Right Column - Other Events */}
                     <div className="lg:col-span-1">
                         <FadeIn direction="up" delay={0.3}>
-                            <div className="sticky top-28">
+                            <div className="sticky top-[calc(var(--header-height)+1rem)]">
                                 <h2 className="text-xl font-extrabold text-gray-900 mb-6">Other Event</h2>
                                 
                                 <div className="space-y-6">
@@ -436,14 +409,14 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
                                             href={`/events/${otherEvent.id}`}
                                             className="group block"
                                         >
-                                            <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
+                                            <div className="sm:flex lg:block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
                                                 {/* Card Image */}
-                                                <div className="relative h-48 bg-gray-50 w-full flex items-center justify-center overflow-hidden">
+                                                <div className="relative aspect-[4/5] bg-gray-50 w-full sm:w-2/5 lg:w-full flex-shrink-0 flex items-center justify-center overflow-hidden">
                                                     <Image
                                                         src={otherEvent.image}
                                                         alt={otherEvent.title}
                                                         fill
-                                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                                        sizes="(max-width: 640px) 100vw, 33vw"
                                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                     />
                                                     {/* Gradient Line di bawah gambar */}
@@ -451,7 +424,7 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
                                                 </div>
 
                                                 {/* Card Content */}
-                                                <div className="p-5">
+                                                <div className="p-5 sm:flex-1 lg:flex-none">
                                                     <div className="flex items-center gap-3 mb-3">
                                                         <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
                                                             otherEvent.status === 'upcoming'

@@ -38,7 +38,10 @@ next-env.d.ts
 .cursor
 
 CLAUDE.md
-DESIGN.md
 
 .claude
 /test-results
+
+# local agent tooling (not for repo)
+.agents/
+openspec/

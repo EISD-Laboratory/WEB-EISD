@@ -40,8 +40,8 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-[calc(100vh-64px-var(--announcement-bar-height))] flex items-stretch bg-white">
-      <div className="w-full lg:w-[32%] xl:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 py-12 lg:pt-12 lg:pb-14 pb-20 relative z-10">
+    <section className="relative min-h-screen flex items-stretch bg-white">
+      <div className="w-full 2xl:w-[30%] flex flex-col justify-center px-6 sm:px-8 lg:px-10 xl:px-12 hero-offset lg:pb-14 pb-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -115,15 +115,17 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="hidden lg:block flex-1 relative"
+        className="hidden 2xl:block flex-1 relative"
       >
-        <Image
-          src="/images/photo-landing.webp"
-          alt="EISD Laboratory Team"
-          fill
-          className="object-cover object-[20%_35%]"
-          priority
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/photo-landing.webp"
+            alt="EISD Laboratory Team"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+        </div>
         <div className="absolute inset-y-0 -left-1 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
 
         <div className={`absolute right-6 z-20 transition-all duration-300 ${announcementVisible ? 'bottom-8' : 'xl:bottom-20 bottom-16'}`}>
@@ -133,14 +135,16 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="lg:hidden absolute inset-0 z-0">
-        <Image
-          src="/images/photo-landing.webp"
-          alt="EISD Laboratory Team"
-          fill
-          className="object-cover opacity-[0.07]"
-          priority
-        />
+      <div className="2xl:hidden absolute inset-0 z-0">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/photo-landing.webp"
+            alt="EISD Laboratory Team"
+            fill
+            className="object-cover object-top opacity-[0.07]"
+            priority
+          />
+        </div>
       </div>
     </section>
   )

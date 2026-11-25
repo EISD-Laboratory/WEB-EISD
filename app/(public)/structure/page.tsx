@@ -47,8 +47,8 @@ const divisions: Division[] = [
     members: [
       { name: 'Muhammad Mufid Taqiyuddin', code: 'VIDS', role: 'koordinator', image: '/images/members/content/MUFID.webp', linkedin: '#' },
       { name: 'Maurithania Joleesha Maria Tjakra', code: 'NIYO', role: 'member', image: '/images/members/content/THANIA.webp', linkedin: '#' },
-      { name: 'Muhammad Reyhan Armadani', code: 'REYY', role: 'member', image: '/images/members/content/REYHAN.webp', linkedin: '#' },
-      { name: 'Renasya Cahya Handayani', code: 'IYAN', role: 'member', image: '/images/members/content/RENASYA.webp', linkedin: '#' },
+      { name: 'Muhammad Reyhan Armadani', code: 'REAR', role: 'member', image: '/images/members/content/REYHAN.webp', linkedin: '#' },
+      { name: 'Renasya Cahya Handayani', code: 'NAYI', role: 'member', image: '/images/members/content/RENASYA.webp', linkedin: '#' },
       { name: 'Dinar Muhammad Akbar', code: 'DNMA', role: 'member', image: '/images/members/content/DINAR.webp', linkedin: '#' },
       { name: 'Zhafran Ahmad Zaidan', code: 'FRAN', role: 'member', image: '/images/members/content/ZHAFRAN.webp', linkedin: '#' },
     ],
@@ -74,7 +74,7 @@ const divisions: Division[] = [
       { name: 'Djaudza Djiyya Muhammad', code: 'DJZA', role: 'member', image: '/images/members/event/DJAUDZA.webp', linkedin: '#' },
       { name: 'Viki Firmansyah', code: 'VIKS', role: 'member', image: '/images/members/event/VIKI.webp', linkedin: '#' },
       { name: 'Rosita Jian Syahiirah', code: 'RORA', role: 'member', image: '/images/members/event/JIAN.webp', linkedin: '#' },
-      { name: 'Jian Hazel Sitorus', code: 'ZELL', role: 'member', image: '/images/members/event/HAZEL.webp', linkedin: '#' },
+      { name: 'Jian Hazel Sitorus', code: 'ZELS', role: 'member', image: '/images/members/event/HAZEL.webp', linkedin: '#' },
       { name: 'Jehezkiel Agna', code: 'JEZA', role: 'member', image: '/images/members/event/JEZA.webp', linkedin: '#' },
     ],
   },
@@ -88,7 +88,7 @@ const divisions: Division[] = [
       { name: 'Andrarieza Rizqi Pradana', code: 'EZAA', role: 'member', image: '/images/members/practicum/EZAA.webp', linkedin: '#' },
       { name: 'Raffi Akbar Firdaus', code: 'AKBR', role: 'member', image: '/images/members/practicum/RAFFI.webp', linkedin: '#' },
       { name: 'Muhammad Iqbal Abhipraya', code: 'ABHI', role: 'member', image: '/images/members/practicum/ABHI.webp', linkedin: '#' },
-      { name: 'Reza Dwi Saputra', code: 'REZA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
+      { name: 'Reza Dwi Saputra', code: 'REDA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
     ],
   },
   {
@@ -115,19 +115,6 @@ const divisions: Division[] = [
       { name: 'Naswa Gyna Sahira', code: 'SGYN', role: 'member', image: '/images/members/studygroup/NASWA.webp', linkedin: '#' },
       { name: 'Siti Amany Fakhirah Riby', code: 'SAFR', role: 'member', image: '/images/members/studygroup/AMANY.webp', linkedin: '#' },
     ],
-  },
-  {
-    name: 'Practicum',
-    icon: LaptopMinimal,
-    gradient: 'from-blue-500 to-indigo-500',
-    members: [
-      { name: 'Farid Munadhil', code: 'DHIL', role: 'koordinator', image: '/images/members/practicum/FARID.webp', linkedin: '#' },
-      { name: 'Topas Akbar', code: 'TOPS', role: 'member', image: '/images/members/practicum/TOPAS.webp', linkedin: '#' },
-      { name: 'Andrarieza Rizqi Pradana', code: 'EZAA', role: 'member', image: '/images/members/practicum/EZAA.webp', linkedin: '#' },
-      { name: 'Raffi Akbar Firdaus', code: 'AKBR', role: 'member', image: '/images/members/practicum/RAFFI.webp', linkedin: '#' },
-      { name: 'Muhammad Iqbal Abhipraya', code: 'ABHI', role: 'member', image: '/images/members/practicum/ABHI.webp', linkedin: '#' },
-      { name: 'Reza Dwi Saputra', code: 'REDA', role: 'member', image: '/images/members/practicum/REZA.webp', linkedin: '#' },
-    ],  
   }
 ]
 

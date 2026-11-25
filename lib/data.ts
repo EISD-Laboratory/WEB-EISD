@@ -56,14 +56,14 @@ export const navItems = [
   { label: "Structure", href: "/structure" },
   { label: "Achievements", href: "/achievements" },
   { label: "Articles", href: "/articles" },
-  { label: 'Study Group', href: 'https://web-sg.vercel.app/' }
+  { label: 'Study Group', href: 'https://eisd-studygroup.site/' }
 ]
 
 export const announcementConfig = {
   message: 'Join us and level up your skills!',
   highlightText: '✦ Study Group EISD',
   ctaLabel: 'Join Now →',
-  ctaHref: 'https://web-sg.vercel.app/',
+  ctaHref: 'https://eisd-studygroup.site/',
   storageKey: 'eisd-announcement-dismissed',
 };
 
