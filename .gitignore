@@ -41,3 +41,7 @@ CLAUDE.md
 
 .claude
 /test-results
+
+# local agent tooling (not for repo)
+.agents/
+openspec/
