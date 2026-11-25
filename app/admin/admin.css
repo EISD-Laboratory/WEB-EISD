@@ -12,20 +12,25 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
+  /* Bare `border` / `divide` utilities default to currentColor (near-black)
+     in Tailwind v4 — pin the admin default to light slate instead. */
+  --default-border-color: #e2e8f0;
+
   --color-background: #f0f0f0;
   --color-foreground: #1a1a1a;
   --color-card: #ffffff;
   --color-card-foreground: #1a1a1a;
   --color-sidebar: #ffffff;
   --color-primary: var(--color-brand-green);
-  --color-primary-foreground: #053322;
+  /* White text on green CTA buttons (overrides the CMS dark-green pairing). */
+  --color-primary-foreground: #ffffff;
   --color-secondary: var(--color-brand-indigo);
   --color-secondary-foreground: #ffffff;
   --color-muted: #e9e9e9;
   --color-muted-foreground: #6b7280;
   --color-accent: #e4e4e7;
   --color-accent-foreground: #1a1a1a;
-  --color-border: #e5e5e5;
+  --color-border: #e2e8f0;
   --color-input: #e5e5e5;
   --color-ring: var(--color-brand-indigo);
   --color-destructive: #ef4444;

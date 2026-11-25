@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { User } from '@/lib/admin/auth'
 
 const STORAGE_KEY = 'cms.mockSession'
@@ -57,12 +57,31 @@ export function signOut() {
 }
 
 export function useMockSession() {
-  // Lazy initializer reads localStorage once (client-only guarded, so the
-  // server prerender keeps the logged-out state without touching storage).
-  const [user, setUser] = useState<User | null>(() =>
-    typeof window === 'undefined' ? null : getMockSession(),
-  )
-  const [loading, setLoading] = useState(() => typeof window === 'undefined')
+  // SSR-safe: logged-out on both the server prerender and the first client
+  // render (identical HTML, no hydration mismatch), then resolve the real
+  // session post-mount. The synchronous setState-in-effect calls below are
+  // intentional — a lazy initializer reading localStorage would render
+  // different UI on the client than the server prerendered whenever a mock
+  // session exists (i.e. hydration failed on every logged-in refresh).
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Deferred past the commit phase so the first client render matches the
+    // server prerender exactly (logged-out loading state on both sides).
+    // Without the defer, a stored mock session would render protected content
+    // on the first client pass while the server emitted the loading UI —
+    // a hydration mismatch on every logged-in refresh.
+    let live = true
+    void Promise.resolve().then(() => {
+      if (!live) return
+      setUser(getMockSession())
+      setLoading(false)
+    })
+    return () => {
+      live = false
+    }
+  }, [])
 
   const handleSignIn = useCallback((username: string) => {
     const next = signIn(username)
