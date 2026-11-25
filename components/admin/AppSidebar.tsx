@@ -27,7 +27,7 @@ export function AppSidebar() {
   const initial = (user?.username?.trim()?.charAt(0) ?? 'A').toUpperCase()
 
   return (
-    <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col overflow-y-auto bg-[#25254d] p-4 text-white">
+    <aside className="flex h-full w-60 shrink-0 flex-col overflow-hidden bg-[#25254d] p-4 text-white">
       <div className="flex items-center gap-2 px-1">
         <span className="grid size-8 place-items-center rounded-lg bg-[#494CA0]/40 text-[#D3D6FB]">
           <FlaskConical className="size-4" />
@@ -35,7 +35,7 @@ export function AppSidebar() {
         <p className="text-[15px] font-semibold tracking-tight">EISD CMS</p>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 min-h-0 flex-1 overflow-y-auto">
         <p className="px-2 text-[11px] font-medium tracking-wide text-white/40 uppercase">Main Menu</p>
         <nav className="mt-2 flex flex-col gap-1">
           {NAV.map((item) => {
@@ -62,7 +62,7 @@ export function AppSidebar() {
         </nav>
       </div>
 
-      <div className="mt-auto flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
+      <div className="mt-4 flex shrink-0 items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
         <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-[#494CA0]/40 text-sm font-bold text-[#D3D6FB]">
           {initial}
         </span>

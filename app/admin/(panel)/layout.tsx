@@ -30,9 +30,11 @@ export default function AdminPanelLayout({
         }
       >
         <ProtectedRoute>
-          <div className="flex min-h-screen bg-white text-foreground">
+          <div className="flex h-dvh overflow-hidden bg-white text-foreground">
             <AppSidebar />
-            {children}
+            <div className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
+              {children}
+            </div>
             <Toaster position="bottom-right" />
           </div>
         </ProtectedRoute>
