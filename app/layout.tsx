@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Stack_Sans_Text } from 'next/font/google'
 import './globals.css'
 
 // 1. Import komponen global di sini
@@ -13,6 +13,14 @@ import { Toaster } from 'react-hot-toast'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
+
+// Admin font variable (Fase 2): Stack Sans Text from cms-eisd, loaded now so
+// app/admin can use `font-(--font-admin)` without a new font request later.
+// Unused on public surfaces — Inter stays the public typeface.
+const stackSansText = Stack_Sans_Text({
+  subsets: ['latin'],
+  variable: '--font-admin',
+})
 
 const siteUrl = 'https://www.eisd.site/'
 const title = 'EISD Laboratory - Enterprise Intelligence System Development Laboratory'
@@ -54,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={stackSansText.variable}>
       <body className={inter.className}>
         <ScrollProgressBar />
 
