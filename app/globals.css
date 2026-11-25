@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Unified brand tokens (archi Fase 0): canonical brand-* names ... */
+  --color-brand-indigo: #494ca0;
+  --color-brand-indigo-dark: #3a3d80;
+  --color-brand-indigo-light: #6366b8;
+  --color-brand-green: #00d97a;
+  --color-brand-pink: #fde2e4;
+  /* Backward-compat aliases for existing classes (bg-primary, text-accent-green, ...) */
+  --color-primary: #494ca0;
+  --color-primary-dark: #3a3d80;
+  --color-primary-light: #6366b8;
+  --color-accent-green: #00d97a;
+  --color-accent-pink: #fde2e4;
+  /* Surface accent defaults to indigo; admin scope overrides to green (Fase 2) */
+  --brand-accent: var(--color-brand-indigo);
+
+  --shadow-soft: 0 2px 15px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
 
 @layer base {
   body {
