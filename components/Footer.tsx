@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Mail, MapPin } from 'lucide-react'
+import FooterYear from './FooterYear'
 
 const socialLinks = [
   {
@@ -38,7 +39,7 @@ export default function Footer() {
               Research lab focused on UI/UX, Software Development, IoT, and Project Management.
             </p>
             <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} EISD Laboratory
+              &copy; <FooterYear /> EISD Laboratory
             </p>
           </div>
 

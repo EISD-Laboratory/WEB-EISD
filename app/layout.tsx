@@ -1,26 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, Stack_Sans_Text } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
-// 1. Import komponen global di sini
-import AnnouncementBar from '@/components/AnnouncementBar'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import ScrollProgressBar from '@/components/ScrollProgressBar'
-import BackToTop from '@/components/BackToTop'
-import WelcomePopup from '@/components/WelcomePopup'
-import { Toaster } from 'react-hot-toast'
+// 1. Site chrome lives in app/(public)/layout.tsx (Fase 0); root stays minimal
+// so app/admin (Fase 2) can mount its own shell.
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
-
-// Admin font variable (Fase 2): Stack Sans Text from cms-eisd, loaded now so
-// app/admin can use `font-(--font-admin)` without a new font request later.
-// Unused on public surfaces — Inter stays the public typeface.
-const stackSansText = Stack_Sans_Text({
-  subsets: ['latin'],
-  variable: '--font-admin',
-})
 
 const siteUrl = 'https://www.eisd.site/'
 const title = 'EISD Laboratory - Enterprise Intelligence System Development Laboratory'
@@ -62,21 +48,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={stackSansText.variable}>
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={inter.className}>
-        <ScrollProgressBar />
-
-        <header className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full">
-          <AnnouncementBar />
-          <Navbar />
-        </header>
-
         {children}
 
-        <Footer />
-        <BackToTop />
-        <Toaster position="top-center" />
-        <WelcomePopup />
         <SpeedInsights />
       </body>
     </html>
